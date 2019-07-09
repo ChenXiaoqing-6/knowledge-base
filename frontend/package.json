@@ -3,26 +3,13 @@
   "description": "The scope of this app is to deal with a single Service-Call and it's related objects.",
   "version": "0.0.0",
   "engines": {
-    "npm": "6.11.5"
+    "npm": "^6.11.5"
   },
   "license": "Copyright Coresystems AG, all rights reserved",
   "scripts": {
     "ng": "ng",
-    "prestart": "npm run build:appConfig:preBuild",
     "start": "ng serve --aot --port 3001",
-    "start:testing-frame": "(docker stop tools-shell-testing-frame || :) && docker build ../../tools-shell-testing-frame -t tools-shell-testing-frame && docker run --rm -p 8080:80 --name tools-shell-testing-frame tools-shell-testing-frame",
-    "dev": "npm start -- --open",
-    "prebuild": "npm run build:appConfig:preBuild",
-    "build": "ng build --aot --show-circular-dependencies --prod --base-href /knowledge-article-management/",
-    "postbuild": "npm run build:appConfig:postBuild",
-    "build:appConfig": "node ./scripts/appConfig.js",
-    "build:appConfig:preBuild": "npm run build:appConfig -- preBuild",
-    "build:appConfig:postBuild": "npm run build:appConfig -- postBuild",
-    "pretest": "npm run build:appConfig:preBuild && npm run lint",
     "test": "ng test",
-    "test:ci": "npm test -- --watch=false --code-coverage --karma-config ./karma.conf.js",
-    "test:ci:NO-COVERAGE": "npm test -- --watch=false --karma-config ./karma.conf.js",
-    "test:ci:headless": "SET_HEADLESS_CHROME=1 npm run test:ci",
     "lint": "ng lint",
     "audit": "npm audit"
   },
