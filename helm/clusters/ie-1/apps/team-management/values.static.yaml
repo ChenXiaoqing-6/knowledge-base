@@ -1,0 +1,31 @@
+replicaCount: 2
+
+image:
+  repository: registry.dev.coresuite.com/team-management
+  tag: auto-filled-by-pipeline
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  annotations:
+    "service.beta.kubernetes.io/aws-load-balancer-internal": "0.0.0.0/0"
+    "external-dns.alpha.kubernetes.io/hostname": team-management.ie-1.coreinfra.io.
+    "traefik.backend.loadbalancer.stickiness": "true"
+ingress:
+  enabled: true
+  annotations:
+    "traefik.frontend.rule.type": "PathPrefixStrip" 
+    "nginx.ingress.kubernetes.io/rewrite-target": "/$1"
+    "traefik.frontend.redirect.entryPoint": "https"
+  path: 
+    - /team-management/
+    - /team-management/(.*)
+  hosts:
+    - gw.ie-1.coreinfra.io
+    - ingress.ie-1.coreinfra.io
+    - eu.coresystems.net
+    - apps.coresystems.net
+env:
+  NODEJS_ENV_START_CONFIG: "config/env-eu.json"
+  LOGSTASH_HOSTS: "sh1aelks.coresuite.com,sh2belks.coresuite.com"
+

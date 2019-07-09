@@ -1,0 +1,6 @@
+<div class="app-wrap">
+  <div class="spinner-container" *ngIf="(routeAndTeamLoading$ | async)">
+    <spinner color="primary" size="50"></spinner>
+  </div>
+  <router-outlet></router-outlet>
+</div>

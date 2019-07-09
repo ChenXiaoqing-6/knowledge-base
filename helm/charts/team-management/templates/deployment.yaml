@@ -1,0 +1,88 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "team-management.fullname" . }}
+  labels:
+    app: {{ template "team-management.name" . }}
+    chart: {{ template "team-management.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  revisionHistoryLimit: 1
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "team-management.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      annotations:
+      {{- range $key, $value := .Values.annotations }}
+        {{ $key }}: {{ $value | quote }}
+      {{- end }}
+      labels:
+        app: {{ template "team-management.name" . }}
+        release: {{ .Release.Name }}
+        maintainer_team: "web"
+    spec:
+      imagePullSecrets:
+        - name: csregistry
+      volumes:
+        - name: log
+          emptyDir: {}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: NODEJS_ENV_START_CONFIG
+              value: {{ .Values.env.NODEJS_ENV_START_CONFIG }}
+            - name: APP_NAME
+              value: {{ .Values.env.APP_NAME }}
+            - name: APP_VERSION
+              value: {{ .Values.env.APP_VERSION }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /portal/status
+              port: http
+            initialDelaySeconds: 40
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              path: /portal/status
+              port: http
+            initialDelaySeconds: 40
+          volumeMounts:
+            - mountPath: /log
+              name: log
+        - name: filebeat-sidecar
+          image: registry.dev.coresuite.com/filebeat:0.2.0
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: LOG_DIR
+              value: "/log"
+            - name: LOGSTASH_HOSTS
+              value: {{ .Values.env.LOGSTASH_HOSTS }}
+            - name: CLUSTER
+              value: {{ .Values.env.FILEBEAT_ENV_CLUSTER }}
+          volumeMounts:
+            - mountPath: /log
+              name: log
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
