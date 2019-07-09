@@ -1,4 +1,6 @@
-fronted structure:
+Please refer to the following project structure to build folder by yourself via CLI.
+
+```
 fronted
   /src
     /app
