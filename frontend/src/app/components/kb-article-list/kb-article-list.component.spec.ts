@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { KbaSearchComponent } from './kba-search.component';
+import { KbArticleListComponent } from './kb-article-list.component';
 
-describe('KbaSearchComponent', () => {
-  let component: KbaSearchComponent;
-  let fixture: ComponentFixture<KbaSearchComponent>;
+describe('KbArticleListComponent', () => {
+  let component: KbArticleListComponent;
+  let fixture: ComponentFixture<KbArticleListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ KbaSearchComponent ]
+      declarations: [ KbArticleListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(KbaSearchComponent);
+    fixture = TestBed.createComponent(KbArticleListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

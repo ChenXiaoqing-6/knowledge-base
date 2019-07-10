@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { KbaService } from './kba.service';
+import { KbService } from './kb.service';
 
 describe('KbaService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: KbaService = TestBed.get(KbaService);
+    const service: KbService = TestBed.get(KbService);
     expect(service).toBeTruthy();
   });
 });

@@ -1,11 +1,11 @@
-import { RenderType } from './rendertype.enum'
+import { RenderType } from './RenderType.enum'
 
 export interface IArticle {
     id: string;
     provider: string,
     title: string,
     content?: string,
-    lastUpdated: string,
+    lastUpdated: Date,
     score: number,
     link: string,
     renderType: RenderType,

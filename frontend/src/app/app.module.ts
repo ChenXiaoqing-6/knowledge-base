@@ -4,9 +4,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FundamentalNgxModule } from 'fundamental-ngx';
 import { AppComponent } from './app.component';
-import { KbaSearchComponent } from './components/kba-search/kba-search.component';
-import { KbaListComponent } from './components/kba-list/kba-list.component';
-import { KbaListItemComponent } from './components/kba-list-item/kba-list-item.component';
+import { KbSearchComponent } from './components/kb-search/kb-search.component';
+import { KbArticleListComponent } from './components/kb-article-list/kb-article-list.component';
+import { KbArticleItemComponent } from './components/kb-article-item/kb-article-item.component';
 
 import { KbaDetailComponent } from './components/kba-detail/kba-detail.component';
 import { KbaDetailContentComponent } from './components/kba-detail-content/kba-detail-content.component';
@@ -15,14 +15,14 @@ import { KbaDetailFooterComponent } from './components/kba-detail-footer/kba-det
 import { SafeUrlPipe } from './pipes/safeUrl';
 
 import { appRoutes } from './router/routes';
-import { KbaService } from './services/kba.service';
+import { KbService } from './services/kb.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    KbaSearchComponent,
-    KbaListComponent,
-    KbaListItemComponent,
+    KbSearchComponent,
+    KbArticleListComponent,
+    KbArticleItemComponent,
     KbaDetailComponent,
     KbaDetailContentComponent,
     KbaDetailFooterComponent,
@@ -41,7 +41,7 @@ import { KbaService } from './services/kba.service';
       })
   ],
   providers: [
-    KbaService
+    KbService
   ],
   bootstrap: [AppComponent]
 })

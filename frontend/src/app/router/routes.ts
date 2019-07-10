@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
-import { KbaSearchComponent } from '../components/kba-search/kba-search.component';
+import { KbSearchComponent } from '../components/kb-search/kb-search.component';
 
 const appRoutes: Routes = [
   {
     path: '',
-    component: KbaSearchComponent
+    component: KbSearchComponent
   },
   {
     path: '**',
-    component: KbaSearchComponent
+    component: KbSearchComponent
   }
 ];
 
