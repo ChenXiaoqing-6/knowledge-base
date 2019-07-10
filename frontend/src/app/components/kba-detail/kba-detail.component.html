@@ -1,0 +1,15 @@
+<ng-container>
+    <fd-panel>
+        <fd-panel-header>
+            <fd-panel-head>
+                <kba-detail-header [article]="article"></kba-detail-header>
+            </fd-panel-head>
+        </fd-panel-header>
+        <fd-panel-body>
+            <kba-detail-content [url]="article.renderValue"></kba-detail-content>
+        </fd-panel-body>
+        <fd-panel-footer>
+            <kba-detail-footer [url]="article.link"></kba-detail-footer>
+        </fd-panel-footer>
+    </fd-panel>
+</ng-container>

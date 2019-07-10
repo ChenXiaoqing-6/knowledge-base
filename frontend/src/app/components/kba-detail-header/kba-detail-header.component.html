@@ -1,0 +1,12 @@
+<div *ngIf="isDetailMode">
+  {{article.views}} | {{article.lastUpdated | date}} | {{article.author}}
+</div>
+
+<div *ngIf="!isDetailMode" class="fd-has-padding-top-tiny">
+  <div class="fd-has-padding-top-tiny">
+    {{article.views}} | {{article.lastUpdated | date}}
+  </div>
+  <div class="fd-has-padding-top-tiny">
+      Author: {{article.author}}
+  </div>
+</div>

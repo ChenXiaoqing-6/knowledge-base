@@ -53,3 +53,5 @@ testem.log
 Thumbs.db
 mocha.json
 
+# node_modules
+frontend/node_modules/*
