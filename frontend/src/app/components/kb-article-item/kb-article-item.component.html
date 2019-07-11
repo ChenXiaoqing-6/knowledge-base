@@ -1,3 +1,14 @@
-<p>
-  kb-article-item works!
-</p>
+<fd-panel>
+  <fd-panel-body class="fd-has-padding-tiny">
+    <div>
+      <a href="#" class="article-title-link" title="{{article.title}}" (click)="openArticleDetail()">
+        <span class="article-title-text">
+          {{article.title}}
+        </span>
+      </a>
+      <button fd-button [options]="'light'" [glyph]="'copy'" (click)="copyArticleLink()"></button>
+      <button fd-button [options]="'light'" [glyph]="'overflow'" (click)="onMore()"></button>
+    </div>
+    <kb-detail-header [article]="article" [isDetailMode]="false"></kb-detail-header>
+  </fd-panel-body>
+</fd-panel>
