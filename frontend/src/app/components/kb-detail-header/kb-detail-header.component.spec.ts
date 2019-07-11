@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { KbaDetailComponent } from './kba-detail.component';
+import { KbaDetailHeaderComponent } from './kb-detail-header.component';
 
-describe('KbaDetailComponent', () => {
-  let component: KbaDetailComponent;
-  let fixture: ComponentFixture<KbaDetailComponent>;
+describe('KbDetailHeaderComponent', () => {
+  let component: KbaDetailHeaderComponent;
+  let fixture: ComponentFixture<KbaDetailHeaderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ KbaDetailComponent ]
+      declarations: [ KbaDetailHeaderComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(KbaDetailComponent);
+    fixture = TestBed.createComponent(KbaDetailHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

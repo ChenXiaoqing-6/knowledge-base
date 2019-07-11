@@ -1,0 +1,5 @@
+<div style="overflow-y: hidden !important; position: relative; width: 100%; height: 100%">
+    <fd-loading-spinner [loading]="isLoading"></fd-loading-spinner>
+    <iframe iframe-resizer title="iframe" id="iFrame" [src]="url | safeUrl" (load)="resizeIframe(this)" style="height: 400px; width: 100%; margin: 0; border: 0; position: relative">
+    </iframe>
+  </div>

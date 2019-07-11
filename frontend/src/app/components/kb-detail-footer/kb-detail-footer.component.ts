@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'kba-detail-footer',
-  templateUrl: './kba-detail-footer.component.html',
-  styleUrls: ['./kba-detail-footer.component.css']
+  selector: 'kb-detail-footer',
+  templateUrl: './kb-detail-footer.component.html',
+  styleUrls: ['./kb-detail-footer.component.css']
 })
-export class KbaDetailFooterComponent implements OnInit {
+export class KbDetailFooterComponent implements OnInit {
   @Input() url: string = '';
   constructor() { }
 

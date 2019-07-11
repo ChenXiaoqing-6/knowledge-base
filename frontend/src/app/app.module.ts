@@ -2,17 +2,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FundamentalNgxModule } from 'fundamental-ngx';
+import { FundamentalNgxModule, IconModule } from 'fundamental-ngx';
 import { AppComponent } from './app.component';
 import { KbSearchComponent } from './components/kb-search/kb-search.component';
 import { KbArticleListComponent } from './components/kb-article-list/kb-article-list.component';
 import { KbArticleItemComponent } from './components/kb-article-item/kb-article-item.component';
 
-import { KbaDetailComponent } from './components/kba-detail/kba-detail.component';
-import { KbaDetailContentComponent } from './components/kba-detail-content/kba-detail-content.component';
-import { KbaDetailHeaderComponent } from './components/kba-detail-header/kba-detail-header.component';
-import { KbaDetailFooterComponent } from './components/kba-detail-footer/kba-detail-footer.component';
+import { KbDetailComponent } from './components/kb-detail/kb-detail.component';
+import { KbDetailContentComponent } from './components/kb-detail-content/kb-detail-content.component';
+import { KbDetailHeaderComponent } from './components/kb-detail-header/kb-detail-header.component';
+import { KbDetailFooterComponent } from './components/kb-detail-footer/kb-detail-footer.component';
 import { SafeUrlPipe } from './pipes/safeUrl';
+import { KbDetailTestComponent } from './components/kb-detail-test/kb-detail-test.component';
 
 import { appRoutes } from './router/routes';
 import { KbService } from './services/kb.service';
@@ -23,16 +24,18 @@ import { KbService } from './services/kb.service';
     KbSearchComponent,
     KbArticleListComponent,
     KbArticleItemComponent,
-    KbaDetailComponent,
-    KbaDetailContentComponent,
-    KbaDetailFooterComponent,
-    KbaDetailHeaderComponent,
-    SafeUrlPipe
+    KbDetailComponent,
+    KbDetailContentComponent,
+    KbDetailFooterComponent,
+    KbDetailHeaderComponent,
+    SafeUrlPipe,
+    KbDetailTestComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FundamentalNgxModule,
+    IconModule,
     RouterModule.forRoot(
       appRoutes,
       {
@@ -43,6 +46,9 @@ import { KbService } from './services/kb.service';
   providers: [
     KbService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    KbDetailComponent
+  ]
 })
 export class AppModule { }
