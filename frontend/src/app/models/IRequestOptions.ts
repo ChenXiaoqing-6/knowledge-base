@@ -5,5 +5,5 @@ export interface IPaginationOptions {
 }
 
 export interface ISearchOptions extends IPaginationOptions {
-    searchValue: string
+    searchTerm: string
 }

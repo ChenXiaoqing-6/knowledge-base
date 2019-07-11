@@ -1,3 +1,17 @@
-<p>
-  kb-search works!
-</p>
+<div>
+<fd-input-group #searchinput 
+  [button]="true" 
+  [placeholder]="'Type some text...'" 
+  [glyph]="'search'"
+  [placement]="'after'" 
+  (addOnButtonClicked)="onSearch(searchinput.inputText)" 
+  (keyup.Enter)="onSearch(searchinput.inputText)"
+>
+</fd-input-group>
+<br>
+<p *ngIf="articles$ | async" >Enter kewords to search for knowledge articles.</p>
+<div>
+  <fd-loading-spinner [loading]="busy$ | async"></fd-loading-spinner>
+
+</div>
+</div>

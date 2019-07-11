@@ -1,6 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { MetaReducer, StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { storeFreeze } from 'ngrx-store-freeze';
 import { RouterModule } from '@angular/router';
 import { FundamentalNgxModule, IconModule } from 'fundamental-ngx';
 import { AppComponent } from './app.component';
@@ -15,8 +19,11 @@ import { KbDetailFooterComponent } from './components/kb-detail-footer/kb-detail
 import { SafeUrlPipe } from './pipes/safeUrl';
 import { KbDetailTestComponent } from './components/kb-detail-test/kb-detail-test.component';
 
+import { IKbState, effects, reducers } from './state';
 import { appRoutes } from './router/routes';
 import { KbService } from './services/kb.service';
+
+export const metaReducers: MetaReducer<IKbState>[] = [storeFreeze];
 
 @NgModule({
   declarations: [
@@ -36,6 +43,12 @@ import { KbService } from './services/kb.service';
     BrowserAnimationsModule,
     FundamentalNgxModule,
     IconModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: false, // Restrict extension to log-only mode
+    }),
+    EffectsModule.forRoot(effects),
     RouterModule.forRoot(
       appRoutes,
       {

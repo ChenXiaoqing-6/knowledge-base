@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+//import { map } from 'rxjs/operators';
+import { CollectionResponse } from '../models/IResponse';
 import { IArticle } from '../models/IArticle';
 import { ISearchOptions } from '../models/IRequestOptions';
-import { AppConfig } from '../config/config';
-import { BaseHttpClient } from '../services/http.client';
+// import { AppConfig } from '../config/config';
+// import { BaseHttpClient } from '../services/http.client';
 
 import { MockSearchResponse } from '../services/mock/mock-data';
 
@@ -13,17 +14,15 @@ import { MockSearchResponse } from '../services/mock/mock-data';
 })
 export class KbService {
 
-  constructor(private http: BaseHttpClient) { }
+  // constructor(private http: BaseHttpClient) { }
 
-  private getUrl(endpoint: string) {
-    return `${AppConfig.facadeBaseURL}/${endpoint}`;
-  }
+  // private getUrl(endpoint: string) {
+  //   return `${AppConfig.facadeBaseURL}/${endpoint}`;
+  // }
 
-  searchArticles(options: ISearchOptions): Observable<IArticle[]> {
+  searchArticles(options: ISearchOptions): Observable<CollectionResponse<IArticle>> {
     //mock
-    return of(MockSearchResponse).pipe(
-      map(res => res['data'])
-    );
+    return of(MockSearchResponse);
 
     // return this.http.get(this.getUrl("search")).pipe(
     //   map(res => res['data'])
