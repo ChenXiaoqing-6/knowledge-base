@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { IArticle } from '../../models/IArticle';
 
 @Component({
   selector: 'kb-detail-footer',
@@ -6,14 +7,18 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./kb-detail-footer.component.css']
 })
 export class KbDetailFooterComponent implements OnInit {
-  @Input() url: string = '';
+  @Input() article: IArticle;
   constructor() { }
 
   ngOnInit() {
   }
 
-  openHelpCenter(url: string): void {
-    window.open(this.url, '_blank');
+  openHelpCenter(): void {
+    window.open(this.article.link, '_blank');
+  }
+
+  get link() {
+    return this.article.link;
   }
 
 }
