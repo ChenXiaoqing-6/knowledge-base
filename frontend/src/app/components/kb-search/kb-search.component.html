@@ -8,16 +8,17 @@
     (keyup.Enter)="onSearch(searchinput.inputText)"
   ></fd-input-group>
   <br>
-  <p *ngIf="isInit$ | async">
-    Enter kewords to search for knowledge articles.
+  <p *ngIf="isInit$ | async; else showResultBox">
+    Enter keywords to search for knowledge articles.
   </p>
-  <div>
+  <ng-template #showResultBox>
     <fd-loading-spinner [loading]="busy$ | async"></fd-loading-spinner>
-    <div *ngIf="totalCount$ | async; else notFound">
-      <p>search Result: {{totalCount$ | async}}</p>
+    <div *ngIf="notFound$ | async; else showResultList">
+        No articles found.
     </div>
-    <ng-template #notFound>No articles found.</ng-template>
-
+    <ng-template #showResultList>
+      <p>search Result: {{totalCount$ | async}}</p>
+    </ng-template>
     <kb-article-list [articles]="articles$ | async"></kb-article-list>
-  </div>
+  </ng-template>
 </div>
