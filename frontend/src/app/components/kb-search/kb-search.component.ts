@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
 import { Observable} from 'rxjs';
 import { IArticle } from '../../models/IArticle';
-import { IKbSearchState } from '../../state/search/search-article.state';
-import { SearchArticles } from '../../state/search/search-article.actions';
-import {selectIsLoading, selectAllArticles } from '../../state/search/search-article.selectors';
+import { KbSearchFacade } from '../../state/search/search-article.facade';
 
 @Component({
   selector: 'app-kb-search',
@@ -14,24 +11,26 @@ import {selectIsLoading, selectAllArticles } from '../../state/search/search-art
 export class KbSearchComponent implements OnInit {
   articles$: Observable<IArticle[]>;
   totalCount$: Observable<number>;
+  isInit$: Observable<boolean>;
   busy$: Observable<boolean>;
 
-  constructor(private store$: Store<IKbSearchState>) { 
-    this.articles$ = this.store$.pipe(select(selectAllArticles));
-    this.busy$ = this.store$.pipe(select(selectIsLoading));
+  constructor(private searchFacade: KbSearchFacade) { 
+    this.articles$ = this.searchFacade.getArticles();
+    this.isInit$ = this.searchFacade.isInit();
+    this.busy$ = this.searchFacade.isSearching();
   }
 
   ngOnInit() {
   }
 
   onSearch(searchString: string) {
-    this.store$.dispatch(new SearchArticles({
+    this.searchFacade.searchArticles({
       pagination: {
         pageIndex: 0,
         pageSize: 20
       },
-      searchTerm: "hello"
-    }));
+      searchTerm: searchString
+    });
   }
 
 }

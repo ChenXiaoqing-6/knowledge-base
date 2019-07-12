@@ -8,6 +8,7 @@ const PAGE_SIZE = 20;
 export const adapter: EntityAdapter<IArticle> = createEntityAdapter<IArticle>();
 
 export const initialKbSearchState: IKbSearchState = adapter.getInitialState({
+    isInit: true,
     isLoading: false,
     pagination: {
         pageSize: PAGE_SIZE,
