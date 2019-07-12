@@ -24,13 +24,17 @@ export class KbSearchComponent implements OnInit {
   }
 
   onSearch(searchString: string) {
-    this.searchFacade.searchArticles({
-      pagination: {
-        pageIndex: 0,
-        pageSize: 20
-      },
-      searchTerm: searchString
-    });
+    if (searchString.trim() == '') {
+      this.searchFacade.resetSearch();
+    } else {
+      this.searchFacade.searchArticles({
+        pagination: {
+          pageIndex: 0,
+          pageSize: 20
+        },
+        searchTerm: searchString
+      });
+    }
   }
 
 }

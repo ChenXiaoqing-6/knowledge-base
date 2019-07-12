@@ -3,7 +3,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { IArticle } from '../../models/IArticle';
 import { IKbState } from '../index';
-import { SearchArticles } from './search-article.actions';
+import { SearchArticles, SearchArticlesReset } from './search-article.actions';
 import { selectIsLoading, selectIsInit, selectAllArticles, selectPagination, selectTotalObjectCount } from './search-article.selectors';
 import { IPagination } from '../../models/IPagination';
 import { ISearchOptions } from '../../models/IRequestOptions';
@@ -20,6 +20,10 @@ export class KbSearchFacade {
 
   public searchArticles(options: ISearchOptions) {
     this.store$.dispatch(new SearchArticles(options));
+  }
+
+  public resetSearch() {
+    this.store$.dispatch(new SearchArticlesReset());
   }
 
   public getPagination(): Observable<IPagination> {
