@@ -24,6 +24,7 @@ import { IKbState, effects, reducers } from './state';
 import { appRoutes } from './router/routes';
 import { KbService } from './services/kb.service';
 import { KbSearchFacade } from './state/search/search-article.facade';
+import { KbViewFacade } from './state/article/article.facade';
 
 export const metaReducers: MetaReducer<IKbState>[] = [storeFreeze];
 
@@ -60,6 +61,7 @@ export const metaReducers: MetaReducer<IKbState>[] = [storeFreeze];
   ],
   providers: [
     KbSearchFacade,
+    KbViewFacade,
     KbService
   ],
   bootstrap: [AppComponent],
