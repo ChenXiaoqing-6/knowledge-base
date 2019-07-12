@@ -1,30 +1,11 @@
-<!-- <ng-container>
-    <fd-panel>
-        <fd-panel-header>
-            <fd-panel-head>
-                <kb-detail-header [article]="modalRef.data.article" [isDetailMode]="true"></kb-detail-header>
-                <button fd-modal-close-btn></button>
-            </fd-panel-head>
-        </fd-panel-header>
-        <fd-panel-body>
-            <kb-detail-content [url]="modalRef.data.article.renderValue"></kb-detail-content>
-        </fd-panel-body>
-        <fd-panel-footer>
-            <kb-detail-footer [url]="modalRef.data.article.link"></kb-detail-footer>
-        </fd-panel-footer>
-    </fd-panel>
-</ng-container> -->
-
-
 <ng-container>
-        <fd-modal-header class="fd-has-padding-bottom-tiny">
-            <kb-detail-header [article]="modalRef.data.article" [isDetailMode]="true"></kb-detail-header>
-            <button fd-modal-close-btn></button>
-        </fd-modal-header>
-        <fd-modal-body style="height: 100%">
-            <kb-detail-content [url]="modalRef.data.article.renderValue"></kb-detail-content>
-        </fd-modal-body>
-        <fd-modal-footer class="fd-has-padding-top-tiny fd-has-padding-bottom-medium">
-            <kb-detail-footer [url]="modalRef.data.article.link"></kb-detail-footer> 
-        </fd-modal-footer>
-    </ng-container>
+    <fd-modal-header class="fd-has-padding-bottom-tiny">
+        <kb-detail-header [article]="modalRef.data.article" [isDetailMode]="true"></kb-detail-header>
+        <button fd-modal-close-btn (click)="modalRef.dismiss('x')"></button>
+    </fd-modal-header>
+
+    <kb-detail-content [url]="modalRef.data.article.renderValue"></kb-detail-content>
+    <fd-modal-footer class="fd-has-padding-top-tiny fd-has-padding-bottom-tiny kbDetailFooterContainer">
+        <kb-detail-footer [url]="modalRef.data.article.link"></kb-detail-footer>
+    </fd-modal-footer>
+</ng-container>

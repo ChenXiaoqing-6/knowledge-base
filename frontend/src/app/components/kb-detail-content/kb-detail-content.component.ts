@@ -10,18 +10,35 @@ export class KbDetailContentComponent implements OnInit {
   public isLoading: boolean = true;
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() {  
   }
 
   public ngAfterViewInit() {
-    this.isLoading = false;
-    const iframeElement = document.getElementById('iFrame') as HTMLIFrameElement;
-    // iframeElement.contentWindow.postMessage
-    console.log('iFrame' + iframeElement + this.isLoading);
+    const _changeIframeHeight = function (event) {
+      if (event.data.hasOwnProperty("FrameHeight")) {
+        var Iframe = document.getElementById(event.data.iframeId);
+        if (Iframe) {
+          Iframe.setAttribute("height", event.data.FrameHeight);
+        }
+      }
+    }
+    window.addEventListener('message', _changeIframeHeight, true);
   }
 
-  resizeIframe(iFrame) {
-    // iFrame.style.height = iFrame.contentWindow.document.body.scrollHeight + 'px';
+  resizeIframe(event) {
+    if (event.target && event.target.src != '') {
+      this.isLoading = false;
+      const iframeElement = document.getElementById('iFrame') as HTMLIFrameElement;
+      if (iframeElement && iframeElement.contentWindow) {
+        iframeElement.contentWindow.postMessage({ FrameHeight: "FrameHeight", iframeId: iframeElement.id }, iframeElement.src);
+      }
+    }
+
+    // dispatch iFrameLoadSuccessAction
+  }
+
+  onIFrameLoadError(event) {
+    // dispatch iFrameLoadFailAction
   }
 
 }

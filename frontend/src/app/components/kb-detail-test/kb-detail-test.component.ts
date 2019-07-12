@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalService } from 'fundamental-ngx';
 import { KbDetailComponent } from '../kb-detail/kb-detail.component';
 import { IArticle } from '../../models/IArticle';
-import { RenderType } from '../../models/rendertype.enum';
+import { RenderType } from '../../models/RenderType.enum';
 
 @Component({
   selector: 'kb-detail-test',

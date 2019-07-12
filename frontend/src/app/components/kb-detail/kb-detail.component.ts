@@ -14,4 +14,7 @@ export class KbDetailComponent implements OnInit {
   ngOnInit() {
   }
 
+  closeDialog(event) {
+
+  }
 }

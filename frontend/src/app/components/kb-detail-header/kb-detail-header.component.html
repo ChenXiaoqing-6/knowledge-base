@@ -1,12 +1,31 @@
 <div *ngIf="isDetailMode">
+  <fd-icon [glyph]="'show'" [size]="'m'"></fd-icon>
   {{article.views}} | {{article.lastUpdated | date}} | {{article.author}}
 </div>
+
+<div *ngIf="!isDetailMode" class="fd-has-padding-top-tiny">
+  <div>
+    <fd-icon [glyph]="'show'" [size]="'m'"></fd-icon>
+    {{article.views}} | {{article.lastUpdated | date}}
+  </div>
+  <div>
+      Author: {{article.author}}
+  </div>
+</div>
+
+
+<!-- <fd-modal-header class="fd-has-padding-bottom-tiny" *ngIf="isDetailMode">
+  <div>
+    {{article.views}} | {{article.lastUpdated | date}} | {{article.author}}
+  </div>
+  <button fd-modal-close-btn (click)="handleMoreAction($event)"></button>
+</fd-modal-header>
 
 <div *ngIf="!isDetailMode" class="fd-has-padding-top-tiny">
   <div class="fd-has-padding-top-tiny">
     {{article.views}} | {{article.lastUpdated | date}}
   </div>
   <div class="fd-has-padding-top-tiny">
-      Author: {{article.author}}
+    Author: {{article.author}}
   </div>
-</div>
+</div> -->
