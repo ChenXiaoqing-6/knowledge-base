@@ -18,6 +18,8 @@ import { KbDetailHeaderComponent } from './components/kb-detail-header/kb-detail
 import { KbDetailFooterComponent } from './components/kb-detail-footer/kb-detail-footer.component';
 import { SafeUrlPipe } from './pipes/safeUrl';
 import { KbDetailTestComponent } from './components/kb-detail-test/kb-detail-test.component';
+import { KbContainerComponent} from './components/kb-container/kb-container.component';
+import { KbLinkedListComponent} from './components/kb-linked-list/kb-linked-list.component';
 
 import { IKbState, effects, reducers } from './state';
 import { appRoutes } from './router/routes';
@@ -37,7 +39,9 @@ export const metaReducers: MetaReducer<IKbState>[] = [storeFreeze];
     KbDetailFooterComponent,
     KbDetailHeaderComponent,
     SafeUrlPipe,
-    KbDetailTestComponent
+    KbDetailTestComponent,
+    KbContainerComponent,
+    KbLinkedListComponent
   ],
   imports: [
     BrowserModule,
