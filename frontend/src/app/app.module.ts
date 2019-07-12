@@ -6,7 +6,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { RouterModule } from '@angular/router';
-import { FundamentalNgxModule, IconModule } from 'fundamental-ngx';
+import { FundamentalNgxModule } from 'fundamental-ngx';
 import { AppComponent } from './app.component';
 import { KbSearchComponent } from './components/kb-search/kb-search.component';
 import { KbArticleListComponent } from './components/kb-article-list/kb-article-list.component';
@@ -42,7 +42,6 @@ export const metaReducers: MetaReducer<IKbState>[] = [storeFreeze];
     BrowserModule,
     BrowserAnimationsModule,
     FundamentalNgxModule,
-    IconModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
