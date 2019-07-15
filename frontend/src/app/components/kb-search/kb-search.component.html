@@ -1,17 +1,24 @@
-<div>
-<fd-input-group #searchinput 
-  [button]="true" 
-  [placeholder]="'Type some text...'" 
-  [glyph]="'search'"
-  [placement]="'after'" 
-  (addOnButtonClicked)="onSearch(searchinput.inputText)" 
-  (keyup.Enter)="onSearch(searchinput.inputText)"
->
-</fd-input-group>
-<br>
-<p *ngIf="articles$ | async" >Enter kewords to search for knowledge articles.</p>
-<div>
-  <fd-loading-spinner [loading]="busy$ | async"></fd-loading-spinner>
-
-</div>
+<div class="fd-has-padding-tiny">
+  <fd-input-group #searchinput 
+    [button]="true" 
+    [placeholder]="'Type some text...'" 
+    [glyph]="'search'"
+    [placement]="'after'" 
+    (addOnButtonClicked)="onSearch(searchinput.inputText)" 
+    (keyup.Enter)="onSearch(searchinput.inputText)"
+  ></fd-input-group>
+  <br>
+  <p *ngIf="isInit$ | async; else showResultBox">
+    Enter keywords to search for knowledge articles.
+  </p>
+  <ng-template #showResultBox>
+    <fd-loading-spinner [loading]="busy$ | async"></fd-loading-spinner>
+    <div *ngIf="notFound$ | async; else showResultList">
+        No articles found.
+    </div>
+    <ng-template #showResultList>
+      <p>search Result: {{totalCount$ | async}}</p>
+    </ng-template>
+    <kb-article-list [articles]="articles$ | async"></kb-article-list>
+  </ng-template>
 </div>

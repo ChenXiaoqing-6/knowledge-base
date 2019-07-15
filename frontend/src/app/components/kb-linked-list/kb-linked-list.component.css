@@ -1,0 +1,10 @@
+.article-title-text{
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    display: block;
+}
+.article-title-link{
+    width: 85%;
+    vertical-align: middle;
+}

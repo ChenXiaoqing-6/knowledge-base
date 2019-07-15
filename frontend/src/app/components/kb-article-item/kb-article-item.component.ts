@@ -1,6 +1,8 @@
 import { IArticle } from './../../models/IArticle';
 import { Component, OnInit, Input } from '@angular/core';
 
+import { KbViewFacade } from '../../state/article/article.facade';
+
 @Component({
   selector: 'kb-article-item',
   templateUrl: './kb-article-item.component.html',
@@ -8,7 +10,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class KbArticleItemComponent implements OnInit {
   @Input() article: IArticle;
-  constructor() { }
+  constructor(private viewFacade: KbViewFacade) { }
 
   ngOnInit() {
   }
@@ -35,7 +37,6 @@ export class KbArticleItemComponent implements OnInit {
   }
   
   openArticleDetail() {
-
+    this.viewFacade.openArticle(this.article);
   }
-
 }

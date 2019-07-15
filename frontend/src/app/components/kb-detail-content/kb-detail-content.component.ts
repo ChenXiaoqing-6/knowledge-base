@@ -1,4 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Observable} from 'rxjs';
+import { IArticle } from '../../models/IArticle';
+import { KbViewFacade } from '../../state/article/article.facade';
 
 @Component({
   selector: 'kb-detail-content',
@@ -6,11 +9,14 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./kb-detail-content.component.css']
 })
 export class KbDetailContentComponent implements OnInit {
-  @Input() public url: string;
-  public isLoading: boolean = true;
-  constructor() { }
+  @Input() public article: IArticle;
+  isContentLoading$: Observable<boolean>;
 
-  ngOnInit() {  
+  constructor(private viewFacade: KbViewFacade) { 
+    this.isContentLoading$ = this.viewFacade.isSearching();
+  }
+
+  ngOnInit() { 
   }
 
   public ngAfterViewInit() {
@@ -27,14 +33,13 @@ export class KbDetailContentComponent implements OnInit {
 
   resizeIframe(event) {
     if (event.target && event.target.src != '') {
-      this.isLoading = false;
       const iframeElement = document.getElementById('iFrame') as HTMLIFrameElement;
       if (iframeElement && iframeElement.contentWindow) {
         iframeElement.contentWindow.postMessage({ FrameHeight: "FrameHeight", iframeId: iframeElement.id }, iframeElement.src);
       }
-    }
 
-    // dispatch iFrameLoadSuccessAction
+      this.viewFacade.setContentLoadSuccess();  // dispatch iFrameLoadSuccessAction
+    }
   }
 
   onIFrameLoadError(event) {

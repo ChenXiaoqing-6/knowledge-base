@@ -1,3 +1,21 @@
+export const MockArticleResponse: any = {
+    "id": "20001",
+    "provider": "Mindtouch",
+    "title": "test guide",
+    "content": "This guide provides an overview of product features and related technologies", //1908+
+    "lastUpdated": "2016-12-16T06:18:26Z",
+    "score": 0.9,
+    "link": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide",
+    "renderType": "IFRAME",
+    "renderValue": "https://sapdemo-responsive.mindtouch.us/Workstations/test_category?mt-f1=true&mt-view=f1",
+    "views": 125,
+    "author": "James Bond",
+    "category": "", //1908+
+    "upvotes": 23,  //1908+
+    "devotes": 0,  //1908+
+    "tag": ["troubleshooting", "coffee maker"],  //1908+
+}
+
 export const MockSearchResponse: any = {
     "data": [
         {
@@ -9,7 +27,7 @@ export const MockSearchResponse: any = {
             "score": 0.9,
             "link": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide",
             "renderType": "IFRAME",
-            "renderValue": "https://f1.sapdemo-responsive.mindtouch.us/Workstations/test_guide",
+            "renderValue": "https://sapdemo-responsive.mindtouch.us/test_German?mt-f1=true&mt-view=f1",
             "views": 125,
             "author": "James Bond",
             "category": "", //1908+
@@ -26,10 +44,10 @@ export const MockSearchResponse: any = {
             "score": 0.9,
             "link": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide",
             "renderType": "IFRAME",
-            "renderValue": "https://f1.sapdemo-responsive.mindtouch.us/Workstations/test_guide",
+            "renderValue": "https://sapdemo-responsive.mindtouch.us/test_German?mt-f1=true&mt-view=f1",
             "views": 20,
             "author": "James Bond",
-            "category": "", 
+            "category": "",
             "upvotes": 12,  //1908+
             "devotes": 0,  //1908+
             "tag": ["troubleshooting", "coffee maker"],  //1908+
@@ -43,10 +61,10 @@ export const MockSearchResponse: any = {
             "score": 0.9,
             "link": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide",
             "renderType": "IFRAME",
-            "renderValue": "https://f1.sapdemo-responsive.mindtouch.us/Workstations/test_guide",
+            "renderValue": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide?mt-f1=true&mt-view=f1",
             "views": 30,
             "author": "James Bond",
-            "category": "", 
+            "category": "",
             "upvotes": 13,  //1908+
             "devotes": 3,  //1908+
             "tag": ["troubleshooting", "coffee maker"],  //1908+
@@ -60,10 +78,10 @@ export const MockSearchResponse: any = {
             "score": 0.9,
             "link": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide",
             "renderType": "IFRAME",
-            "renderValue": "https://f1.sapdemo-responsive.mindtouch.us/Workstations/test_guide",
+            "renderValue": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide?mt-f1=true&mt-view=f1",
             "views": 40,
             "author": "James Bond",
-            "category": "", 
+            "category": "",
             "upvotes": 24,  //1908+
             "devotes": 4,  //1908+
             "tag": ["troubleshooting", "coffee maker"],  //1908+

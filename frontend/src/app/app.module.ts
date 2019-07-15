@@ -17,11 +17,14 @@ import { KbDetailContentComponent } from './components/kb-detail-content/kb-deta
 import { KbDetailHeaderComponent } from './components/kb-detail-header/kb-detail-header.component';
 import { KbDetailFooterComponent } from './components/kb-detail-footer/kb-detail-footer.component';
 import { SafeUrlPipe } from './pipes/safeUrl';
-import { KbDetailTestComponent } from './components/kb-detail-test/kb-detail-test.component';
+import { KbContainerComponent} from './components/kb-container/kb-container.component';
+import { KbLinkedListComponent} from './components/kb-linked-list/kb-linked-list.component';
 
 import { IKbState, effects, reducers } from './state';
 import { appRoutes } from './router/routes';
 import { KbService } from './services/kb.service';
+import { KbSearchFacade } from './state/search/search-article.facade';
+import { KbViewFacade } from './state/article/article.facade';
 
 import {ErrorHandlingComponent} from './components/error-handling/error-handling.component';
 
@@ -37,8 +40,9 @@ export const metaReducers: MetaReducer<IKbState>[] = [storeFreeze];
     KbDetailContentComponent,
     KbDetailFooterComponent,
     KbDetailHeaderComponent,
-    SafeUrlPipe,
-    KbDetailTestComponent, 
+    SafeUrlPipe,   
+    KbContainerComponent,
+    KbLinkedListComponent,
     ErrorHandlingComponent
   ],
   imports: [
@@ -59,6 +63,8 @@ export const metaReducers: MetaReducer<IKbState>[] = [storeFreeze];
       })
   ],
   providers: [
+    KbSearchFacade,
+    KbViewFacade,
     KbService
   ],
   bootstrap: [AppComponent],

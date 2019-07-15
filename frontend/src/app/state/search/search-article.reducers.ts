@@ -8,6 +8,7 @@ const PAGE_SIZE = 20;
 export const adapter: EntityAdapter<IArticle> = createEntityAdapter<IArticle>();
 
 export const initialKbSearchState: IKbSearchState = adapter.getInitialState({
+    isInit: true,
     isLoading: false,
     pagination: {
         pageSize: PAGE_SIZE,
@@ -22,11 +23,11 @@ export function reducer(state = initialKbSearchState, action: Actions): IKbSearc
 
         case ActionTypes.SearchArticles:
 
-            return { ...state, isLoading: true };
+            return { ...state, isLoading: true, isInit: false };
 
         case ActionTypes.SearchArticlesSuccess:
-
-            return adapter.addAll(action.payload.data, { ...state, isLoading: false });
+            let payload = action.payload;
+            return adapter.addAll(payload.data, { ...state, isLoading: false, totalObjectCount: payload.totalCount });
 
         case ActionTypes.SearchArticlesError:
 

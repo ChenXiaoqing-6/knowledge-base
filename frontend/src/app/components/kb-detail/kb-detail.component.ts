@@ -7,14 +7,11 @@ import { ModalRef } from 'fundamental-ngx';
   styleUrls: ['./kb-detail.component.css']
 })
 export class KbDetailComponent implements OnInit {
+
   constructor(public modalRef: ModalRef) { 
-   
   }
 
   ngOnInit() {
   }
 
-  closeDialog(event) {
-
-  }
 }

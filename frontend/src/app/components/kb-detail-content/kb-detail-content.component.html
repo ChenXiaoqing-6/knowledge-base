@@ -1,7 +1,7 @@
 <div class="kbDetailContent">
-  <fd-loading-spinner [loading]="isLoading"></fd-loading-spinner>
+  <fd-loading-spinner [loading]="isContentLoading$ | async"></fd-loading-spinner>
   <div id="kbDetailIFrameContainer">
-    <iframe title="iframe" id="iFrame" (load)="resizeIframe($event)" [src]="url | safeUrl"
+    <iframe title="iframe" id="iFrame" (load)="resizeIframe($event)" (error)="onIFrameLoadError($event)" [src]="article.renderValue | safeUrl"
       class="kbDetailContentIFrame">
     </iframe>
   </div>

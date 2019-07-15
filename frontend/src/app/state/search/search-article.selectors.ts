@@ -9,6 +9,11 @@ export const selectIsLoading = createSelector(
   (state) => state.isLoading
 );
 
+export const selectIsInit = createSelector(
+  kbSearchState,
+  (state) => state.isInit
+);
+
 export const selectPagination = createSelector(
   kbSearchState,
   (state) => state.pagination
