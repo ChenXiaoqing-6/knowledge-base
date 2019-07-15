@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, timer,  throwError } from 'rxjs';
+import { Observable, timer } from 'rxjs';
+//import { Observable, timer,  throwError } from 'rxjs';
 import { mapTo } from 'rxjs/operators';
 //import { map } from 'rxjs/operators';
 import { CollectionResponse } from '../models/IResponse';
