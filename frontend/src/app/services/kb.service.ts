@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, timer } from 'rxjs';
+import { Observable, timer,  throwError } from 'rxjs';
 import { mapTo } from 'rxjs/operators';
 //import { map } from 'rxjs/operators';
 import { CollectionResponse } from '../models/IResponse';
@@ -51,7 +51,8 @@ export class KbService {
 
   searchArticles(options: ISearchOptions): Observable<CollectionResponse<IArticle>> {
 
-    return this._mock(options);
+   return this._mock(options);
+   //return throwError(new Error('Fake error'));
 
     // return this.http.get(this.getUrl("search")).pipe(
     //   map(res => res['data'])
