@@ -23,6 +23,8 @@ import { IKbState, effects, reducers } from './state';
 import { appRoutes } from './router/routes';
 import { KbService } from './services/kb.service';
 
+import {ErrorHandlingComponent} from './components/error-handling/error-handling.component';
+
 export const metaReducers: MetaReducer<IKbState>[] = [storeFreeze];
 
 @NgModule({
@@ -36,7 +38,8 @@ export const metaReducers: MetaReducer<IKbState>[] = [storeFreeze];
     KbDetailFooterComponent,
     KbDetailHeaderComponent,
     SafeUrlPipe,
-    KbDetailTestComponent
+    KbDetailTestComponent, 
+    ErrorHandlingComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +63,7 @@ export const metaReducers: MetaReducer<IKbState>[] = [storeFreeze];
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    KbDetailComponent
+    KbDetailComponent, ErrorHandlingComponent
   ]
 })
 export class AppModule { }
