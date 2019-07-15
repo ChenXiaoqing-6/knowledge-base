@@ -5,7 +5,7 @@ import { ISearchOptions } from '../../models/IRequestOptions';
 export enum ActionTypes {
   SearchArticles = '[KB-ARTICLE-SEARCH] SearchArticles',
   SearchArticlesSuccess = '[KB-ARTICLE-SEARCH] SearchArticlesSuccess',
-  SearchArticlesError = '[KB-ARTICLE-SEARCH] UpdateSelectedError',
+  SearchArticlesError = '[KB-ARTICLE-SEARCH] SearchSelectedError',
   SearchArticlesReset = '[KB-ARTICLE-SEARCH] SearchArticlesReset'
 }
 
@@ -16,7 +16,7 @@ export class SearchArticles implements Action {
 
 export class SearchArticlesSuccess implements Action {
   public readonly type = ActionTypes.SearchArticlesSuccess;
-  constructor(public payload: { data: IArticle[] , totalCount: number }) { }
+  constructor(public payload: { data: IArticle[] , totalCount: number }, public clearState: boolean = true) { }
 }
 
 export class SearchArticlesError implements Action {
