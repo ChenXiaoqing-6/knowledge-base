@@ -1,10 +1,16 @@
-.article-title-text{
+.article-container{
+    display: flex;
+    align-items: center;
+}
+.article-link{
     white-space: nowrap; 
     overflow: hidden; 
     text-overflow: ellipsis;
-    display: block;
-}
-.article-title-link{
     width: 80%;
-    vertical-align: middle;
+}
+.action-container{
+    width: 20%;
+}
+.action-container div{
+    float: right;
 }
