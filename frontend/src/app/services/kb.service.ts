@@ -51,7 +51,8 @@ export class KbService {
 
   searchArticles(options: ISearchOptions): Observable<CollectionResponse<IArticle>> {
 
-    return this._mock(options);
+   return this._mock(options);
+   //return throwError(new Error('Fake error'));
 
     // return this.http.get(this.getUrl("search")).pipe(
     //   map(res => res['data'])

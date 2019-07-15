@@ -23,7 +23,7 @@
       <div 
         fdInfiniteScroll 
         (onScrollAction)="loadMore()" 
-        [scrollPercent]="90" 
+        [scrollPercent]="scrollPercent" 
         style="max-height: 400px; overflow-y: scroll;">
         <kb-article-list [articles]="articles$ | async"></kb-article-list>
       </div>
