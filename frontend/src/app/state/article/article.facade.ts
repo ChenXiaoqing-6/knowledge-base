@@ -8,7 +8,7 @@ import { selectIsContentLoading } from './article.selectors';
 
 @Injectable()
 export class KbViewFacade {
- 
+
   constructor(private store$: Store<IKbState>) {
   }
 
@@ -21,7 +21,7 @@ export class KbViewFacade {
   }
 
   public setContentLoadSuccess() {
-      return this.store$.dispatch(new LoadIFrameContentSuccess());
+    return this.store$.dispatch(new LoadIFrameContentSuccess());
   }
- 
+
 }

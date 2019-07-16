@@ -1,7 +1,7 @@
 <ng-container>
     <fd-modal-header class="fd-has-padding-bottom-tiny">
         <kb-detail-header [article]="modalRef.data.article | async" [isDetailMode]="true"></kb-detail-header>
-        <button fd-modal-close-btn (click)="modalRef.dismiss('x')"></button>
+        <button fd-modal-close-btn (click)="modalRef.close()"></button>
     </fd-modal-header>
 
     <kb-detail-content [article]="modalRef.data.article | async"></kb-detail-content>
