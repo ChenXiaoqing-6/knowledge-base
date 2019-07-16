@@ -19,22 +19,35 @@ export function reducer(state = initialKbSearchState, action: Actions): IKbSearc
     switch (action.type) {
 
         case ActionTypes.SearchArticles:
-
-            return { ...state, isLoading: true, isInit: false, searchTerm: action.payload.searchTerm };
+            return { 
+                ...state, 
+                isLoading: true, 
+                isInit: false, 
+                searchTerm: action.payload.searchTerm,
+                pagination: action.payload.pagination,
+                totalObjectCount: 0
+            };
 
         case ActionTypes.SearchArticlesSuccess:
-            let payload = action.payload;
-            console.log("action: ", action);
-            console.log("state1: ", state);
+            console.log("action, state: ", action, state);
             if (action.clearState) {
-                let _state = adapter.removeAll(state);
-                console.log("state2: ", state, _state);
-                _state = adapter.addAll(payload.data, { ...state, isLoading: false, totalObjectCount: payload.totalCount });
-                console.log("state3: ", state, _state);
-                return _state;
+                return adapter.addAll(action.payload.data, { 
+                    ...state, 
+                    isLoading: false,
+                    totalObjectCount: action.payload.totalCount 
+                });
             } else {
-                return adapter.addMany(payload.data, { ...state, isLoading: false });
+                return adapter.addMany(action.payload.data, { 
+                    ...state, 
+                    isLoading: false,
+                    totalObjectCount: action.payload.totalCount
+                });
             }
+
+        case ActionTypes.LoadNextPage:
+            let _pagination = { ...state.pagination };
+            _pagination.pageIndex++;
+            return { ...state, isLoading: true, pagination: _pagination, totalObjectCount: 0 };
 
         case ActionTypes.SearchArticlesError:
 

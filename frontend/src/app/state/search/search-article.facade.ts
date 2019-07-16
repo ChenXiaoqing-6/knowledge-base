@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { combineLatest } from 'rxjs/operators';
 import { IArticle } from '../../models/IArticle';
 import { IKbState } from '../index';
-import { SearchArticles, SearchArticlesReset } from './search-article.actions';
+import { SearchArticles, LoadNextPage, SearchArticlesReset } from './search-article.actions';
 import {
   selectIsLoading,
   selectIsInit,
@@ -20,6 +20,7 @@ import { ISearchOptions } from '../../models/IRequestOptions';
 export class KbSearchFacade {
 
   constructor(private store$: Store<IKbState>) {
+    
   }
 
   public getArticles(): Observable<IArticle[]> {
@@ -27,6 +28,7 @@ export class KbSearchFacade {
   }
 
   public searchArticles(options: ISearchOptions) {
+    console.log("search:", options);
     if (options.searchTerm.trim().length == 0) {
       this.resetSearch();
     } else {
@@ -35,10 +37,8 @@ export class KbSearchFacade {
   }
 
   public loadMoreArticles() {
-    this.getSearchOptionsForNext().subscribe(options => {
-      console.log("loadmore:", options);
-      this.store$.dispatch(new SearchArticles(options));
-    });
+    console.log("loadmore:");
+    this.store$.dispatch(new LoadNextPage());
   }
 
   public resetSearch() {
@@ -76,14 +76,14 @@ export class KbSearchFacade {
     );
   }
 
-  public getSearchOptionsForNext(): Observable<ISearchOptions> {
+  public getSearchOptions(): Observable<ISearchOptions> {
     return this.getPagination().pipe(
       combineLatest(
         this.getSerachTerm(),
-        (pagination, searchTerm) => {
+        (_pagination, _searchTerm) => {
           return {
-            pagination: { ...pagination, pageIndex: pagination.pageIndex + 1 },
-            searchTerm: searchTerm
+            pagination: _pagination,
+            searchTerm: _searchTerm
           };
         }
       )

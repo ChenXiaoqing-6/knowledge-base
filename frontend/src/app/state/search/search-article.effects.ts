@@ -1,20 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, switchMap, map } from "rxjs/operators";
+import { catchError, switchMap, map, withLatestFrom } from "rxjs/operators";
 
 import { ActionTypes } from './search-article.actions';
 import { KbService } from '../../services/kb.service';
 import {
   SearchArticles,
   SearchArticlesSuccess,
-  SearchArticlesError
+  SearchArticlesError,
+  LoadNextPage
 } from './search-article.actions';
+import { KbSearchFacade } from './search-article.facade';
+import { ISearchOptions } from '../../models/IRequestOptions';
+import { AlertService } from 'fundamental-ngx';
 
 @Injectable()
 export class KbSearchEffects {
 
-  constructor(private actions$: Actions, private kbService: KbService) {}
+  constructor(
+    private actions$: Actions, 
+    private facade: KbSearchFacade, 
+    private kbService: KbService,
+    private alertService: AlertService) 
+  {}
 
   @Effect()
   searchArticles$ = this.actions$
@@ -32,6 +41,30 @@ export class KbSearchEffects {
       })
     );
 
+    @Effect()
+    loadNextPage$ = this.actions$
+      .pipe(
+        ofType<LoadNextPage>(ActionTypes.LoadNextPage),
+        withLatestFrom(this.facade.getSearchOptions()),
+        switchMap(([action, searchOptions]: [LoadNextPage, ISearchOptions]) => {
+          return of(new SearchArticles(searchOptions));
+        })
+      );
+
+      @Effect({dispatch: false})
+      SearchError$ = this.actions$
+        .pipe(
+          ofType<SearchArticlesError>(ActionTypes.SearchArticlesError),
+          switchMap((action) => {
+            let errMsg = `Error occured: ${action.payload.error}`;
+            this.alertService.open(errMsg, {
+              type: 'error',
+              dismissible: false,
+              duration: 3000
+            });
+            return of('noop');
+          })
+        );
 }
 
 

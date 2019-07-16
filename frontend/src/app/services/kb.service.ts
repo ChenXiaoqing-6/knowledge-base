@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, timer } from 'rxjs';
+import { Observable, timer, throwError } from 'rxjs';
 import { mapTo, tap } from 'rxjs/operators';
 //import { map } from 'rxjs/operators';
 import { CollectionResponse } from '../models/IResponse';
@@ -22,6 +22,11 @@ export class KbService {
   // }
 
   private _mock(options: ISearchOptions): Observable<CollectionResponse<IArticle>> {
+
+    if (options.searchTerm.indexOf("Error") >= 0) {
+      return throwError(new Error('Fake error')); 
+    }
+
     let data: Array<IArticle> = [];
     let types: Array<string> = ["Java", "Angular", "Nodejs", "Javascript"];
     for (let i = 1; i <= 100; i++) {
@@ -45,14 +50,13 @@ export class KbService {
         typeDataPages[options.pagination.pageIndex-1] : [], 
       totalObjectCount: typeData.length
     };
-    console.log("executed: ", options);
-    return timer(300).pipe(tap(()=>{console.log("done.");}),mapTo(ret));
+    console.log("send request to server: ", options);
+    return timer(30).pipe(tap(()=>{console.log("done.");}),mapTo(ret));
   }
 
   searchArticles(options: ISearchOptions): Observable<CollectionResponse<IArticle>> {
 
    return this._mock(options);
-   //return throwError(new Error('Fake error'));
 
     // return this.http.get(this.getUrl("search")).pipe(
     //   map(res => res['data'])

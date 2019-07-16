@@ -58,7 +58,7 @@ export class KbSearchComponent implements OnInit, OnDestroy {
   }
 
   loadMore() {
-    console.log("load more...");
+    console.log("[FD] trigger load more...");
     this.loadMore$.next();
   }
 

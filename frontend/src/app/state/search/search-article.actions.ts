@@ -6,6 +6,7 @@ export enum ActionTypes {
   SearchArticles = '[KB-ARTICLE-SEARCH] SearchArticles',
   SearchArticlesSuccess = '[KB-ARTICLE-SEARCH] SearchArticlesSuccess',
   SearchArticlesError = '[KB-ARTICLE-SEARCH] SearchSelectedError',
+  LoadNextPage = '[KB-ARTICLE-SEARCH] LoadNextPage',
   SearchArticlesReset = '[KB-ARTICLE-SEARCH] SearchArticlesReset'
 }
 
@@ -24,6 +25,10 @@ export class SearchArticlesError implements Action {
   constructor(public payload: { error: any }) { }
 }
 
+export class LoadNextPage implements Action {
+  public readonly type = ActionTypes.LoadNextPage;
+}
+
 export class SearchArticlesReset implements Action {
   public readonly type = ActionTypes.SearchArticlesReset;
 }
@@ -31,4 +36,5 @@ export class SearchArticlesReset implements Action {
 export type Actions = SearchArticles
   | SearchArticlesSuccess
   | SearchArticlesError
+  | LoadNextPage
   | SearchArticlesReset;

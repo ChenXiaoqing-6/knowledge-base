@@ -38,6 +38,7 @@
     "core-js": "^2.4.1",
     "daypilot-pro-angular": "https://npm.daypilot.org/daypilot-pro-angular/trial/2018.4.3442.tar.gz",
     "fiori-fundamentals": "^1.5.7",
+    "fundamental-styles": "^0.1.0",
     "fsm-shell": "^0.1.1-rc8",
     "fundamental-ngx": "^0.6.0",
     "ldclient-js": "^2.4.0",

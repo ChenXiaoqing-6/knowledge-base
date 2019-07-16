@@ -26,8 +26,6 @@ import { KbService } from './services/kb.service';
 import { KbSearchFacade } from './state/search/search-article.facade';
 import { KbViewFacade } from './state/article/article.facade';
 
-import {ErrorHandlingComponent} from './components/error-handling/error-handling.component';
-
 export const metaReducers: MetaReducer<IKbState>[] = [storeFreeze];
 
 @NgModule({
@@ -42,8 +40,7 @@ export const metaReducers: MetaReducer<IKbState>[] = [storeFreeze];
     KbDetailHeaderComponent,
     SafeUrlPipe,   
     KbContainerComponent,
-    KbLinkedListComponent,
-    ErrorHandlingComponent
+    KbLinkedListComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +66,7 @@ export const metaReducers: MetaReducer<IKbState>[] = [storeFreeze];
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    KbDetailComponent, ErrorHandlingComponent
+    KbDetailComponent
   ]
 })
 export class AppModule { }
