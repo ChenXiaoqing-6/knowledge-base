@@ -36,6 +36,7 @@ export class KbSearchFacade {
 
   public loadMoreArticles() {
     this.getSearchOptionsForNext().subscribe(options => {
+      console.log("loadmore:", options);
       this.store$.dispatch(new SearchArticles(options));
     });
   }

@@ -25,7 +25,7 @@ export class KbSearchEffects {
           .pipe(
             map(response => new SearchArticlesSuccess(
               { data: response.data, totalCount: response.totalObjectCount }, 
-              action.payload.pagination.pageIndex === 0 
+              action.payload.pagination.pageIndex === 1 
             )),
             catchError(error => of(new SearchArticlesError({ error })))
           );

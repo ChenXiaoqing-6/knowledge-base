@@ -20,11 +20,11 @@
       <ng-template #showResultList>
         <p>search Result: {{totalCount$ | async}}</p>
       </ng-template>
-      <div 
+      <div style="background-color: cadetblue"
         fdInfiniteScroll 
         (onScrollAction)="loadMore()" 
-        [scrollPercent]="scrollPercent" 
-        style="max-height: 400px; overflow-y: scroll;">
+        [scrollPercent]="80" 
+        style="height: 100%; overflow-y: scroll;">
         <kb-article-list [articles]="articles$ | async"></kb-article-list>
       </div>
     </ng-template>

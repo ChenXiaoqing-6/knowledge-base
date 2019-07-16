@@ -13,8 +13,6 @@ import { KbSearchFacade } from '../../state/search/search-article.facade';
 export class KbSearchComponent implements OnInit, OnDestroy {
 
   private onDestroy$: Subject<boolean> = new Subject();
-
-  scrollPercent: 80;
   articles$: Observable<IArticle[]>;
   totalCount$: Observable<number>;
   isInit$: Observable<boolean>;
@@ -60,7 +58,7 @@ export class KbSearchComponent implements OnInit, OnDestroy {
   }
 
   loadMore() {
-    console.log("scroll: ");
+    console.log("load more...");
     this.loadMore$.next();
   }
 
