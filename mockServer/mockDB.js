@@ -4,7 +4,7 @@ function generateMockData() {
     lastUpdated = "2016-12-16T06:18:26Z",
     link = "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide",
     renderType = "IFRAME",
-    renderValue = "https://f1.sapdemo-responsive.mindtouch.us/Workstations/test_guide",
+    renderValue = "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide?mt-f1=true&mt-view=f1",
     views = 125,
     author = "James Bond",
     category = "",
