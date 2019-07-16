@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, fromEvent, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { IArticle } from '../../models/IArticle';
 import { KbViewFacade } from '../../state/article/article.facade';
 
@@ -11,21 +12,24 @@ import { KbViewFacade } from '../../state/article/article.facade';
 export class KbDetailContentComponent implements OnInit {
   @Input() public article: IArticle;
   public isContentLoading$: Observable<boolean>;
+  private onDestroy$: Subject<boolean> = new Subject();
 
   constructor(private viewFacade: KbViewFacade) {
     this.isContentLoading$ = this.viewFacade.isSearching();
   }
 
   ngOnInit() {
-    window.addEventListener('message', this._changeIFrameHeight, true);
+    fromEvent(window, 'message').pipe(
+      takeUntil(this.onDestroy$)
+    ).subscribe(event => this._changeIFrameHeight(event));
   }
 
   onIFrameLoad(event) {
     if (event.target && event.target.src != '') {
       const iframeElement = document.getElementById('iFrame') as HTMLIFrameElement;
-      if (iframeElement && iframeElement.contentWindow) { //load success
+      if (iframeElement && iframeElement.contentWindow) {
         iframeElement.contentWindow.postMessage({ FrameHeight: "FrameHeight", iframeId: iframeElement.id }, iframeElement.src);
-        this.viewFacade.setContentLoadSuccess();  // dispatch iFrameLoadSuccessAction
+        this.viewFacade.setContentLoadSuccess(); 
       }
     }
   }
