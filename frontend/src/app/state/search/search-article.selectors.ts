@@ -19,6 +19,11 @@ export const selectPagination = createSelector(
   (state) => state.pagination
 );
 
+export const selectSearchTerm = createSelector(
+  kbSearchState,
+  (state) => state.searchTerm
+);
+
 export const selectAllArticles = createSelector(
   kbSearchState,
   fromReducers.selectAll

@@ -20,11 +20,12 @@ export class KbSearchEffects {
   searchArticles$ = this.actions$
     .pipe(
       ofType<SearchArticles>(ActionTypes.SearchArticles),
-      switchMap(action => {
+      switchMap(action => { 
         return this.kbService.searchArticles(action.payload)
           .pipe(
             map(response => new SearchArticlesSuccess(
-              { data: response.data, totalCount: response.totalObjectCount }
+              { data: response.data, totalCount: response.totalObjectCount }, 
+              action.payload.pagination.pageIndex === 1 
             )),
             catchError(error => of(new SearchArticlesError({ error })))
           );
