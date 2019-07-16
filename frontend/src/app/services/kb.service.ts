@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, timer } from 'rxjs';
-import { mapTo } from 'rxjs/operators';
+import { mapTo, tap } from 'rxjs/operators';
 //import { map } from 'rxjs/operators';
 import { CollectionResponse } from '../models/IResponse';
 import { IArticle } from '../models/IArticle';
@@ -45,13 +45,14 @@ export class KbService {
         typeDataPages[options.pagination.pageIndex-1] : [], 
       totalObjectCount: typeData.length
     };
-    
-    return timer(3000).pipe(mapTo(ret));
+    console.log("executed: ", options);
+    return timer(300).pipe(tap(()=>{console.log("done.");}),mapTo(ret));
   }
 
   searchArticles(options: ISearchOptions): Observable<CollectionResponse<IArticle>> {
 
-    return this._mock(options);
+   return this._mock(options);
+   //return throwError(new Error('Fake error'));
 
     // return this.http.get(this.getUrl("search")).pipe(
     //   map(res => res['data'])

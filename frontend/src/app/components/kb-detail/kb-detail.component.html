@@ -1,11 +1,11 @@
 <ng-container>
     <fd-modal-header class="fd-has-padding-bottom-tiny">
-        <kb-detail-header [article]="modalRef.data.article" [isDetailMode]="true"></kb-detail-header>
+        <kb-detail-header [article]="modalRef.data.article | async" [isDetailMode]="true"></kb-detail-header>
         <button fd-modal-close-btn (click)="modalRef.dismiss('x')"></button>
     </fd-modal-header>
 
-    <kb-detail-content [url]="modalRef.data.article.renderValue"></kb-detail-content>
+    <kb-detail-content [article]="modalRef.data.article | async"></kb-detail-content>
     <fd-modal-footer class="fd-has-padding-top-tiny fd-has-padding-bottom-tiny kbDetailFooterContainer">
-        <kb-detail-footer [url]="modalRef.data.article.link"></kb-detail-footer>
+        <kb-detail-footer [article]="modalRef.data.article | async"></kb-detail-footer>
     </fd-modal-footer>
 </ng-container>

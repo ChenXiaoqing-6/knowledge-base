@@ -2,7 +2,8 @@ import { Action } from '@ngrx/store';
 import { IArticle } from '../../models/IArticle';
 
 export enum ActionTypes {
-  OpenArticle = '[KB-ARTICLE-OPEN] OpenArticle'
+  OpenArticle = '[KB-ARTICLE-OPEN] OpenArticle',
+  LoadIFrameContentSuccess = '[KB-ARTICLE-OPEN] LoadIFrameContentSuccess',
 }
 
 export class OpenArticle implements Action {
@@ -10,4 +11,8 @@ export class OpenArticle implements Action {
   constructor(public payload: IArticle) { }
 }
 
-export type Actions = OpenArticle;
+export class LoadIFrameContentSuccess implements Action {
+  public readonly type = ActionTypes.LoadIFrameContentSuccess;
+}
+
+export type Actions = OpenArticle | LoadIFrameContentSuccess;
