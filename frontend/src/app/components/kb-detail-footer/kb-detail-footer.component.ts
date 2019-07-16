@@ -17,8 +17,4 @@ export class KbDetailFooterComponent implements OnInit {
     window.open(this.article.link, '_blank');
   }
 
-  get link() {
-    return this.article.link;
-  }
-
 }

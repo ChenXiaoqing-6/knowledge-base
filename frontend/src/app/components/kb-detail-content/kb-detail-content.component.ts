@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import { IArticle } from '../../models/IArticle';
 import { KbViewFacade } from '../../state/article/article.facade';
 
@@ -10,40 +10,33 @@ import { KbViewFacade } from '../../state/article/article.facade';
 })
 export class KbDetailContentComponent implements OnInit {
   @Input() public article: IArticle;
-  isContentLoading$: Observable<boolean>;
+  public isContentLoading$: Observable<boolean>;
 
-  constructor(private viewFacade: KbViewFacade) { 
+  constructor(private viewFacade: KbViewFacade) {
     this.isContentLoading$ = this.viewFacade.isSearching();
   }
 
-  ngOnInit() { 
+  ngOnInit() {
+    window.addEventListener('message', this._changeIFrameHeight, true);
   }
 
-  public ngAfterViewInit() {
-    const _changeIframeHeight = function (event) {
-      if (event.data.hasOwnProperty("FrameHeight")) {
-        var Iframe = document.getElementById(event.data.iframeId);
-        if (Iframe) {
-          Iframe.setAttribute("height", event.data.FrameHeight);
-        }
-      }
-    }
-    window.addEventListener('message', _changeIframeHeight, true);
-  }
-
-  resizeIframe(event) {
+  onIFrameLoad(event) {
     if (event.target && event.target.src != '') {
       const iframeElement = document.getElementById('iFrame') as HTMLIFrameElement;
-      if (iframeElement && iframeElement.contentWindow) {
+      if (iframeElement && iframeElement.contentWindow) { //load success
         iframeElement.contentWindow.postMessage({ FrameHeight: "FrameHeight", iframeId: iframeElement.id }, iframeElement.src);
+        this.viewFacade.setContentLoadSuccess();  // dispatch iFrameLoadSuccessAction
       }
-
-      this.viewFacade.setContentLoadSuccess();  // dispatch iFrameLoadSuccessAction
     }
   }
 
-  onIFrameLoadError(event) {
-    // dispatch iFrameLoadFailAction
+  private _changeIFrameHeight(event): void {
+    if (event.data.hasOwnProperty("FrameHeight")) {
+      var Iframe = document.getElementById(event.data.iframeId);
+      if (Iframe) {
+        Iframe.setAttribute("height", event.data.FrameHeight);
+      }
+    }
   }
 
 }
