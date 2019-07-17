@@ -16,7 +16,7 @@ import { KbDetailComponent } from './components/kb-detail/kb-detail.component';
 import { KbDetailContentComponent } from './components/kb-detail-content/kb-detail-content.component';
 import { KbDetailHeaderComponent } from './components/kb-detail-header/kb-detail-header.component';
 import { KbDetailFooterComponent } from './components/kb-detail-footer/kb-detail-footer.component';
-import { SafeUrlPipe } from './pipes/safeUrl';
+import { SafeUrlPipe } from './pipes/safeUrl.pipe';
 import { KbContainerComponent} from './components/kb-container/kb-container.component';
 import { KbLinkedListComponent} from './components/kb-linked-list/kb-linked-list.component';
 
