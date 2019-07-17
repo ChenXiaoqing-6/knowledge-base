@@ -21,7 +21,7 @@ export class KbDetailContentComponent implements OnInit {
   public ngOnInit() {
     fromEvent(window, 'message').pipe(
       takeUntil(this.onDestroy$)
-    ).subscribe(event => this._changeIFrameHeight(event));
+    ).subscribe(event => this.changeIFrameHeight(event));
   }
 
   public onIFrameLoad(event) {
@@ -38,8 +38,8 @@ export class KbDetailContentComponent implements OnInit {
     this.onDestroy$.next(true);
   }
 
-  private _changeIFrameHeight(event): void {
-    if (event.data.hasOwnProperty("FrameHeight")) {
+  public changeIFrameHeight(event): void {
+    if (event.data && event.data.hasOwnProperty("FrameHeight")) {
       var Iframe = document.getElementById(event.data.iframeId);
       if (Iframe) {
         Iframe.setAttribute("height", event.data.FrameHeight);

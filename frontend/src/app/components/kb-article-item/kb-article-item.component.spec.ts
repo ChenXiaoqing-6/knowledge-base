@@ -1,9 +1,15 @@
 import { KbViewFacade } from './../../state/article/article.facade';
-import { KbDetailHeaderComponent } from './../kb-detail-header/kb-detail-header.component';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FundamentalNgxModule } from 'fundamental-ngx';
 import { KbArticleItemComponent } from './kb-article-item.component';
 import { RenderType } from '../../models/RenderType.enum';
+import { Component, Input } from '@angular/core';
+
+@Component({ selector: 'kb-detail-header', template: '' })
+class KbDetailHeaderComponent {
+  @Input() article: any;
+  @Input() isDetailMode: false;
+}
 
 describe('KbArticleItemComponent', () => {
   let component: KbArticleItemComponent;
