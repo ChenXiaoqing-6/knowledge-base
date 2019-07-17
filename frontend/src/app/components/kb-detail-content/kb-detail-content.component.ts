@@ -18,13 +18,13 @@ export class KbDetailContentComponent implements OnInit {
     this.isContentLoading$ = this.viewFacade.isSearching();
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     fromEvent(window, 'message').pipe(
       takeUntil(this.onDestroy$)
     ).subscribe(event => this._changeIFrameHeight(event));
   }
 
-  onIFrameLoad(event) {
+  public onIFrameLoad(event) {
     if (event.target && event.target.src != '') {
       const iframeElement = document.getElementById('iFrame') as HTMLIFrameElement;
       if (iframeElement && iframeElement.contentWindow) {
@@ -32,6 +32,10 @@ export class KbDetailContentComponent implements OnInit {
         this.viewFacade.setContentLoadSuccess(); 
       }
     }
+  }
+
+  public ngOnDestroy(): void {
+    this.onDestroy$.next(true);
   }
 
   private _changeIFrameHeight(event): void {
