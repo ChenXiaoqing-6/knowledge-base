@@ -20,12 +20,22 @@ export function reducer(state = initialKbSearchState, action: Actions): IKbSearc
     switch (action.type) {
 
         case ActionTypes.SearchArticles:
-            return {
-                ...state,
-                isLoading: true,
-                isInit: false,
-                searchTerm: action.payload.searchTerm
-            };
+            if (action.payload.pagination.pageIndex === 1 ) {
+                return adapter.removeAll({
+                    ...state,
+                    isLoading: true,
+                    isInit: false,
+                    searchTerm: action.payload.searchTerm,
+                    pagination: action.payload.pagination,
+                    lastPage: 1,
+                    totalObjectCount: 0
+                });
+            } else {
+                return {
+                    ...state,
+                    isLoading: true
+                };
+            }
 
         case ActionTypes.SearchArticlesSuccess:
             console.log("action, state: ", action, state);
