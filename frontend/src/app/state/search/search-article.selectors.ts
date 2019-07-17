@@ -29,6 +29,11 @@ export const selectAllArticles = createSelector(
   fromReducers.selectAll
 );
 
+export const selectLastPage = createSelector(
+  kbSearchState,
+  (state) => state.lastPage
+);
+
 export const selectTotalObjectCount = createSelector(
   kbSearchState,
   (state) => state.totalObjectCount

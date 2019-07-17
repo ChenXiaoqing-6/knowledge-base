@@ -11,6 +11,7 @@ export const initialKbSearchState: IKbSearchState = adapter.getInitialState({
     isLoading: false,
     searchTerm: "",
     pagination: PaginationHelper.create(),
+    lastPage: 1,
     totalObjectCount: 0
 });
 
@@ -19,35 +20,36 @@ export function reducer(state = initialKbSearchState, action: Actions): IKbSearc
     switch (action.type) {
 
         case ActionTypes.SearchArticles:
-            return { 
-                ...state, 
-                isLoading: true, 
-                isInit: false, 
-                searchTerm: action.payload.searchTerm,
-                pagination: action.payload.pagination,
-                totalObjectCount: 0
+            return {
+                ...state,
+                isLoading: true,
+                isInit: false,
+                searchTerm: action.payload.searchTerm
             };
 
         case ActionTypes.SearchArticlesSuccess:
             console.log("action, state: ", action, state);
             if (action.clearState) {
-                return adapter.addAll(action.payload.data, { 
-                    ...state, 
+                return adapter.addAll(action.payload.data, {
+                    ...state,
                     isLoading: false,
-                    totalObjectCount: action.payload.totalCount 
+                    pagination: action.payload.pagination,
+                    lastPage: action.payload.lastPage,
+                    totalObjectCount: action.payload.totalCount
                 });
             } else {
-                return adapter.addMany(action.payload.data, { 
-                    ...state, 
+                return adapter.addMany(action.payload.data, {
+                    ...state,
                     isLoading: false,
+                    pagination: action.payload.pagination,
+                    lastPage: action.payload.lastPage,
                     totalObjectCount: action.payload.totalCount
                 });
             }
 
         case ActionTypes.LoadNextPage:
-            let _pagination = { ...state.pagination };
-            _pagination.pageIndex++;
-            return { ...state, isLoading: true, pagination: _pagination, totalObjectCount: 0 };
+
+            return { ...state };
 
         case ActionTypes.SearchArticlesError:
 

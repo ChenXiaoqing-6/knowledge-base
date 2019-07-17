@@ -48,10 +48,11 @@ export class KbService {
       ...MockSearchResponse, 
       data: (options.pagination.pageIndex <= typeDataPages.length) ? 
         typeDataPages[options.pagination.pageIndex-1] : [], 
+      lastPage: typeDataPages.length || 1,  
       totalObjectCount: typeData.length
     };
-    console.log("send request to server: ", options);
-    return timer(30).pipe(tap(()=>{console.log("done.");}),mapTo(ret));
+    console.log("request server: ", options);
+    return timer(300).pipe(tap(()=>{console.log("done.");}),mapTo(ret));
   }
 
   searchArticles(options: ISearchOptions): Observable<CollectionResponse<IArticle>> {

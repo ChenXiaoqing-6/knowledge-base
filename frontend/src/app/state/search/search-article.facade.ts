@@ -11,6 +11,7 @@ import {
   selectAllArticles,
   selectPagination,
   selectSearchTerm,
+  selectLastPage,
   selectTotalObjectCount
 } from './search-article.selectors';
 import { IPagination } from '../../models/IPagination';
@@ -19,16 +20,13 @@ import { ISearchOptions } from '../../models/IRequestOptions';
 @Injectable()
 export class KbSearchFacade {
 
-  constructor(private store$: Store<IKbState>) {
-    
-  }
+  constructor(private store$: Store<IKbState>) { }
 
   public getArticles(): Observable<IArticle[]> {
     return this.store$.pipe(select(selectAllArticles));
   }
 
   public searchArticles(options: ISearchOptions) {
-    console.log("search:", options);
     if (options.searchTerm.trim().length == 0) {
       this.resetSearch();
     } else {
@@ -37,7 +35,6 @@ export class KbSearchFacade {
   }
 
   public loadMoreArticles() {
-    console.log("loadmore:");
     this.store$.dispatch(new LoadNextPage());
   }
 
@@ -51,6 +48,10 @@ export class KbSearchFacade {
 
   public getSerachTerm(): Observable<string> {
     return this.store$.pipe(select(selectSearchTerm));
+  }
+
+  public getLastPage(): Observable<number> {
+    return this.store$.pipe(select(selectLastPage));
   }
 
   public getTotalObjectCount(): Observable<number> {
@@ -76,15 +77,18 @@ export class KbSearchFacade {
     );
   }
 
-  public getSearchOptions(): Observable<ISearchOptions> {
+  public getNextPageSearchOptions(): Observable<ISearchOptions | null> {
     return this.getPagination().pipe(
       combineLatest(
+        this.getLastPage(),
         this.getSerachTerm(),
-        (_pagination, _searchTerm) => {
-          return {
-            pagination: _pagination,
-            searchTerm: _searchTerm
-          };
+        (_pagination, _lastPage, _searchTerm) => {
+          let _nextPage = { ..._pagination, pageIndex: _pagination.pageIndex + 1 };
+          return (_nextPage.pageIndex > _lastPage) ? null :
+            {
+              pagination: _nextPage,
+              searchTerm: _searchTerm
+            }
         }
       )
     );

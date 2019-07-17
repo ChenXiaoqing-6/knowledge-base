@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 import { IArticle } from '../../models/IArticle';
 import { ISearchOptions } from '../../models/IRequestOptions';
+import { IPagination } from '../../models/IPagination';
 
 export enum ActionTypes {
   SearchArticles = '[KB-ARTICLE-SEARCH] SearchArticles',
@@ -17,7 +18,7 @@ export class SearchArticles implements Action {
 
 export class SearchArticlesSuccess implements Action {
   public readonly type = ActionTypes.SearchArticlesSuccess;
-  constructor(public payload: { data: IArticle[] , totalCount: number }, public clearState: boolean = true) { }
+  constructor(public payload: { data: IArticle[] , pagination: IPagination, lastPage: number, totalCount: number }, public clearState: boolean = true) { }
 }
 
 export class SearchArticlesError implements Action {

@@ -7,5 +7,6 @@ export interface IKbSearchState extends EntityState<IArticle> {
     isLoading: boolean;
     searchTerm: string;
     pagination: IPagination;
+    lastPage: number;
     totalObjectCount: number;
 }
