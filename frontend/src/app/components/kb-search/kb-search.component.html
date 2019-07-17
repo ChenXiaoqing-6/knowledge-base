@@ -12,19 +12,20 @@
     <p *ngIf="isInit$ | async; else showResultBox">
       Enter keywords to search for knowledge articles.
     </p>
+
     <ng-template #showResultBox>
       <fd-loading-spinner [loading]="busy$ | async"></fd-loading-spinner>
       <div *ngIf="notFound$ | async; else showResultList">
           No articles found.
       </div>
       <ng-template #showResultList>
-        <p>search Result: {{totalCount$ | async}}</p>
+        <p>Search results: {{totalCount$ | async}}</p>
       </ng-template>
       <div
         fdInfiniteScroll 
         (onScrollAction)="loadMore()" 
-        [scrollPercent]="80" 
-        style="border: solid 1px cadetblue; height: 500px; overflow-y: auto;">
+        [scrollPercent]="98" 
+        class="infinite-scroll-area">
         <kb-article-list [articles]="articles$ | async"></kb-article-list>
       </div>
     </ng-template>

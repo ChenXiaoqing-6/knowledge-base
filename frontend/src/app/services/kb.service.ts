@@ -52,7 +52,7 @@ export class KbService {
       totalObjectCount: typeData.length
     };
     console.log("request server: ", options);
-    return timer(300).pipe(tap(()=>{console.log("done.");}),mapTo(ret));
+    return timer(1000).pipe(tap(()=>{console.log("done.");}),mapTo(ret));
   }
 
   searchArticles(options: ISearchOptions): Observable<CollectionResponse<IArticle>> {

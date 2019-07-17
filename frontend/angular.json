@@ -104,11 +104,11 @@
   "defaultProject": "knowledge-article-management",
   "schematics": {
     "@schematics/angular:component": {
-      "prefix": "app",
+      "prefix": "kb",
       "styleext": "css"
     },
     "@schematics/angular:directive": {
-      "prefix": "app"
+      "prefix": "kb"
     }
   }
 }
