@@ -1,5 +1,6 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FundamentalNgxModule } from 'fundamental-ngx';
 
 import { KbLinkedListComponent } from './kb-linked-list.component';
 
@@ -9,9 +10,10 @@ describe('KbLinkedListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ KbLinkedListComponent ]
+      declarations: [KbLinkedListComponent],
+      imports: [FundamentalNgxModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

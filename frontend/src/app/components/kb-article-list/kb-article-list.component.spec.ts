@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, Input } from '@angular/core';
 
 import { KbArticleListComponent } from './kb-article-list.component';
+
+@Component({ selector: 'kb-article-item', template: '' })
+class KbArticleItemComponent {
+  @Input() article: any;
+}
 
 describe('KbArticleListComponent', () => {
   let component: KbArticleListComponent;
@@ -8,9 +14,12 @@ describe('KbArticleListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ KbArticleListComponent ]
+      declarations: [
+        KbArticleListComponent,
+        KbArticleItemComponent
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
