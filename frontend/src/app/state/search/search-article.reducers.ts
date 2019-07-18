@@ -57,10 +57,6 @@ export function reducer(state = initialKbSearchState, action: Actions): IKbSearc
                 });
             }
 
-        case ActionTypes.LoadNextPage:
-
-            return { ...state };
-
         case ActionTypes.SearchArticlesError:
 
             return { ...state, isLoading: false };

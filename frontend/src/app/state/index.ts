@@ -1,4 +1,4 @@
-import { ActionReducerMap } from '@ngrx/store';
+import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { reducer as kbSearchReducer } from './search/search-article.reducers';
 import { reducer as kbViewReducer } from './article/article.reducers';
 import { IKbSearchState } from './search/search-article.state';
@@ -20,3 +20,5 @@ export const effects = [
   KbSearchEffects,
   KbViewEffects
 ];
+
+export const metaReducers: MetaReducer<IKbState>[] = [];

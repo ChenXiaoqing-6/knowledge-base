@@ -1,10 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { MetaReducer, StoreModule } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { storeFreeze } from 'ngrx-store-freeze';
 import { RouterModule } from '@angular/router';
 import { FundamentalNgxModule } from 'fundamental-ngx';
 import { AppComponent } from './app.component';
@@ -17,16 +16,14 @@ import { KbDetailContentComponent } from './components/kb-detail-content/kb-deta
 import { KbDetailHeaderComponent } from './components/kb-detail-header/kb-detail-header.component';
 import { KbDetailFooterComponent } from './components/kb-detail-footer/kb-detail-footer.component';
 import { SafeUrlPipe } from './pipes/safeUrl.pipe';
-import { KbContainerComponent} from './components/kb-container/kb-container.component';
-import { KbLinkedListComponent} from './components/kb-linked-list/kb-linked-list.component';
+import { KbContainerComponent } from './components/kb-container/kb-container.component';
+import { KbLinkedListComponent } from './components/kb-linked-list/kb-linked-list.component';
 
-import { IKbState, effects, reducers } from './state';
+import { effects, reducers, metaReducers } from './state';
 import { appRoutes } from './router/routes';
 import { KbService } from './services/kb.service';
 import { KbSearchFacade } from './state/search/search-article.facade';
 import { KbViewFacade } from './state/article/article.facade';
-
-export const metaReducers: MetaReducer<IKbState>[] = [storeFreeze];
 
 @NgModule({
   declarations: [
@@ -38,7 +35,7 @@ export const metaReducers: MetaReducer<IKbState>[] = [storeFreeze];
     KbDetailContentComponent,
     KbDetailFooterComponent,
     KbDetailHeaderComponent,
-    SafeUrlPipe,   
+    SafeUrlPipe,
     KbContainerComponent,
     KbLinkedListComponent
   ],
