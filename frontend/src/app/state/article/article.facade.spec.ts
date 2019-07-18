@@ -1,10 +1,11 @@
-import { StoreMock } from '../mock/store.mock';
-import { KbViewFacade } from './article.facade';
 import { fakeAsync } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
+
+import { StoreMock } from '../mock/store.mock';
+import { KbViewFacade } from './article.facade';
 import { OpenArticle, LoadIFrameContentSuccess } from './article.actions';
 import { IArticle } from '../../models/IArticle';
-import { RenderType } from '../../models/RenderType.enum'
+import { MockArticle } from '../../models/mock/Article.mock';
 
 describe('KbViewFacade facade test', () => {
   function setup() {
@@ -23,18 +24,7 @@ describe('KbViewFacade facade test', () => {
 
     it('shoudl dispatch to open article', () => {
       const service = setup();
-      let article: IArticle = {
-        id: "testId",
-        provider: "testProvider",
-        title: "test title",
-        lastUpdated: new Date(),
-        score: 100,
-        link: "http://test.com",
-        renderType: RenderType.IFRAME,
-        renderValue: "test render",
-        views: 1,
-        author: "test author",
-      };
+      let article: IArticle = MockArticle;
 
       service.kbViewFacade.openArticle(article);
 

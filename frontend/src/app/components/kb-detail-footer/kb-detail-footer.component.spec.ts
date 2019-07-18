@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FundamentalNgxModule } from 'fundamental-ngx';
 
 import { KbDetailFooterComponent } from './kb-detail-footer.component';
 
@@ -8,7 +9,12 @@ describe('KbDetailFooterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ KbDetailFooterComponent ]
+      declarations: [
+        KbDetailFooterComponent
+      ],
+      imports: [
+        FundamentalNgxModule,
+      ],
     })
     .compileComponents();
   }));

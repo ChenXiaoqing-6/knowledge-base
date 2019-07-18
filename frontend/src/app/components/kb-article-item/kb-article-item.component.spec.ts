@@ -1,9 +1,9 @@
-import { IArticle } from './../../models/IArticle';
 import { KbViewFacade } from './../../state/article/article.facade';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FundamentalNgxModule } from 'fundamental-ngx';
 import { KbArticleItemComponent } from './kb-article-item.component';
 import { Component, Input } from '@angular/core';
+import { MockArticle } from '../../models/mock/Article.mock';
 
 @Component({ selector: 'kb-detail-header', template: '' })
 class KbDetailHeaderComponent {
@@ -28,9 +28,7 @@ describe('KbArticleItemComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(KbArticleItemComponent);
     component = fixture.componentInstance;
-    component.article = {
-      title: "test"
-    } as IArticle;
+    component.article = MockArticle;
     fixture.detectChanges();
   });
 
