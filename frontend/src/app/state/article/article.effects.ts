@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ModalService } from 'fundamental-ngx';
+import { ModalService, ModalRef } from 'fundamental-ngx';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { mergeMap, catchError, map } from "rxjs/operators";
@@ -17,7 +17,7 @@ export class KbViewEffects {
     .pipe(
       ofType<OpenArticle>(ActionTypes.OpenArticle),
       mergeMap(action => {
-        let dialogRef = this.modalService.open(KbDetailComponent, {
+        let dialogRef: ModalRef = this.modalService.open(KbDetailComponent, {
           data: {
             article: of(action.payload)
           },
