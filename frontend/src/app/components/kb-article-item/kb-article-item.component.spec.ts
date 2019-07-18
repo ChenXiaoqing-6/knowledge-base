@@ -1,8 +1,8 @@
+import { IArticle } from './../../models/IArticle';
 import { KbViewFacade } from './../../state/article/article.facade';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FundamentalNgxModule } from 'fundamental-ngx';
 import { KbArticleItemComponent } from './kb-article-item.component';
-import { RenderType } from '../../models/RenderType.enum';
 import { Component, Input } from '@angular/core';
 
 @Component({ selector: 'kb-detail-header', template: '' })
@@ -29,17 +29,8 @@ describe('KbArticleItemComponent', () => {
     fixture = TestBed.createComponent(KbArticleItemComponent);
     component = fixture.componentInstance;
     component.article = {
-      id: "1",
-      provider: "test",
-      title: "test",
-      lastUpdated: new Date(),
-      score: 1,
-      link: "test",
-      renderType: RenderType.IFRAME,
-      renderValue: "test",
-      views: 1,
-      author: "test",
-    };
+      title: "test"
+    } as IArticle;
     fixture.detectChanges();
   });
 
