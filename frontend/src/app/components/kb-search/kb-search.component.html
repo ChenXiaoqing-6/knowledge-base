@@ -1,7 +1,7 @@
 <div class="fd-has-padding-tiny">
   <fd-input-group #searchinput 
     [button]="true" 
-    [placeholder]="'Type some text...'" 
+    [placeholder]="'Enter words to search...'" 
     [glyph]="'search'"
     [placement]="'after'" 
     (addOnButtonClicked)="search(searchinput.inputText)" 
@@ -19,7 +19,7 @@
           No articles found.
       </div>
       <ng-template #showResultList>
-        <p>Search results: {{totalCount$ | async}}</p>
+        <p>Search Results: {{totalCount$ | async}}</p>
       </ng-template>
       <div
         fdInfiniteScroll 

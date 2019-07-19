@@ -29,7 +29,7 @@ export class KbSearchComponent implements OnInit, OnDestroy {
     this.busy$ = this.searchFacade.isSearching();
     this.totalCount$ = this.searchFacade.getTotalObjectCount();
     this.notFound$ = this.searchFacade.isNotFound();
-
+    
     this.search$.pipe(
       takeUntil(this.onDestroy$),
       distinctUntilChanged(),
@@ -58,7 +58,6 @@ export class KbSearchComponent implements OnInit, OnDestroy {
   }
 
   loadMore() {
-    console.log("[FD] trigger load more...");
     this.loadMore$.next();
   }
 
