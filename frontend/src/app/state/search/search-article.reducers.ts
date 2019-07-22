@@ -38,7 +38,6 @@ export function reducer(state = initialKbSearchState, action: Actions): IKbSearc
             }
 
         case ActionTypes.SearchArticlesSuccess:
-            console.log("action, state: ", action, state);
             if (action.clearState) {
                 return adapter.addAll(action.payload.data, {
                     ...state,

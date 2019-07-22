@@ -4,17 +4,18 @@ import { Helper as PaginationHelper } from '../../models/IPagination';
 import * as fromAction from './search-article.actions';
 import * as fromSearchArticle from './search-article.reducers';
 
-describe("search-article reducers", () => {
+describe("KbSearchReducers", () => {
+
     it('should return the default state', () => {
         let initialState = fromSearchArticle.initialKbSearchState;
-        let currentState = fromSearchArticle.adapter.addMany([{id: '1'}, {id: '2'}] as IArticle[], initialState);
+        let currentState = fromSearchArticle.adapter.addMany([{ id: '1' }, { id: '2' }] as IArticle[], initialState);
         let action = {} as fromAction.Actions;
         expect(fromSearchArticle.reducer(currentState, action)).toBe(currentState);
     });
 
     it('SearchArticles for initial search: pageIndex == 1', () => {
         let initialState = fromSearchArticle.initialKbSearchState;
-        let currentState = fromSearchArticle.adapter.addMany([{id: '1'}, {id: '2'}] as IArticle[], initialState);
+        let currentState = fromSearchArticle.adapter.addMany([{ id: '1' }, { id: '2' }] as IArticle[], initialState);
         let payload = {
             searchTerm: "searchKeywords",
             pagination: {
@@ -38,7 +39,7 @@ describe("search-article reducers", () => {
 
     it('SearchArticles for delta search: pageIndex != 1', () => {
         let initialState = fromSearchArticle.initialKbSearchState;
-        let currentState = fromSearchArticle.adapter.addMany([{id: '1'}, {id: '2'}] as IArticle[], initialState);
+        let currentState = fromSearchArticle.adapter.addMany([{ id: '1' }, { id: '2' }] as IArticle[], initialState);
         let payload = {
             pagination: {
                 pageIndex: 4
@@ -53,12 +54,12 @@ describe("search-article reducers", () => {
 
     it('SearchArticlesSuccess for clearState = true', () => {
         let initialState = fromSearchArticle.initialKbSearchState;
-        let currentState = fromSearchArticle.adapter.addMany([{id: '1'}, {id: '2'}] as IArticle[], initialState);
+        let currentState = fromSearchArticle.adapter.addMany([{ id: '1' }, { id: '2' }] as IArticle[], initialState);
         let payload = {
-            data:[{id: '5'}, {id: '6'}, {id: '7'}] as IArticle[] , 
+            data: [{ id: '5' }, { id: '6' }, { id: '7' }] as IArticle[],
             pagination: PaginationHelper.create(),
             lastPage: 1,
-            totalCount: 20 
+            totalCount: 20
         };
         let action = new fromAction.SearchArticlesSuccess(payload, true);
         currentState = fromSearchArticle.reducer(currentState, action)
@@ -75,12 +76,12 @@ describe("search-article reducers", () => {
 
     it('SearchArticlesSuccess for clearState = false', () => {
         let initialState = fromSearchArticle.initialKbSearchState;
-        let currentState = fromSearchArticle.adapter.addMany([{id: '1'}, {id: '2'}] as IArticle[], initialState);
+        let currentState = fromSearchArticle.adapter.addMany([{ id: '1' }, { id: '2' }] as IArticle[], initialState);
         let payload = {
-            data:[{id: '5'}, {id: '6'}, {id: '7'}] as IArticle[] , 
+            data: [{ id: '5' }, { id: '6' }, { id: '7' }] as IArticle[],
             pagination: PaginationHelper.create(),
             lastPage: 1,
-            totalCount: 20 
+            totalCount: 20
         };
         let action = new fromAction.SearchArticlesSuccess(payload, false);
         currentState = fromSearchArticle.reducer(currentState, action)
@@ -96,7 +97,7 @@ describe("search-article reducers", () => {
 
     it('SearchArticlesError', () => {
         let initialState = fromSearchArticle.initialKbSearchState;
-        let currentState = fromSearchArticle.adapter.addMany([{id: '1'}, {id: '2'}] as IArticle[], initialState);
+        let currentState = fromSearchArticle.adapter.addMany([{ id: '1' }, { id: '2' }] as IArticle[], initialState);
         let action = new fromAction.SearchArticlesError({ error: "error" });
         currentState = fromSearchArticle.reducer(currentState, action)
         expect(currentState).toEqual({
@@ -107,7 +108,7 @@ describe("search-article reducers", () => {
 
     it('SearchArticlesReset', () => {
         let initialState = fromSearchArticle.initialKbSearchState;
-        let currentState = fromSearchArticle.adapter.addMany([{id: '1'}, {id: '2'}] as IArticle[], initialState);
+        let currentState = fromSearchArticle.adapter.addMany([{ id: '1' }, { id: '2' }] as IArticle[], initialState);
         let action = new fromAction.SearchArticlesReset();
         currentState = fromSearchArticle.reducer(currentState, action)
         expect(currentState).toEqual(initialState);

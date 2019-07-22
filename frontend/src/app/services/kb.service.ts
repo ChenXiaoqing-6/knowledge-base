@@ -55,7 +55,7 @@ export class KbService {
     return timer(1000).pipe(tap(()=>{console.log("done.");}),mapTo(ret));
   }
 
-  searchArticles(options: ISearchOptions): Observable<CollectionResponse<IArticle>> {
+  public searchArticles(options: ISearchOptions): Observable<CollectionResponse<IArticle>> {
 
    return this._mock(options);
 
