@@ -18,6 +18,7 @@ import { KbDetailFooterComponent } from './components/kb-detail-footer/kb-detail
 import { SafeUrlPipe } from './pipes/safeUrl.pipe';
 import { KbContainerComponent } from './components/kb-container/kb-container.component';
 import { KbLinkedListComponent } from './components/kb-linked-list/kb-linked-list.component';
+import { KbSuggestedListComponent } from './components/kb-suggested-list/kb-suggested-list.component';
 
 import { effects, reducers, metaReducers } from './state';
 import { appRoutes } from './router/routes';
@@ -37,7 +38,8 @@ import { KbViewFacade } from './state/article/article.facade';
     KbDetailHeaderComponent,
     SafeUrlPipe,
     KbContainerComponent,
-    KbLinkedListComponent
+    KbLinkedListComponent,
+    KbSuggestedListComponent
   ],
   imports: [
     BrowserModule,
