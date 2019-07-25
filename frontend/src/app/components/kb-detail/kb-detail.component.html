@@ -1,11 +1,22 @@
-<ng-container>
-    <fd-modal-header class="fd-has-padding-bottom-tiny">
-        <kb-detail-header [article]="modalRef.data.article | async" [isDetailMode]="true"></kb-detail-header>
-        <button fd-modal-close-btn (click)="modalRef.close()"></button>
-    </fd-modal-header>
+<fd-panel>
+    <div id="articleDetailHeaderContainer">
+        <div class="article-actions-container">
+            <div class="article-back">
+                <button id="backBtn" fd-button [options]="'light'" [glyph]="'arrow-left'" (click)="onBackToSearchPage()"></button>
+            </div>
+            <div class="article-actions">
+                <kb-article-actions [article]="article"></kb-article-actions>
+            </div>
+        </div>
 
-    <kb-detail-content [article]="modalRef.data.article | async"></kb-detail-content>
-    <fd-modal-footer class="fd-has-padding-top-tiny fd-has-padding-bottom-tiny kbDetailFooterContainer">
-        <kb-detail-footer [article]="modalRef.data.article | async"></kb-detail-footer>
+        <div class="fd-has-margin-tiny">
+            <kb-detail-header [article]="article" [isDetailMode]="true"></kb-detail-header>
+        </div>
+    </div>
+
+    <kb-detail-content class="article-detail-content" [article]="article"></kb-detail-content>
+
+    <fd-modal-footer class="fd-has-padding-top-tiny fd-has-padding-bottom-tiny article-detail-footer">
+        <kb-detail-footer [article]="article"></kb-detail-footer>
     </fd-modal-footer>
-</ng-container>
+</fd-panel>
