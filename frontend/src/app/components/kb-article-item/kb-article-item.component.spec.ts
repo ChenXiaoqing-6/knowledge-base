@@ -1,14 +1,19 @@
-import { KbViewFacade } from './../../state/article/article.facade';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FundamentalNgxModule } from 'fundamental-ngx';
-import { KbArticleItemComponent } from './kb-article-item.component';
 import { Component, Input } from '@angular/core';
 import { MockArticle } from '../../models/mock/Article.mock';
+import { KbViewFacade } from './../../state/article/article.facade';
+import { KbArticleItemComponent } from './kb-article-item.component';
 
 @Component({ selector: 'kb-detail-header', template: '' })
 class KbDetailHeaderComponent {
   @Input() article: any;
   @Input() isDetailMode: false;
+}
+
+@Component({ selector: 'kb-article-actions', template: '' })
+class KbArticleActionsComponent {
+  @Input() article: any;
 }
 
 describe('KbArticleItemComponent', () => {
@@ -17,7 +22,7 @@ describe('KbArticleItemComponent', () => {
   let KbViewFacadeSpy = jasmine.createSpyObj('KbViewFacade', ['openArticle']);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [KbArticleItemComponent, KbDetailHeaderComponent],
+      declarations: [KbArticleItemComponent, KbDetailHeaderComponent, KbArticleActionsComponent],
       providers: [
         { provide: KbViewFacade, useValue: KbViewFacadeSpy }],
       imports: [FundamentalNgxModule]
@@ -39,20 +44,5 @@ describe('KbArticleItemComponent', () => {
   it('Test openArticleDetail: KbViewFacade openArticle should be called with article', () => {
     component.openArticleDetail();
     expect(KbViewFacadeSpy.openArticle).toHaveBeenCalledWith(component.article);
-  });
-
-  it('Test copyArticleLink: execCommand should called with copy', () => {
-    spyOn(document, 'execCommand');
-    component.copyArticleLink();
-    expect(document.execCommand).toHaveBeenCalledWith('copy');
-    expect(document.body.getElementsByTagName("textarea").length).toBe(0);
-  });
-
-  it('Test copyArticleLink if execCommand throw error', () => {
-    spyOn(document, 'execCommand').and.callFake(() => {
-      throw 'error';
-    });
-    component.copyArticleLink();
-    expect(document.body.getElementsByTagName("textarea").length).toBe(0);
   });
 });

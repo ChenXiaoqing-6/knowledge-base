@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { catchError, tap, map } from "rxjs/operators";
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { ActionTypes, OpenArticle, OpenArticleError } from './article.actions';
+import { ActionTypes, OpenArticle, BackArticle, OpenArticleError } from './article.actions';
 import { IArticle } from './../../models/IArticle';
 
 @Injectable()
@@ -24,7 +24,7 @@ export class KbViewEffects {
   @Effect({ dispatch: false })
   backToSearchPage$ = this.actions$
     .pipe(
-      ofType<OpenArticle>(ActionTypes.BackArticle),
+      ofType<BackArticle>(ActionTypes.BackArticle),
       tap(_ => this.location.back())
     );
 }
