@@ -6,11 +6,13 @@ import { Observable } from 'rxjs';
 import { OpenArticle, OpenArticleError } from './article.actions';
 import { KbViewEffects } from './article.effects';
 import { MockArticle } from '../../models/mock/Article.mock';
+import { Router } from '@angular/router';
 
 describe('TodoListEffects', () => {
     let actions: Observable<any>;
     let effects: KbViewEffects;
-    let modalService: jasmine.SpyObj<ModalService>;
+    let router: jasmine.SpyObj<Router>;
+    let location: jasmine.SpyObj<Location>;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -18,16 +20,23 @@ describe('TodoListEffects', () => {
                 KbViewEffects,
                 provideMockActions(() => actions),
                 {
-                    provide: ModalService,
+                    provide: Router,
                     useValue: {
-                        open: jasmine.createSpy()
+                        navigate: jasmine.createSpy()
+                    }
+                },
+                {
+                    provide: Location,
+                    useValue: {
+                        back: jasmine.createSpy()
                     }
                 }
             ]
         });
 
         effects = TestBed.get(KbViewEffects);
-        modalService = TestBed.get(ModalService);
+        router = TestBed.get(Router);
+        location = TestBed.get(Location);
     });
 
     describe('openArticle', () => {
