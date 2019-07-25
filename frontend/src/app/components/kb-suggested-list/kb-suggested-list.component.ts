@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { MockSuggestedResponse } from '../../services/mock/mock-data';
+
 
 @Component({
   selector: 'app-kb-suggested-list',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KbSuggestedListComponent implements OnInit {
 
+  @Input() articles = MockSuggestedResponse;
   constructor() { }
 
   ngOnInit() {
   }
+
 
 }

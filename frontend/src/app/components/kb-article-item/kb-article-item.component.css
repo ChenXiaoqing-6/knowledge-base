@@ -14,3 +14,9 @@
 .action-container button{
     float: right;
 }
+.fd-panel{
+    background-color:white;
+}
+.fd-panel-body{
+    background-color: white;
+}

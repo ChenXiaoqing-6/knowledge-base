@@ -3,6 +3,7 @@ import { Observable, timer, throwError } from "rxjs";
 import { CollectionResponse } from "../../models/IResponse";
 import { IArticle } from "../../models/IArticle";
 import { tap, mapTo } from "rxjs/operators";
+import { RenderType } from "../../models/RenderType.enum";
 
 export const MockArticleResponse: any = {
     "id": "20001",
@@ -21,7 +22,93 @@ export const MockArticleResponse: any = {
     "devotes": 0,  //1908+
     "tag": ["troubleshooting", "coffee maker"],  //1908+
 }
-
+export const MockSuggestedResponse: IArticle[] = [
+ { 
+  "id": "30001",
+  "provider": "Mindtouch",
+  "title": "Suggested Article1",
+  "content": "This guide provides an overview of product features and related technologies", //1908+
+  "lastUpdated": new Date("2016-12-16T06:18:26Z"),
+  "score": 0.9,
+  "link": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide",
+  "renderType": RenderType.IFRAME,
+  "renderValue": "https://sapdemo-responsive.mindtouch.us/test_German?mt-f1=true&mt-view=f1",
+  "views": 125,
+  "author": "James Bond",
+  "category": "", //1908+
+  "upvotes": 23,  //1908+
+  "devotes": 0,  //1908+
+  "tag": ["troubleshooting", "coffee maker"],  //1908+
+},
+{ 
+  "id": "30002",
+  "provider": "Mindtouch",
+  "title": "Suggested Article2",
+  "content": "This guide provides an overview of product features and related technologies", //1908+
+  "lastUpdated": new Date("2016-12-16T06:18:26Z"),
+  "score": 0.9,
+  "link": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide",
+  "renderType": RenderType.IFRAME,
+  "renderValue": "https://sapdemo-responsive.mindtouch.us/test_German?mt-f1=true&mt-view=f1",
+  "views": 125,
+  "author": "James Bond",
+  "category": "", //1908+
+  "upvotes": 23,  //1908+
+  "devotes": 0,  //1908+
+  "tag": ["troubleshooting", "coffee maker"],  //1908+
+},
+{ 
+  "id": "30003",
+  "provider": "Mindtouch",
+  "title": "Suggested Article3",
+  "content": "This guide provides an overview of product features and related technologies", //1908+
+  "lastUpdated": new Date("2016-12-16T06:18:26Z"),
+  "score": 0.9,
+  "link": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide",
+  "renderType": RenderType.IFRAME,
+  "renderValue": "https://sapdemo-responsive.mindtouch.us/test_German?mt-f1=true&mt-view=f1",
+  "views": 125,
+  "author": "James Bond",
+  "category": "", //1908+
+  "upvotes": 23,  //1908+
+  "devotes": 0,  //1908+
+  "tag": ["troubleshooting", "coffee maker"],  //1908+
+},
+{ 
+  "id": "30004",
+  "provider": "Mindtouch",
+  "title": "Suggested Article4",
+  "content": "This guide provides an overview of product features and related technologies", //1908+
+  "lastUpdated": new Date("2016-12-16T06:18:26Z"),
+  "score": 0.9,
+  "link": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide",
+  "renderType": RenderType.IFRAME,
+  "renderValue": "https://sapdemo-responsive.mindtouch.us/test_German?mt-f1=true&mt-view=f1",
+  "views": 125,
+  "author": "James Bond",
+  "category": "", //1908+
+  "upvotes": 23,  //1908+
+  "devotes": 0,  //1908+
+  "tag": ["troubleshooting", "coffee maker"],  //1908+
+},
+{ 
+  "id": "30005",
+  "provider": "Mindtouch",
+  "title": "Suggested Article5",
+  "content": "This guide provides an overview of product features and related technologies", //1908+
+  "lastUpdated": new Date("2016-12-16T06:18:26Z"),
+  "score": 0.9,
+  "link": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide",
+  "renderType": RenderType.IFRAME,
+  "renderValue": "https://sapdemo-responsive.mindtouch.us/test_German?mt-f1=true&mt-view=f1",
+  "views": 125,
+  "author": "James Bond",
+  "category": "", //1908+
+  "upvotes": 23,  //1908+
+  "devotes": 0,  //1908+
+  "tag": ["troubleshooting", "coffee maker"],  //1908+
+}
+]
 export const MockSearchResponse: any = {
     "data": [
         {

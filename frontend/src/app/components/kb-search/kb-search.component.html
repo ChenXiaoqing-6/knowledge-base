@@ -9,9 +9,10 @@
   ></fd-input-group>
   <br>
   <div [attr.aria-busy]="busy$ | async">
-    <p *ngIf="isInit$ | async; else showResultBox">
-      Enter keywords to search for knowledge articles.
-    </p>
+      <div *ngIf="isInit$ | async; else showResultBox">
+        <app-kb-suggested-list></app-kb-suggested-list>
+        <app-kb-linked-list></app-kb-linked-list>
+      </div>
 
     <ng-template #showResultBox>
       <fd-loading-spinner [loading]="busy$ | async"></fd-loading-spinner>
@@ -19,7 +20,10 @@
           No articles found.
       </div>
       <ng-template #showResultList>
-        <p>Search Results: {{totalCount$ | async}}</p>
+        <p>Search Results: {{totalCount$ | async}}
+            <a href="app-kb-suggested-list">&nbsp;Back to Suggested Articles</a>
+        </p>
+        
       </ng-template>
       <div
         fdInfiniteScroll 
