@@ -1,3 +1,41 @@
-.kbDetailFooterContainer {
-    padding-left: 5px;
+.article-detail-footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+    height: 47px;
+    padding-left: 16px;
+    background: #ffffff;
+}
+
+.article-detail-content {
+    /* flex: auto; */
+    position: relative;
+}
+
+.article-detail-content::after {
+    content: '';
+    display: block;
+    height: 47px;
+    /* Set same as footer's height */
+}
+
+.article-actions-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.article-back {
+    width: 80%;
+}
+
+.article-actions {
+    width: 20%;
+}
+
+.article-metadata {
+    margin-left: 10px;
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalRef } from 'fundamental-ngx';
+import { ActivatedRoute } from '@angular/router';
+import { IArticle } from '../../models/IArticle';
+import { KbViewFacade } from '../../state/article/article.facade';
 
 @Component({
   selector: 'kb-detail',
@@ -7,11 +9,16 @@ import { ModalRef } from 'fundamental-ngx';
   styleUrls: ['./kb-detail.component.css']
 })
 export class KbDetailComponent implements OnInit {
-
-  constructor(public modalRef: ModalRef) { 
+  
+  public article: IArticle;
+  constructor(private route: ActivatedRoute, private kbViewFacade: KbViewFacade) { 
   }
 
   ngOnInit() {
+    this.article = this.route.snapshot.params as IArticle;
   }
 
-}
+  onBackToSearchPage() {
+    this.kbViewFacade.backToSearchPage();
+  }
+ }

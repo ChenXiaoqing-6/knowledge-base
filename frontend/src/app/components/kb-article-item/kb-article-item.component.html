@@ -1,14 +1,13 @@
 <fd-panel class="fd-has-margin-y-small">
-  <fd-panel-body class="fd-has-padding-tiny">
-    <div class="article-container">
-      <a href="#" class="article-link" title="{{article.title}}" (click)="openArticleDetail()">
+    <fd-panel-body class="fd-has-padding-tiny">
+        <div class="fd-has-display-flex fd-has-align-items-center">
+            <a class="article-link" title="{{article.title}}" (click)="openArticleDetail()">
         {{article.title}}
       </a>
-      <div class="action-container">
-          <button fd-button [options]="'light'" [glyph]="'overflow'" (click)="onMore()"></button>
-          <button fd-button [options]="'light'" [glyph]="'copy'" (click)="copyArticleLink()"></button>
-      </div>
-    </div>
-    <kb-detail-header [article]="article" [isDetailMode]="false"></kb-detail-header>
-  </fd-panel-body>
+            <div class="action-container">
+                <kb-article-actions [article]="article"></kb-article-actions>
+            </div>
+        </div>
+        <kb-detail-header [article]="article" [isDetailMode]="false"></kb-detail-header>
+    </fd-panel-body>
 </fd-panel>

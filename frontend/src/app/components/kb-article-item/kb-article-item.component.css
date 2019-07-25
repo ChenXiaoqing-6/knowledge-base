@@ -1,16 +1,11 @@
-.article-container{
-    display: flex;
-    align-items: center;
-}
-.article-link{
-    white-space: nowrap; 
-    overflow: hidden; 
+.article-link {
+    white-space: nowrap;
+    overflow: hidden;
     text-overflow: ellipsis;
     width: 80%;
+    cursor: pointer;
 }
-.action-container{
+
+.action-container {
     width: 20%;
-}
-.action-container button{
-    float: right;
 }

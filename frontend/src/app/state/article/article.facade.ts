@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { IArticle } from '../../models/IArticle';
 import { IKbState } from '../index';
-import { OpenArticle, LoadIFrameContentSuccess } from './article.actions';
+import { OpenArticle, BackArticle, LoadIFrameContentSuccess } from './article.actions';
 import { selectIsContentLoading } from './article.selectors';
 
 @Injectable()
@@ -22,6 +22,10 @@ export class KbViewFacade {
 
   public setContentLoadSuccess() {
     return this.store$.dispatch(new LoadIFrameContentSuccess());
+  }
+
+  public backToSearchPage() {
+    return this.store$.dispatch(new BackArticle());
   }
 
 }
