@@ -1,4 +1,4 @@
-<div class="fd-has-padding-tiny">
+<div class="fd-has-padding-tiny container-view">
   <fd-input-group #searchinput 
     [button]="true" 
     [placeholder]="'Enter words to search...'" 
@@ -10,11 +10,19 @@
   <br>
   <div [attr.aria-busy]="busy$ | async">
     <div *ngIf="isInit$ | async; else showResultBox">
-      <div *ngIf="linkedArticlesIsCompleted$ | async">
-        <p class="fd-has-margin-tiny linkedResults-text">Linked Articles ({{linkedArticlesTotalCount$ | async}})</p>
-      </div>  
-      <fd-loading-spinner [loading]="linkedArticlesBusy$ | async"></fd-loading-spinner>
-      <app-kb-linked-list [articles]="linkedArticles$ | async"></app-kb-linked-list>
+      <div class="fd-has-margin-small">
+          <div>
+            <p class="title-text">Suggested Articles (4)</p>
+          </div>
+          <kb-suggested-list></kb-suggested-list>
+        <div class="fd-has-margin-y-small">
+          <div *ngIf="linkedArticlesIsCompleted$ | async">
+            <p class="title-text">Linked Articles ({{linkedArticlesTotalCount$ | async}})</p>
+          </div>  
+          <fd-loading-spinner [loading]="linkedArticlesBusy$ | async"></fd-loading-spinner>
+          <app-kb-linked-list [articles]="linkedArticles$ | async"></app-kb-linked-list>
+        </div>
+      </div>
     </div>
 
     <ng-template #showResultBox>

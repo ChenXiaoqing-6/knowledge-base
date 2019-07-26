@@ -9,6 +9,7 @@ import { IArticle } from './../../models/IArticle';
 })
 export class KbArticleItemComponent implements OnInit {
   @Input() article: IArticle;
+  @Input() type: String;
   constructor( private viewFacade: KbViewFacade) { }
 
   ngOnInit() { }

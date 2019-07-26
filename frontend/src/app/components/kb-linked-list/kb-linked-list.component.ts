@@ -8,6 +8,7 @@ import { IArticle } from './../../models/IArticle';
 })
 export class KbLinkedListComponent implements OnInit {
   @Input() articles: IArticle[];
+  type: String = "LinkedArticleList";
   constructor() { }
 
   ngOnInit() {

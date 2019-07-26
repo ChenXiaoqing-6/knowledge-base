@@ -1,4 +1,7 @@
-<div>
+<div *ngIf="type == 'ArticleList'">
     <button class="fd-has-float-right" fd-button [options]="'light'" [glyph]="'overflow'" (click)="onMore()"></button>
     <button class="fd-has-float-right" fd-button [options]="'light'" [glyph]="'copy'" (click)="copyArticleLink()"></button>
+</div>
+<div *ngIf="type == 'LinkedArticleList'">
+    <button class="fd-has-float-right" fd-button [options]="'light'" [glyph]="'delete'" (click)="removeLinkedArticle(article)"></button>
 </div>

@@ -8,18 +8,6 @@
     text-overflow: ellipsis;
     width: 80%;
 }
-.linkedResults-text{
-    width: 127px;
-    height: 17px;
-    font-family: 72;
-    font-size: 16px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: #333333;
-}
 .action-container{
     width: 20%;
 }

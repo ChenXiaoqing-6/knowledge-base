@@ -1,3 +1,3 @@
-<p>
-  kb-suggested-list works!
-</p>
+<div *ngFor="let article of articles">
+  <kb-article-item [article]="article" [type]="type"></kb-article-item>
+</div>

@@ -10,6 +10,7 @@ import { IArticle } from './../../models/IArticle';
 export class KbArticleActionsComponent implements OnInit {
 
   @Input() article: IArticle;
+  @Input() type: String;
   constructor(private alertService: AlertService) { }
 
   ngOnInit() {
@@ -39,6 +40,10 @@ export class KbArticleActionsComponent implements OnInit {
 
   onMore() {
 
+  }
+
+  removeLinkedArticle() {
+    
   }
 
 }
