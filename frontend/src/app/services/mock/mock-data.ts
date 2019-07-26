@@ -99,6 +99,79 @@ export const MockSearchResponse: any = {
     "totalObjectCount": 100
 }
 
+export const MockLinkedArticlesResponse: any = {
+  "data": [
+      {
+          "id": "1",
+          "provider": "Mindtouch",
+          "title": "Issue Reporting",
+          "content": "This guide provides an overview of product features and related technologies", //1908+
+          "lastUpdated": "2019-07-25T06:18:26Z",
+          "score": 0.9,
+          "link": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide",
+          "renderType": "IFRAME",
+          "renderValue": "https://sapdemo-responsive.mindtouch.us/test_German?mt-f1=true&mt-view=f1",
+          "views": 26,
+          "author": "Ivan Magalhães",
+          "category": "", //1908+
+          "upvotes": 23,  //1908+
+          "devotes": 0,  //1908+
+          "tag": ["troubleshooting", "coffee maker"],  //1908+
+      },
+      {
+          "id": "2",
+          "provider": "Mindtouch",
+          "title": "Information Check",
+          "content": "This guide provides an overview of product features and related technologies", //1908+
+          "lastUpdated": "2017-09-07T06:18:26Z",
+          "score": 0.9,
+          "link": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide",
+          "renderType": "IFRAME",
+          "renderValue": "https://sapdemo-responsive.mindtouch.us/test_German?mt-f1=true&mt-view=f1",
+          "views": 400,
+          "author": "James Bond",
+          "category": "",
+          "upvotes": 12,  //1908+
+          "devotes": 0,  //1908+
+          "tag": ["troubleshooting", "coffee maker"],  //1908+
+      },
+      {
+          "id": "3",
+          "provider": "Mindtouch",
+          "title": "Issue Reporting to Responsible Machine Designer in the Team",
+          "content": "This guide provides an overview of product features and related technologies", //1908+
+          "lastUpdated": "2019-06-25T06:18:26Z",
+          "score": 0.9,
+          "link": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide",
+          "renderType": "IFRAME",
+          "renderValue": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide?mt-f1=true&mt-view=f1",
+          "views": 26,
+          "author": "James Bond",
+          "category": "",
+          "upvotes": 13,  //1908+
+          "devotes": 3,  //1908+
+          "tag": ["troubleshooting", "coffee maker"],  //1908+
+      },
+      {
+          "id": "4",
+          "provider": "Mindtouch",
+          "title": "Machine Learning",
+          "content": "This guide provides an overview of product features and related technologies", //1908+
+          "lastUpdated": "2018-11-02T06:18:26Z",
+          "score": 0.9,
+          "link": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide",
+          "renderType": "IFRAME",
+          "renderValue": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide?mt-f1=true&mt-view=f1",
+          "views": 234,
+          "author": "James Bond",
+          "category": "",
+          "upvotes": 24,  //1908+
+          "devotes": 4,  //1908+
+          "tag": ["troubleshooting", "coffee maker"],  //1908+
+      }
+  ],
+  "totalObjectCount": 4
+}
 
 export function mockSearch(options: ISearchOptions): Observable<CollectionResponse<IArticle>>  {
     if (options.searchTerm.indexOf("Error") >= 0) {
@@ -131,4 +204,12 @@ export function mockSearch(options: ISearchOptions): Observable<CollectionRespon
       };
       console.log("request server: ", options);
       return timer(1000).pipe(tap(()=>{console.log("done.");}),mapTo(ret));
+}
+
+export function MockLinkedArticles(): Observable<CollectionResponse<IArticle>> {
+  let ret = {
+    ...MockLinkedArticlesResponse,
+  };
+  return timer(1000).pipe(tap(()=>{console.log("done.");}),mapTo(ret));
+  // return throwError(new Error('Fake error'));
 }

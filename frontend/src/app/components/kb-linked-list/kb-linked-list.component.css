@@ -1,10 +1,28 @@
-.article-title-text{
+.article-container{
+    display: flex;
+    align-items: center;
+}
+.article-link{
     white-space: nowrap; 
     overflow: hidden; 
     text-overflow: ellipsis;
-    display: block;
+    width: 80%;
 }
-.article-title-link{
-    width: 85%;
-    vertical-align: middle;
+.linkedResults-text{
+    width: 127px;
+    height: 17px;
+    font-family: 72;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #333333;
+}
+.action-container{
+    width: 20%;
+}
+.action-container button{
+    float: right;
 }

@@ -1,17 +1,15 @@
-<div *ngIf="articles.length == 0" class="fd-has-margin-tiny">
-  No linked articles exist.
-</div>
 <div *ngFor="let article of articles">
-  <fd-panel class="fd-has-margin-tiny">
+  <fd-panel class="fd-has-margin-y-small">
     <fd-panel-body class="fd-has-padding-tiny">
-      <div>
-        <a href="#" class="article-title-link" title="{{article.title}}" (click)="openArticleDetail()">
-          <span class="article-title-text">
-            {{article.title}}
-          </span>
+      <div class="article-container">
+        <a href="#" class="article-link" title="{{article.title}}" (click)="openArticleDetail()">
+          {{article.title}}
         </a>
-        <button fd-button [options]="'light'" [glyph]="'delete'" (click)="removeLinkedArticle(article)"></button>
+        <div class="action-container">
+          <button fd-button [options]="'light'" [glyph]="'delete'" (click)="removeLinkedArticle(article)"></button>
+        </div>
       </div>
+      <kb-detail-header [article]="article" [isDetailMode]="false"></kb-detail-header>
     </fd-panel-body>
   </fd-panel>
 </div>

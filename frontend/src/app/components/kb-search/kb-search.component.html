@@ -9,9 +9,13 @@
   ></fd-input-group>
   <br>
   <div [attr.aria-busy]="busy$ | async">
-    <p *ngIf="isInit$ | async; else showResultBox">
-      Enter keywords to search for knowledge articles.
-    </p>
+    <div *ngIf="isInit$ | async; else showResultBox">
+      <div *ngIf="linkedArticlesIsCompleted$ | async">
+        <p class="fd-has-margin-tiny linkedResults-text">Linked Articles ({{linkedArticlesTotalCount$ | async}})</p>
+      </div>  
+      <fd-loading-spinner [loading]="linkedArticlesBusy$ | async"></fd-loading-spinner>
+      <app-kb-linked-list [articles]="linkedArticles$ | async"></app-kb-linked-list>
+    </div>
 
     <ng-template #showResultBox>
       <fd-loading-spinner [loading]="busy$ | async"></fd-loading-spinner>

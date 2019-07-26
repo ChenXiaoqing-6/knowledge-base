@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MockSearchResponse } from './../../services/mock/mock-data';
+import { Component, OnInit, Input } from '@angular/core';
+import { IArticle } from './../../models/IArticle';
 
 @Component({
   selector: 'app-kb-linked-list',
@@ -7,7 +7,7 @@ import { MockSearchResponse } from './../../services/mock/mock-data';
   styleUrls: ['./kb-linked-list.component.css']
 })
 export class KbLinkedListComponent implements OnInit {
-  articles = [...MockSearchResponse.data];
+  @Input() articles: IArticle[];
   constructor() { }
 
   ngOnInit() {

@@ -26,6 +26,7 @@ import { appRoutes } from './router/routes';
 import { KbService } from './services/kb.service';
 import { KbSearchFacade } from './state/search/search-article.facade';
 import { KbViewFacade } from './state/article/article.facade';
+import { KbLinkedListFacade } from './state/linkedArticle/linked-article.facade';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { KbViewFacade } from './state/article/article.facade';
   providers: [
     KbSearchFacade,
     KbViewFacade,
+    KbLinkedListFacade,
     KbService
   ],
   bootstrap: [AppComponent],

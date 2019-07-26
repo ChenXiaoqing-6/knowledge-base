@@ -4,6 +4,7 @@ import { debounceTime, takeUntil, distinctUntilChanged } from 'rxjs/operators';
 import { IArticle } from '../../models/IArticle';
 import { Helper as PaginationHelper } from '../../models/IPagination';
 import { KbSearchFacade } from '../../state/search/search-article.facade';
+import { KbLinkedListFacade } from '../../state/linkedArticle/linked-article.facade';
 
 @Component({
   selector: 'app-kb-search',
@@ -13,6 +14,11 @@ import { KbSearchFacade } from '../../state/search/search-article.facade';
 export class KbSearchComponent implements OnInit, OnDestroy {
 
   private onDestroy$: Subject<boolean> = new Subject();
+  linkedArticles$: Observable<IArticle[]>;
+  linkedArticlesTotalCount$: Observable<number>;
+  linkedArticlesIsCompleted$: Observable<boolean>;
+  linkedArticlesBusy$: Observable<boolean>;
+
   articles$: Observable<IArticle[]>;
   totalCount$: Observable<number>;
   isInit$: Observable<boolean>;
@@ -20,8 +26,9 @@ export class KbSearchComponent implements OnInit, OnDestroy {
   notFound$: Observable<boolean>;
   search$: Subject<string> = new Subject();
   loadMore$: Subject<void> = new Subject();
+  getLinkedArticle$: Subject<void> = new Subject();
 
-  constructor(private searchFacade: KbSearchFacade) { }
+  constructor(private searchFacade: KbSearchFacade, private linkedListFacade: KbLinkedListFacade) { }
 
   ngOnInit() {
     this.articles$ = this.searchFacade.getArticles();
@@ -29,6 +36,11 @@ export class KbSearchComponent implements OnInit, OnDestroy {
     this.busy$ = this.searchFacade.isSearching();
     this.totalCount$ = this.searchFacade.getTotalObjectCount();
     this.notFound$ = this.searchFacade.isNotFound();
+
+    this.linkedArticles$ = this.linkedListFacade.getArticles();
+    this.linkedArticlesIsCompleted$ = this.linkedListFacade.isCompleted();
+    this.linkedArticlesBusy$ = this.linkedListFacade.isLinkingArticles();
+    this.linkedArticlesTotalCount$ = this.linkedListFacade.getTotalObjectCount();
     
     this.search$.pipe(
       takeUntil(this.onDestroy$),
@@ -47,6 +59,16 @@ export class KbSearchComponent implements OnInit, OnDestroy {
     ).subscribe(() => {
       this.searchFacade.loadMoreArticles();
     });
+
+    this.getLinkedArticle$.pipe(
+      takeUntil(this.onDestroy$),
+      distinctUntilChanged(),
+      debounceTime(300)
+    ).subscribe(() => {
+      this.linkedListFacade.getLinkedArticles();
+    })
+
+    this.getLinkedArticle$.next();
   }
 
   public ngOnDestroy(): void {
