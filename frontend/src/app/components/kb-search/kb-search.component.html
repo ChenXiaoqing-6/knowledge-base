@@ -1,4 +1,5 @@
 <div class="fd-has-padding-tiny">
+  <div class="search-input">
   <fd-input-group #searchinput 
     [button]="true" 
     [placeholder]="'Enter words to search...'" 
@@ -7,6 +8,7 @@
     (addOnButtonClicked)="search(searchinput.inputText)" 
     (keyup.Enter)="search(searchinput.inputText)"
   ></fd-input-group>
+  </div>
   <br>
   <div [attr.aria-busy]="busy$ | async">
       <div *ngIf="isInit$ | async; else showResultBox">
