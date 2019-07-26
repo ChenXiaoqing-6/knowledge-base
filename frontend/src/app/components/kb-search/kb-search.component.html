@@ -20,10 +20,11 @@
           No articles found.
       </div>
       <ng-template #showResultList>
-        <p>Search Results: {{totalCount$ | async}}
-            <a href="app-kb-suggested-list">&nbsp;Back to Suggested Articles</a>
+        <div class="search-result">
+        <p class="search-result">{{totalCount$ | async}} results
+            <a href="app-kb-suggested-list">Back to Suggestions</a>
         </p>
-        
+        </div>
       </ng-template>
       <div
         fdInfiniteScroll 

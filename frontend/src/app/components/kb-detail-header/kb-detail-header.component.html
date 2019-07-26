@@ -3,13 +3,17 @@
   {{article.views}} | {{article.lastUpdated | date}} | {{article.author}}
 </div>
 
-<div *ngIf="!isDetailMode" class="fd-has-padding-top-tiny">
-  <div>
-    <fd-icon [glyph]="'show'" [size]="'m'"></fd-icon>
+<div *ngIf="!isDetailMode">
+  <div class="detail-show">
+    <fd-icon  [glyph]="'show'" [size]="'s'"></fd-icon>
     {{article.views}} | {{article.lastUpdated | date}}
   </div>
-  <div>
-      Author: {{article.author}}
+  <div class="detail-author">
+      <span>Author:</span> 
+      {{article.author}}
+  </div>
+  <div class="detail-content">
+    {{article.content}}
   </div>
 </div>
 

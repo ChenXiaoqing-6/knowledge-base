@@ -1,0 +1,38 @@
+.detail-show{
+  font-family: 72;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #666666;
+  margin-top: 6px;
+}
+.detail-author span{
+  background-color: #ffffff;
+  color: #666666;
+  
+}
+.detail-author{
+    font-family: 72;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #333333;
+    margin-top: 6px;
+}
+.detail-content{
+  font-family: 72;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #666666;
+  margin-top: 6px;
+}

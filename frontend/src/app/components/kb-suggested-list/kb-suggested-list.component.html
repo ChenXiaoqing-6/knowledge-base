@@ -1,4 +1,6 @@
-<p>Suggested Articles(5)</p>
+<div class="Suggested-total">
+  <p>Suggested Articles({{suggestedListTotal}})</p> 
+</div>
 <div *ngFor="let article of articles">
     <kb-article-item [article]="article"></kb-article-item>
-  </div>
+</div>

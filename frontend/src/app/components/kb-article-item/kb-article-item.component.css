@@ -1,6 +1,7 @@
 .article-container{
     display: flex;
     align-items: center;
+    height: 17px;
 }
 .article-link{
     white-space: nowrap; 
@@ -14,9 +15,8 @@
 .action-container button{
     float: right;
 }
-.fd-panel{
+.article-items{
     background-color:white;
-}
-.fd-panel-body{
-    background-color: white;
+    padding: 0!important;
+    margin-top: 18px;
 }
