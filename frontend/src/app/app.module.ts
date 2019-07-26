@@ -16,7 +16,6 @@ import { KbDetailContentComponent } from './components/kb-detail-content/kb-deta
 import { KbDetailHeaderComponent } from './components/kb-detail-header/kb-detail-header.component';
 import { KbDetailFooterComponent } from './components/kb-detail-footer/kb-detail-footer.component';
 import { SafeUrlPipe } from './pipes/safeUrl.pipe';
-import { KbContainerComponent } from './components/kb-container/kb-container.component';
 import { KbLinkedListComponent } from './components/kb-linked-list/kb-linked-list.component';
 import { KbSuggestedListComponent } from './components/kb-suggested-list/kb-suggested-list.component';
 
@@ -37,7 +36,6 @@ import { KbViewFacade } from './state/article/article.facade';
     KbDetailFooterComponent,
     KbDetailHeaderComponent,
     SafeUrlPipe,
-    KbContainerComponent,
     KbLinkedListComponent,
     KbSuggestedListComponent
   ],
