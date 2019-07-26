@@ -26,7 +26,7 @@ export class KbSearchComponent implements OnInit, OnDestroy {
   notFound$: Observable<boolean>;
   search$: Subject<string> = new Subject();
   loadMore$: Subject<void> = new Subject();
-  getLinkedArticle$: Subject<void> = new Subject();
+  getLinkedArticles$: Subject<void> = new Subject();
 
   constructor(private searchFacade: KbSearchFacade, private linkedListFacade: KbLinkedListFacade) { }
 
@@ -60,7 +60,7 @@ export class KbSearchComponent implements OnInit, OnDestroy {
       this.searchFacade.loadMoreArticles();
     });
 
-    this.getLinkedArticle$.pipe(
+    this.getLinkedArticles$.pipe(
       takeUntil(this.onDestroy$),
       distinctUntilChanged(),
       debounceTime(300)
@@ -68,7 +68,7 @@ export class KbSearchComponent implements OnInit, OnDestroy {
       this.linkedListFacade.getLinkedArticles();
     })
 
-    this.getLinkedArticle$.next();
+    this.getLinkedArticles$.next();
   }
 
   public ngOnDestroy(): void {
