@@ -3,7 +3,7 @@ import { Store, select } from "@ngrx/store";
 import { IKbState } from "../index";
 import { Observable } from "rxjs";
 import { IArticle } from "../../models/IArticle";
-import { SuggestedArticles } from './suggested-article.actions';
+import { SuggestedArticles, InitSuggestedArticles } from './suggested-article.actions';
 import {
     selectAllArticles,
     selectTotalObjectCount,
@@ -33,6 +33,7 @@ export class KbSuggestedFacade {
     }
 
     public getsuggestedArticle() {
+        this.store$.dispatch(new InitSuggestedArticles);
         this.store$.dispatch(new SuggestedArticles);
     }
 

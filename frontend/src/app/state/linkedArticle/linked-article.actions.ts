@@ -2,9 +2,15 @@ import { Action } from '@ngrx/store';
 import { IArticle } from '../../models/IArticle';
 
 export enum ActionTypes {
+  InitLinkedArticles = '[KB-LINKED-ARTICLE] InitLinkedArticles',
   GetLinkedArticles = '[KB-LINKED-ARTICLE] GetLinkedArticles',
   GetLinkedArticlesSuccess = '[KB-LINKED-ARTICLE] GetLinkedArticlesSuccess',
   GetLinkedArticlesError = '[KB-LINKED-ARTICLE] GetLinkedArticlesError'
+}
+
+export class InitLinkedArticles implements Action {
+  public readonly type = ActionTypes.InitLinkedArticles;
+  constructor() { }
 }
 
 export class GetLinkedArticles implements Action {
@@ -24,4 +30,5 @@ export class GetLinkedArticlesError implements Action {
 
 export type Actions = GetLinkedArticles
   | GetLinkedArticlesSuccess
-  | GetLinkedArticlesError;
+  | GetLinkedArticlesError
+  | InitLinkedArticles;

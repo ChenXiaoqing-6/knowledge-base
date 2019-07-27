@@ -3,7 +3,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { IArticle } from '../../models/IArticle';
 import { IKbState } from '../index';
-import { GetLinkedArticles } from './linked-article.actions';
+import { GetLinkedArticles, InitLinkedArticles } from './linked-article.actions';
 import {
     selectIsLoading,
     selectIsCompleted,
@@ -21,6 +21,7 @@ export class KbLinkedListFacade {
     }
 
     public getLinkedArticles() {
+        this.store$.dispatch(new InitLinkedArticles());
         this.store$.dispatch(new GetLinkedArticles());
     }
 

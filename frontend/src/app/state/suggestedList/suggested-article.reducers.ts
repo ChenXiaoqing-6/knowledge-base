@@ -15,6 +15,9 @@ export const initialKbSuggestedState:IKbSuggestedState = adapter.getInitialState
 export function reducer(state = initialKbSuggestedState,action:Actions):IKbSuggestedState{
 
     switch(action.type){
+
+        case ActionTypes.InitSuggestedArticles:
+            return { ...initialKbSuggestedState };
         
         case ActionTypes.SuggestedArticles:
             return {

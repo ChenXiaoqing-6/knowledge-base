@@ -15,10 +15,14 @@ export function reducer(state = initialKbLinkedArticleState, action: Actions): I
 
     switch (action.type) {
 
+        case ActionTypes.InitLinkedArticles:
+            return { ...initialKbLinkedArticleState };
+
         case ActionTypes.GetLinkedArticles:
             return {
                 ...state,
-                isLoading: true
+                isLoading: true,
+                isCompleted: false
             };
 
         case ActionTypes.GetLinkedArticlesSuccess:

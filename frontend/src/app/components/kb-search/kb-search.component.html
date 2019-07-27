@@ -4,37 +4,36 @@
     [placeholder]="'Enter words to search...'" 
     [glyph]="'search'"
     [placement]="'after'" 
-    (addOnButtonClicked)="search(searchinput.inputText)" 
+    (addOnButtonClicked)="search(searchinput.inputText)"
     (keyup.Enter)="search(searchinput.inputText)"
-  ></fd-input-group>
+    ></fd-input-group>
   <br>
   <div [attr.aria-busy]="busy$ | async">
     <div *ngIf="isInit$ | async; else showResultBox">
       <div class="fd-has-margin-small">
-          <div *ngIf="suggestedArticlesIsCompleted$ | async">
-            <p class="title-text">Suggested Articles ({{suggestedAticlesTotalCount$ | async}})</p>
-          </div>
-          <fd-loading-spinner [loading]="suggestedArticlesBusy$ | async"></fd-loading-spinner>
-          <kb-suggested-list [articles]="suggestedArticles$ | async"></kb-suggested-list>
-        <div class="fd-has-margin-y-small">
-          <div *ngIf="linkedArticlesIsCompleted$ | async">
-            <p class="title-text">Linked Articles ({{linkedArticlesTotalCount$ | async}})</p>
-          </div>  
-          <fd-loading-spinner [loading]="linkedArticlesBusy$ | async"></fd-loading-spinner>
-          <app-kb-linked-list [articles]="linkedArticles$ | async"></app-kb-linked-list>
+        <div *ngIf="suggestedArticlesIsCompleted$ | async">
+          <p class="title-text">Suggested Articles ({{suggestedAticlesTotalCount$ | async}})</p>
         </div>
+        <fd-loading-spinner [loading]="suggestedArticlesBusy$ | async"></fd-loading-spinner>
+        <kb-suggested-list [articles]="suggestedArticles$ | async"></kb-suggested-list>
+        <br>
+        <div *ngIf="linkedArticlesIsCompleted$ | async">
+          <p class="title-text">Linked Articles ({{linkedArticlesTotalCount$ | async}})</p>
+        </div>
+        <fd-loading-spinner [loading]="linkedArticlesBusy$ | async"></fd-loading-spinner>
+        <app-kb-linked-list [articles]="linkedArticles$ | async"></app-kb-linked-list>
       </div>
     </div>
 
     <ng-template #showResultBox>
       <fd-loading-spinner [loading]="busy$ | async"></fd-loading-spinner>
       <div *ngIf="notFound$ | async; else showResultList">
-          No articles found.
+        No articles found.
       </div>
       <ng-template #showResultList>
         <p>Search Results: {{totalCount$ | async}}</p>
       </ng-template>
-      <div
+      <div 
         fdInfiniteScroll 
         (onScrollAction)="loadMore()" 
         [scrollPercent]="98" 

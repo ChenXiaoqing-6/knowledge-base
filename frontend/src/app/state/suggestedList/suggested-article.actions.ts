@@ -2,9 +2,15 @@ import { Action } from '@ngrx/store';
 import { IArticle } from '../../models/IArticle';
 
 export enum ActionTypes {
+    InitSuggestedArticles = '[KB-ARTICLE-SUGGESTED] InitSuggestedArticles',
     SuggestedArticles = '[KB-ARTICLE-SUGGESTED] SuggestedArticles',
     SuggestedArticlesSuccess = '[KB-ARTICLE-SUGGESTED] SuggestedArticlesSuccess',
     SuggestedArticlesError = '[KB-ARTICLE-SUGGESTED] SuggestedSelectedError'
+}
+
+export class InitSuggestedArticles implements Action {
+    public readonly type = ActionTypes.InitSuggestedArticles;
+    constructor() { }
 }
 
 export class SuggestedArticles implements Action {
@@ -25,3 +31,4 @@ export class SuggestedArticlesError implements Action {
 export type Actions = SuggestedArticles
     | SuggestedArticlesSuccess
     | SuggestedArticlesError
+    |InitSuggestedArticles;
