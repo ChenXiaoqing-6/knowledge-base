@@ -18,3 +18,9 @@
 .container-view{
     background-color: white;
 }
+.search-result p a{
+    float: right;
+}
+.search-result p{
+    color: #666666;
+}
