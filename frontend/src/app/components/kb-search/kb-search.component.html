@@ -11,10 +11,11 @@
   <div [attr.aria-busy]="busy$ | async">
     <div *ngIf="isInit$ | async; else showResultBox">
       <div class="fd-has-margin-small">
-          <div>
-            <p class="title-text">Suggested Articles (4)</p>
+          <div *ngIf="suggestedArticlesIsCompleted$ | async">
+            <p class="title-text">Suggested Articles ({{suggestedAticlesTotalCount$ | async}})</p>
           </div>
-          <kb-suggested-list></kb-suggested-list>
+          <fd-loading-spinner [loading]="suggestedArticlesBusy$ | async"></fd-loading-spinner>
+          <kb-suggested-list [articles]="suggestedArticles$ | async"></kb-suggested-list>
         <div class="fd-has-margin-y-small">
           <div *ngIf="linkedArticlesIsCompleted$ | async">
             <p class="title-text">Linked Articles ({{linkedArticlesTotalCount$ | async}})</p>

@@ -173,6 +173,97 @@ export const MockLinkedArticlesResponse: any = {
   "totalObjectCount": 4
 }
 
+export const MockSuggestedArticlesResponse: any = {
+  "data": [
+      {
+          "id": "1",
+          "provider": "Mindtouch",
+          "title": "Washing Machine",
+          "content": "This guide provides an overview of product features and related technologies", //1908+
+          "lastUpdated": "2017-09-07T06:18:26Z",
+          "score": 0.9,
+          "link": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide",
+          "renderType": "IFRAME",
+          "renderValue": "https://sapdemo-responsive.mindtouch.us/test_German?mt-f1=true&mt-view=f1",
+          "views": 400,
+          "author": "Roman Kutepov",
+          "category": "", //1908+
+          "upvotes": 23,  //1908+
+          "devotes": 0,  //1908+
+          "tag": ["troubleshooting", "coffee maker"],  //1908+
+      },
+      {
+          "id": "2",
+          "provider": "Mindtouch",
+          "title": "Chicken Machine",
+          "content": "This guide provides an overview of product features and related technologies", //1908+
+          "lastUpdated": "2018-11-02T06:18:26Z",
+          "score": 0.9,
+          "link": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide",
+          "renderType": "IFRAME",
+          "renderValue": "https://sapdemo-responsive.mindtouch.us/test_German?mt-f1=true&mt-view=f1",
+          "views": 234,
+          "author": "Cayla Brister",
+          "category": "",
+          "upvotes": 12,  //1908+
+          "devotes": 0,  //1908+
+          "tag": ["troubleshooting", "coffee maker"],  //1908+
+      },
+      {
+          "id": "3",
+          "provider": "Mindtouch",
+          "title": "Learnning Machine",
+          "content": "This guide provides an overview of product features and related technologies", //1908+
+          "lastUpdated": "2019-06-25T06:18:26Z",
+          "score": 0.9,
+          "link": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide",
+          "renderType": "IFRAME",
+          "renderValue": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide?mt-f1=true&mt-view=f1",
+          "views": 26,
+          "author": "Ivan Magalhães",
+          "category": "",
+          "upvotes": 13,  //1908+
+          "devotes": 3,  //1908+
+          "tag": ["troubleshooting", "coffee maker"],  //1908+
+      },
+      {
+          "id": "4",
+          "provider": "Mindtouch",
+          "title": "Design Machine",
+          "content": "This guide provides an overview of product features and related technologies", //1908+
+          "lastUpdated": "2016-01-12T06:18:26Z",
+          "score": 0.9,
+          "link": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide",
+          "renderType": "IFRAME",
+          "renderValue": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide?mt-f1=true&mt-view=f1",
+          "views": 196,
+          "author": "Roman Kutepov",
+          "category": "",
+          "upvotes": 24,  //1908+
+          "devotes": 4,  //1908+
+          "tag": ["troubleshooting", "coffee maker"],  //1908+
+      },
+      {
+        "id": "5",
+        "provider": "Mindtouch",
+        "title": "Happy Machine",
+        "content": "This guide provides an overview of product features and related technologies", //1908+
+        "lastUpdated": "2019-02-12T06:18:26Z",
+        "score": 0.9,
+        "link": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide",
+        "renderType": "IFRAME",
+        "renderValue": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide?mt-f1=true&mt-view=f1",
+        "views": 26,
+        "author": "Shinohara Ryoma",
+        "category": "",
+        "upvotes": 24,  //1908+
+        "devotes": 4,  //1908+
+        "tag": ["troubleshooting", "coffee maker"],  //1908+
+    }
+  ],
+  "totalObjectCount": 5
+}
+
 export function mockSearch(options: ISearchOptions): Observable<CollectionResponse<IArticle>>  {
     if (options.searchTerm.indexOf("Error") >= 0) {
         return throwError(new Error('Fake error')); 
@@ -209,6 +300,14 @@ export function mockSearch(options: ISearchOptions): Observable<CollectionRespon
 export function MockLinkedArticles(): Observable<CollectionResponse<IArticle>> {
   let ret = {
     ...MockLinkedArticlesResponse,
+  };
+  return timer(1000).pipe(tap(()=>{console.log("done.");}),mapTo(ret));
+  // return throwError(new Error('Fake error'));
+}
+
+export function MockSuggestedArticles(): Observable<CollectionResponse<IArticle>> {
+  let ret = {
+    ...MockSuggestedArticlesResponse,
   };
   return timer(1000).pipe(tap(()=>{console.log("done.");}),mapTo(ret));
   // return throwError(new Error('Fake error'));
