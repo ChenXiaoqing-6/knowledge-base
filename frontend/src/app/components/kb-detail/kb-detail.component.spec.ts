@@ -1,10 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, Input } from '@angular/core';
-import { FundamentalNgxModule, ModalRef } from 'fundamental-ngx';
-import { of } from 'rxjs';
-
-import { KbDetailComponent } from './kb-detail.component';
+import { FundamentalNgxModule } from 'fundamental-ngx';
+import { ActivatedRoute } from '@angular/router';
 import { MockArticle } from '../../models/mock/Article.mock';
+import { KbViewFacade } from './../../state/article/article.facade';
+import { KbDetailComponent } from './kb-detail.component';
 
 @Component({ selector: 'kb-detail-header', template: '' })
 class KbDetailHeaderComponent {
@@ -22,10 +22,15 @@ class KbDetailContentComponent {
   @Input() article: any;
 }
 
+@Component({ selector: 'kb-article-actions', template: '' })
+class KbArticleActionsComponent {
+  @Input() article: any;
+}
+
 describe('KbDetailComponent', () => {
   let component: KbDetailComponent;
   let fixture: ComponentFixture<KbDetailComponent>;
-  let modalRef: ModalRef = new ModalRef();
+  let KbViewFacadeSpy = jasmine.createSpyObj('KbViewFacade', ['openArticle']);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -34,12 +39,14 @@ describe('KbDetailComponent', () => {
         KbDetailHeaderComponent,
         KbDetailFooterComponent,
         KbDetailContentComponent,
+        KbArticleActionsComponent,
       ],
       imports: [
         FundamentalNgxModule,
       ],
       providers: [
-        { provide: ModalRef, useValue: modalRef }
+        { provide: ActivatedRoute, useValue: {snapshot:{params: MockArticle} }},
+        { provide: KbViewFacade, useValue: KbViewFacadeSpy }
       ],
     })
       .compileComponents();
@@ -48,7 +55,6 @@ describe('KbDetailComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(KbDetailComponent);
     component = fixture.componentInstance;
-    modalRef.data = { article: of(MockArticle) };
     fixture.detectChanges();
   });
 
