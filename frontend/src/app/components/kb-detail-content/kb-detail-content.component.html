@@ -1,4 +1,4 @@
-<div class="kbDetailContent">
+<div class="kbDetailContent" [attr.aria-busy]="isContentLoading$ | async">
     <fd-loading-spinner [loading]="isContentLoading$ | async"></fd-loading-spinner>
 
     <iframe title="iframe" id="iFrame" (load)="onIFrameLoad($event)" [src]="article.renderValue | safeUrl" class="kbDetailContentIFrame">
