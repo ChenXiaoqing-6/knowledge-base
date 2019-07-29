@@ -20,6 +20,7 @@ class KbDetailFooterComponent {
 @Component({ selector: 'kb-detail-content', template: '' })
 class KbDetailContentComponent {
   @Input() article: any;
+  @Input() public parentHeaderBarId: string;
 }
 
 @Component({ selector: 'kb-article-actions', template: '' })
