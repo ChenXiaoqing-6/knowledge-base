@@ -11,39 +11,31 @@
   <div [attr.aria-busy]="busy$ | async">
     <div *ngIf="isInit$ | async; else showResultBox">
       <div class="fd-has-margin-small">
-        <div *ngIf="suggestedArticlesIsCompleted$ | async">
-          <p class="title-text">Suggested Articles ({{suggestedAticlesTotalCount$ | async}})</p>
-        </div>
-        <fd-loading-spinner [loading]="suggestedArticlesBusy$ | async"></fd-loading-spinner>
-        <kb-suggested-list [articles]="suggestedArticles$ | async"></kb-suggested-list>
+        <kb-suggested-list></kb-suggested-list>
         <br>
-        <div *ngIf="linkedArticlesIsCompleted$ | async">
-          <p class="title-text">Linked Articles ({{linkedArticlesTotalCount$ | async}})</p>
-        </div>
-        <fd-loading-spinner [loading]="linkedArticlesBusy$ | async"></fd-loading-spinner>
-        <app-kb-linked-list [articles]="linkedArticles$ | async"></app-kb-linked-list>
+        <kb-linked-list></kb-linked-list>
       </div>
     </div>
 
     <ng-template #showResultBox>
-      <fd-loading-spinner [loading]="busy$ | async"></fd-loading-spinner>
-      <div *ngIf="notFound$ | async; else showResultList">
-        No articles found.
-      </div>
-      <ng-template #showResultList>
-        <div class="search-result">
-          <p class="search-result">{{totalCount$ | async}} results
-            <a href="app-kb-search">Back to Suggestions</a>
-          </p>
+        <fd-loading-spinner [loading]="busy$ | async"></fd-loading-spinner>
+        <div *ngIf="notFound$ | async; else showResultList">
+          No articles found.
         </div>
-      </ng-template>
-      <div 
-        fdInfiniteScroll 
-        (onScrollAction)="loadMore()" 
-        [scrollPercent]="98" 
-        class="infinite-scroll-area">
-        <kb-article-list [articles]="articles$ | async"></kb-article-list>
-      </div>
+        <ng-template #showResultList>
+          <div class="search-result">
+            <p>{{totalCount$ | async}} results
+              <a href="app-kb-search">Back to Suggestions</a>
+            </p>
+          </div>
+        </ng-template>
+        <div 
+          fdInfiniteScroll 
+          (onScrollAction)="loadMore()" 
+          [scrollPercent]="98" 
+          class="infinite-scroll-area">
+          <kb-article-list [articles]="articles$ | async"></kb-article-list>
+        </div>
     </ng-template>
   </div>
 

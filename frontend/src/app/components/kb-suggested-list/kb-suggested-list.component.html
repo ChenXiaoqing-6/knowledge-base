@@ -1,3 +1,7 @@
-<div *ngFor="let article of articles">
+<div *ngIf="suggestedArticlesIsCompleted$ | async">
+  <p class="title-text">Suggested Articles ({{suggestedAticlesTotalCount$ | async}})</p>
+</div>
+<fd-loading-spinner [loading]="suggestedArticlesBusy$ | async"></fd-loading-spinner>
+<div *ngFor="let article of (suggestedArticles$ | async)">
   <kb-article-item [article]="article" [type]="type"></kb-article-item>
 </div>
