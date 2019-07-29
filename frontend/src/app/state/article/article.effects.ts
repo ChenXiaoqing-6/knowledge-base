@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
+import { of, empty } from 'rxjs';
 import { catchError, tap, map } from "rxjs/operators";
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -17,14 +17,23 @@ export class KbViewEffects {
     .pipe(
       ofType<OpenArticle>(ActionTypes.OpenArticle),
       map((action: any) => action.payload),
-      tap((payload: IArticle) => this.router.navigate(['/kbDetail', payload])),
-      catchError(error => of(new OpenArticleError(error)))
+      tap((payload: IArticle) => {
+        this.router.navigate(['/kbDetail', payload]);
+        return empty();
+      }),
+      catchError(error => {
+        debugger;
+        return of(new OpenArticleError(error));
+      })
     );
 
   @Effect({ dispatch: false })
   backToSearchPage$ = this.actions$
     .pipe(
       ofType<BackArticle>(ActionTypes.BackArticle),
-      tap(_ => this.location.back())
+      tap(_ => {
+        this.location.back();
+        return empty();
+      })
     );
 }

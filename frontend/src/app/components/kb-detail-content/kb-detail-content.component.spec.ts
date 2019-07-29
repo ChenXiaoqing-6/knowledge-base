@@ -56,7 +56,7 @@ describe('KbDetailContentComponent', () => {
   describe('ngOnInit', () => {
     it('should trigger message event', () => {
       let spy = jasmine.createSpy('message');
-      let changeIFrameHeightSpy = spyOn(component, 'changeIFrameHeight');
+      let changeIFrameHeightSpy = spyOn(component, 'setIFrameHeight');
       window.addEventListener('message', () => {
         component.ngOnInit();
         expect(changeIFrameHeightSpy).toHaveBeenCalledTimes(1);
