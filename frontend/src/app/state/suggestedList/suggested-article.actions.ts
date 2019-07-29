@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { IArticle } from '../../models/IArticle';
+import { ISearchOptions } from '../../models/IRequestOptions';
 
 export enum ActionTypes {
     InitSuggestedArticles = '[KB-ARTICLE-SUGGESTED] InitSuggestedArticles',
@@ -15,7 +16,7 @@ export class InitSuggestedArticles implements Action {
 
 export class SuggestedArticles implements Action {
     public readonly type = ActionTypes.SuggestedArticles;
-    constructor() { }
+    constructor(public payload: ISearchOptions) { }
 }
 
 export class SuggestedArticlesSuccess implements Action {

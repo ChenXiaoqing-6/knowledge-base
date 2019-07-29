@@ -74,18 +74,19 @@ export class KbSearchComponent implements OnInit, OnDestroy {
 
     this.getLinkedArticles$.pipe(
       takeUntil(this.onDestroy$),
-      distinctUntilChanged(),
-      debounceTime(300)
+      distinctUntilChanged()
     ).subscribe(() => {
       this.linkedListFacade.getLinkedArticles();
     });
 
     this.getsuggestedArticle$.pipe(
       takeUntil(this.onDestroy$),
-      distinctUntilChanged(),
-      debounceTime(300)
+      distinctUntilChanged()
     ).subscribe(() => {
-      this.suggestedListFacade.getsuggestedArticle();
+      this.suggestedListFacade.getsuggestedArticle({
+        pagination: PaginationHelper.createSuggestedPagination(),
+        searchTerm: "Angular"
+      });
     })
 
     this.getLinkedArticles$.next();

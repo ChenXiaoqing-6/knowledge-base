@@ -10,6 +10,7 @@ import {
     selectIsCompleted,
     selectIsLoading
 } from './suggested-article.selectors';
+import { ISearchOptions } from "../../models/IRequestOptions";
 
 @Injectable()
 export class KbSuggestedFacade {
@@ -32,9 +33,9 @@ export class KbSuggestedFacade {
         return this.store$.pipe(select(selectIsLoading));
     }
 
-    public getsuggestedArticle() {
-        this.store$.dispatch(new InitSuggestedArticles);
-        this.store$.dispatch(new SuggestedArticles);
+    public getsuggestedArticle(options: ISearchOptions) {
+        this.store$.dispatch(new InitSuggestedArticles());
+        this.store$.dispatch(new SuggestedArticles(options));
     }
 
 }
