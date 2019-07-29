@@ -1,6 +1,5 @@
-<div class="Suggested-total">
-  <p>Suggested Articles({{suggestedListTotal}})</p> 
+<div class="Suggested-total" *ngIf = "suggestedArticlesIsCompleted$ |async">
+  <p>Suggested Articles({{suggestedAticlesTotalCount$ | async}})</p> 
 </div>
-<div *ngFor="let article of articles">
-    <kb-article-item [article]="article"></kb-article-item>
-</div>
+<fd-loading-spinner [loading]="suggestedArticlesBusy$ | async"></fd-loading-spinner>
+<kb-article-list [articles]="suggestedArticles$ | async"></kb-article-list>

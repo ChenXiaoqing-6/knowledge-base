@@ -7,3 +7,8 @@ export interface IPaginationOptions {
 export interface ISearchOptions extends IPaginationOptions {
     searchTerm: string
 }
+
+export interface ISuggestedOptions extends IPaginationOptions {
+    suggestedTerm: string
+}
+

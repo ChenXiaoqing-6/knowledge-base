@@ -6,7 +6,7 @@ import { ISearchOptions } from '../models/IRequestOptions';
 import { CollectionResponse } from '../models/IResponse';
 // import { AppConfig } from '../config/config';
 // import { BaseHttpClient } from '../services/http.client';
-import { mockSearch } from '../services/mock/mock-data';
+import { mockSearch ,MockSuggestedArticles} from '../services/mock/mock-data';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,12 @@ export class KbService {
     // return this.http.get(this.getUrl("search")).pipe(
     //   map(res => res['data'])
     // );
+  }
+
+  public getSuggestedArticles(): Observable<CollectionResponse<IArticle>> {
+    
+    return MockSuggestedArticles();
+    
   }
 
 }

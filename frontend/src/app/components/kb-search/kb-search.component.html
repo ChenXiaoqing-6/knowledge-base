@@ -12,7 +12,7 @@
   <br>
   <div [attr.aria-busy]="busy$ | async">
       <div *ngIf="isInit$ | async; else showResultBox">
-        <app-kb-suggested-list></app-kb-suggested-list>
+        <kb-suggested-list></kb-suggested-list>
         <app-kb-linked-list></app-kb-linked-list>
       </div>
 
