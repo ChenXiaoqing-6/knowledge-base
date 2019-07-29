@@ -1,18 +1,12 @@
-import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { IKbSuggestedState } from "./suggested-article.state";
-import * as formReducers from './suggested-article.reducers';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { IKbSuggestedState } from './suggested-article.state';
+import * as fromReducers from './suggested-article.reducers';
 
+export const kbSuggestedState = createFeatureSelector<IKbSuggestedState>('kbSuggested');
 
-export const kbSuggestedState = createFeatureSelector<IKbSuggestedState>('kbSuggestedArticles');
-
-export const selectAllArticles = createSelector(
+export const selectIsLoading = createSelector(
     kbSuggestedState,
-    formReducers.selectAll
-);
-
-export const selectTotalObjectCount = createSelector(
-    kbSuggestedState,
-    (state) => state.totalObjectCount
+    (state) => state.isLoading
 );
 
 export const selectIsCompleted = createSelector(
@@ -20,8 +14,12 @@ export const selectIsCompleted = createSelector(
     (state) => state.isCompleted
 );
 
-export const selectIsLoading = createSelector(
+export const selectAllArticles = createSelector(
     kbSuggestedState,
-    (state) => state.isLoading
+    fromReducers.selectAll
 );
 
+export const selectTotalObjectCount = createSelector(
+    kbSuggestedState,
+    (state) => state.totalObjectCount
+); 
