@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class KbArticleListComponent implements OnInit {
   @Input() articles: IArticle[];
+  type: String = "ArticleList";
   constructor() { }
 
   ngOnInit() {
