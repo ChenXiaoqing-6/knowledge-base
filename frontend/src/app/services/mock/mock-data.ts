@@ -210,6 +210,6 @@ export function MockLinkedArticles(): Observable<CollectionResponse<IArticle>> {
   let ret = {
     ...MockLinkedArticlesResponse,
   };
-  return timer(1000).pipe(tap(()=>{console.log("done.");}),mapTo(ret));
+  return timer(2000).pipe(tap(()=>{console.log("done.");}),mapTo(ret));
   // return throwError(new Error('Fake error'));
 }

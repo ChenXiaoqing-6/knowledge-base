@@ -2,8 +2,9 @@
     <fd-input-group #searchinput [button]="true" [placeholder]="'Enter words to search...'" [glyph]="'search'" [placement]="'after'" (addOnButtonClicked)="search(searchinput.inputText)" (keyup.Enter)="search(searchinput.inputText)"></fd-input-group>
     <br>
     <div [attr.aria-busy]="busy$ | async">
+        <fd-loading-spinner [loading]="(isSuggestedListBusy$ | async) && (isLinkedListBusy$ | async)"></fd-loading-spinner>
         <div *ngIf="isInit$ | async; else showResultBox">
-            <div>
+            <div [hidden]="(isSuggestedListBusy$ | async) && (isLinkedListBusy$ | async)">
                 <kb-suggested-list></kb-suggested-list>
                 <br>
                 <kb-linked-list></kb-linked-list>

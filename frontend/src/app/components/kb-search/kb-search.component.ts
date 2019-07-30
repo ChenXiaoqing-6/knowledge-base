@@ -4,6 +4,8 @@ import { debounceTime, takeUntil, distinctUntilChanged } from 'rxjs/operators';
 import { IArticle } from '../../models/IArticle';
 import { Helper as PaginationHelper } from '../../models/IPagination';
 import { KbSearchFacade } from '../../state/search/search-article.facade';
+import { KbSuggestedFacade } from '../../state/suggestedList/suggested-article.facade';
+import { KbLinkedListFacade } from '../../state/linkedArticle/linked-article.facade';
 
 @Component({
   selector: 'app-kb-search',
@@ -13,6 +15,8 @@ import { KbSearchFacade } from '../../state/search/search-article.facade';
 export class KbSearchComponent implements OnInit, OnDestroy {
 
   private onDestroy$: Subject<boolean> = new Subject();
+  isSuggestedListBusy$: Observable<boolean>;
+  isLinkedListBusy$: Observable<boolean>;
   articles$: Observable<IArticle[]>;
   totalCount$: Observable<number>;
   isInit$: Observable<boolean>;
@@ -21,7 +25,7 @@ export class KbSearchComponent implements OnInit, OnDestroy {
   search$: Subject<string> = new Subject();
   loadMore$: Subject<void> = new Subject();
 
-  constructor(private searchFacade: KbSearchFacade) { }
+  constructor(private searchFacade: KbSearchFacade, private suggestedFacade: KbSuggestedFacade, private linkedFacade: KbLinkedListFacade) { }
 
   ngOnInit() {
     this.articles$ = this.searchFacade.getArticles();
@@ -29,6 +33,8 @@ export class KbSearchComponent implements OnInit, OnDestroy {
     this.busy$ = this.searchFacade.isSearching();
     this.totalCount$ = this.searchFacade.getTotalObjectCount();
     this.notFound$ = this.searchFacade.isNotFound();
+    this.isSuggestedListBusy$ = this.suggestedFacade.isLoadingSuggestedAticles();
+    this.isLinkedListBusy$ = this.linkedFacade.isLinkingArticles();
 
     this.search$.pipe(
       takeUntil(this.onDestroy$),

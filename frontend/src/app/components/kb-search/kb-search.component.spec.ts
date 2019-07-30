@@ -4,6 +4,8 @@ import { FundamentalNgxModule } from 'fundamental-ngx';
 import { IArticle } from '../../models/IArticle';
 import { Helper as PageHelper } from '../../models/IPagination';
 import { KbSearchFacade } from '../../state/search/search-article.facade';
+import { KbSuggestedFacade } from '../../state/suggestedList/suggested-article.facade';
+import { KbLinkedListFacade } from '../../state/linkedArticle/linked-article.facade';
 import { KbSearchComponent } from './kb-search.component';
 
 @Component({ selector: 'kb-article-list', template: '' })
@@ -24,7 +26,7 @@ class KbLinkedListComponent {
 describe('KbSearchComponent', () => {
   let component: KbSearchComponent;
   let fixture: ComponentFixture<KbSearchComponent>;
-  let facadeSpy = jasmine.createSpyObj('KbSearchFacade', [
+  let KbSearchFacadeSpy = jasmine.createSpyObj('KbSearchFacade', [
     'getArticles',
     'isInit',
     'isSearching',
@@ -32,6 +34,22 @@ describe('KbSearchComponent', () => {
     'isNotFound',
     'searchArticles', 
     'loadMoreArticles'
+  ]);
+
+  let KbSuggestedFacadeSpy = jasmine.createSpyObj('KbSuggestedFacade', [
+    'getArticles',
+    'getsuggestedArticle',
+    'getTotalObjectCount',
+    'isCompleted',
+    'isLoadingSuggestedAticles'
+  ]);
+
+  let KbLinkedListFacadeSpy = jasmine.createSpyObj('KbLinkedListFacade', [
+    'getArticles',
+    'getLinkedArticles',
+    'getTotalObjectCount',
+    'isCompleted',
+    'isLinkingArticles'
   ]);
 
   beforeEach(async(() => {
@@ -43,7 +61,9 @@ describe('KbSearchComponent', () => {
         KbLinkedListComponent
       ],
       providers: [
-        { provide: KbSearchFacade, useValue: facadeSpy }
+        { provide: KbSearchFacade, useValue: KbSearchFacadeSpy },
+        { provide: KbSuggestedFacade, useValue: KbSuggestedFacadeSpy },
+        { provide: KbLinkedListFacade, useValue: KbLinkedListFacadeSpy }
       ],
       imports: [
         FundamentalNgxModule
@@ -73,8 +93,8 @@ describe('KbSearchComponent', () => {
     component.search(searchTerm);
     /** only trigger one real call with last search string */
     component.search$.subscribe(()=>{
-      expect(facadeSpy.searchArticles).toHaveBeenCalledTimes(1);
-      expect(facadeSpy.searchArticles).toHaveBeenCalledWith(expectedOptions);
+      expect(KbSearchFacadeSpy.searchArticles).toHaveBeenCalledTimes(1);
+      expect(KbSearchFacadeSpy.searchArticles).toHaveBeenCalledWith(expectedOptions);
     })
   });
 
@@ -85,8 +105,8 @@ describe('KbSearchComponent', () => {
     component.loadMore();
     /** only trigger one real call */
     component.loadMore$.subscribe(()=>{
-      expect(facadeSpy.loadMoreArticles).toHaveBeenCalledTimes(1);
-      expect(facadeSpy.loadMoreArticles).toHaveBeenCalledWith();
+      expect(KbSearchFacadeSpy.loadMoreArticles).toHaveBeenCalledTimes(1);
+      expect(KbSearchFacadeSpy.loadMoreArticles).toHaveBeenCalledWith();
     })
   });
 
