@@ -1,3 +1,7 @@
-<p>
-  kb-suggested-list works!
-</p>
+<div *ngIf="suggestedArticlesIsCompleted$ | async">
+  <p class="title-text">Suggested Articles ({{suggestedAticlesTotalCount$ | async}})</p>
+</div>
+<fd-loading-spinner [loading]="suggestedArticlesBusy$ | async"></fd-loading-spinner>
+<div *ngFor="let article of (suggestedArticles$ | async)">
+  <kb-article-item [article]="article" [type]="type"></kb-article-item>
+</div>

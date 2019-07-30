@@ -16,7 +16,6 @@ import { KbDetailContentComponent } from './components/kb-detail-content/kb-deta
 import { KbDetailHeaderComponent } from './components/kb-detail-header/kb-detail-header.component';
 import { KbDetailFooterComponent } from './components/kb-detail-footer/kb-detail-footer.component';
 import { SafeUrlPipe } from './pipes/safeUrl.pipe';
-import { KbContainerComponent } from './components/kb-container/kb-container.component';
 import { KbLinkedListComponent } from './components/kb-linked-list/kb-linked-list.component';
 import { KbSuggestedListComponent } from './components/kb-suggested-list/kb-suggested-list.component';
 import { KbArticleActionsComponent } from './components/kb-article-actions/kb-article-actions.component';
@@ -26,6 +25,8 @@ import { appRoutes } from './router/routes';
 import { KbService } from './services/kb.service';
 import { KbSearchFacade } from './state/search/search-article.facade';
 import { KbViewFacade } from './state/article/article.facade';
+import { KbLinkedListFacade } from './state/linkedArticle/linked-article.facade';
+import { KbSuggestedFacade } from './state/suggestedList/suggested-article.facade';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,6 @@ import { KbViewFacade } from './state/article/article.facade';
     KbDetailFooterComponent,
     KbDetailHeaderComponent,
     SafeUrlPipe,
-    KbContainerComponent,
     KbLinkedListComponent,
     KbSuggestedListComponent,
     KbArticleActionsComponent
@@ -63,6 +63,8 @@ import { KbViewFacade } from './state/article/article.facade';
   providers: [
     KbSearchFacade,
     KbViewFacade,
+    KbLinkedListFacade,
+    KbSuggestedFacade,
     KbService
   ],
   bootstrap: [AppComponent],

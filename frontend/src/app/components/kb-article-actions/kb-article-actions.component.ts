@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AlertService } from 'fundamental-ngx';
 import { IArticle } from './../../models/IArticle';
+import { ActionDisplayType } from './../../models/ActionDisplayType.enum';
 
 @Component({
   selector: 'kb-article-actions',
@@ -10,6 +11,7 @@ import { IArticle } from './../../models/IArticle';
 export class KbArticleActionsComponent implements OnInit {
 
   @Input() article: IArticle;
+  @Input() type: ActionDisplayType;
   constructor(private alertService: AlertService) { }
 
   ngOnInit() {
@@ -39,6 +41,10 @@ export class KbArticleActionsComponent implements OnInit {
 
   onMore() {
 
+  }
+
+  removeLinkedArticle() {
+    
   }
 
 }

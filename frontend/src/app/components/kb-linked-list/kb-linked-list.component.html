@@ -1,17 +1,7 @@
-<div *ngIf="articles.length == 0" class="fd-has-margin-tiny">
-  No linked articles exist.
+<div *ngIf="linkedArticlesIsCompleted$ | async">
+  <p class="title-text">Linked Articles ({{linkedArticlesTotalCount$ | async}})</p>
 </div>
-<div *ngFor="let article of articles">
-  <fd-panel class="fd-has-margin-tiny">
-    <fd-panel-body class="fd-has-padding-tiny">
-      <div>
-        <a href="#" class="article-title-link" title="{{article.title}}" (click)="openArticleDetail()">
-          <span class="article-title-text">
-            {{article.title}}
-          </span>
-        </a>
-        <button fd-button [options]="'light'" [glyph]="'delete'" (click)="removeLinkedArticle(article)"></button>
-      </div>
-    </fd-panel-body>
-  </fd-panel>
+<fd-loading-spinner [loading]="linkedArticlesBusy$ | async"></fd-loading-spinner>
+<div *ngFor="let article of (linkedArticles$ | async)">
+  <kb-article-item [article]="article" [type]="type"></kb-article-item>
 </div>

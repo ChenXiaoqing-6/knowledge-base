@@ -10,6 +10,13 @@ export class Helper {
             pageSize: 10,
             pageIndex: 1
         };
-    }
+    };
+
+    public static createSuggestedPagination(): IPagination {
+        return {
+            pageSize: 5,
+            pageIndex: 1
+        };
+    };
 
 }
