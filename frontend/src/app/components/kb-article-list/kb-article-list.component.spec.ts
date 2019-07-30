@@ -6,6 +6,7 @@ import { KbArticleListComponent } from './kb-article-list.component';
 @Component({ selector: 'kb-article-item', template: '' })
 class KbArticleItemComponent {
   @Input() article: any;
+  @Input() type: any;
 }
 
 describe('KbArticleListComponent', () => {

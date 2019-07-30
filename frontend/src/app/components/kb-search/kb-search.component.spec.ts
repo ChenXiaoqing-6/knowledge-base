@@ -11,6 +11,16 @@ class KbArticleListComponent {
   @Input() articles: IArticle[];
 }
 
+@Component({ selector: 'kb-suggested-list', template: '' })
+class KbSuggestedListComponent {
+  @Input() articles: IArticle[];
+}
+
+@Component({ selector: 'kb-linked-list', template: '' })
+class KbLinkedListComponent {
+  @Input() articles: IArticle[];
+}
+
 describe('KbSearchComponent', () => {
   let component: KbSearchComponent;
   let fixture: ComponentFixture<KbSearchComponent>;
@@ -28,7 +38,9 @@ describe('KbSearchComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         KbSearchComponent,
-        KbArticleListComponent
+        KbArticleListComponent,
+        KbSuggestedListComponent,
+        KbLinkedListComponent
       ],
       providers: [
         { provide: KbSearchFacade, useValue: facadeSpy }

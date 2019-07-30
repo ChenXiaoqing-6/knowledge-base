@@ -14,6 +14,7 @@ class KbDetailHeaderComponent {
 @Component({ selector: 'kb-article-actions', template: '' })
 class KbArticleActionsComponent {
   @Input() article: any;
+  @Input() type: any;
 }
 
 describe('KbArticleItemComponent', () => {

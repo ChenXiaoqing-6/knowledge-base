@@ -26,6 +26,7 @@ class KbDetailContentComponent {
 @Component({ selector: 'kb-article-actions', template: '' })
 class KbArticleActionsComponent {
   @Input() article: any;
+  @Input() type: any;
 }
 
 describe('KbDetailComponent', () => {
