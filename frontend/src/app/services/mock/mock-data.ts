@@ -96,7 +96,7 @@ export const MockSearchResponse: any = {
     "pageSize": 20,
     "currentPage": 1,
     "lastPage": 4,
-    "totalObjectCount": 100
+    "totalObjectCount": 4
 }
 
 export const MockLinkedArticlesResponse: any = {
