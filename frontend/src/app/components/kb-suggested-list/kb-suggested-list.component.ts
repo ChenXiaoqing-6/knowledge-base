@@ -4,6 +4,7 @@ import { takeUntil } from 'rxjs/operators';
 import { IArticle } from '../../models/IArticle';
 import { Helper as PaginationHelper } from '../../models/IPagination';
 import { KbSuggestedFacade } from '../../state/suggestedList/suggested-article.facade';
+import { ActionDisplayType } from './../../models/ActionDisplayType.enum';
 
 @Component({
   selector: 'kb-suggested-list',
@@ -19,7 +20,7 @@ export class KbSuggestedListComponent implements OnInit, OnDestroy {
   suggestedArticlesBusy$: Observable<boolean>;
   getsuggestedArticle$: Subject<void> = new Subject();
 
-  type: String = "ArticleList";
+  type: ActionDisplayType = ActionDisplayType.SEARCHED_ARTICLE_LIST;
   constructor(private suggestedListFacade: KbSuggestedFacade) { }
 
   ngOnInit() {

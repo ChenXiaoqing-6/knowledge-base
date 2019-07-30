@@ -3,6 +3,7 @@ import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { IArticle } from './../../models/IArticle';
 import { KbLinkedListFacade } from '../../state/linkedArticle/linked-article.facade';
+import { ActionDisplayType } from './../../models/ActionDisplayType.enum';
 
 @Component({
   selector: 'kb-linked-list',
@@ -17,7 +18,7 @@ export class KbLinkedListComponent implements OnInit, OnDestroy {
   linkedArticlesBusy$: Observable<boolean>;
   getLinkedArticles$: Subject<void> = new Subject();
 
-  type: String = "LinkedArticleList";
+  type: ActionDisplayType = ActionDisplayType.LINKED_ARTICLE_LIST;
   constructor(private linkedListFacade: KbLinkedListFacade) { }
 
   ngOnInit() {
