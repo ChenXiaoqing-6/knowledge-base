@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IArticle } from '../../models/IArticle';
 import { KbViewFacade } from '../../state/article/article.facade';
+import { MockArticle } from '../../models/mock/Article.mock';
 
 @Component({
   selector: 'kb-detail',
@@ -15,7 +16,12 @@ export class KbDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.article = this.route.snapshot.params as IArticle;
+    // this.article = this.route.snapshot.params as IArticle;
+    if (this.route.snapshot.params instanceof Object){
+      this.article = this.route.snapshot.params as IArticle;
+    } else {
+      this.article = MockArticle;
+    }
   }
 
   onBackToSearchPage() {
