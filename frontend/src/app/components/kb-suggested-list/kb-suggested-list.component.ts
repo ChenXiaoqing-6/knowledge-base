@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil, distinctUntilChanged } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { IArticle } from '../../models/IArticle';
 import { Helper as PaginationHelper } from '../../models/IPagination';
 import { KbSuggestedFacade } from '../../state/suggestedList/suggested-article.facade';
@@ -29,8 +29,7 @@ export class KbSuggestedListComponent implements OnInit, OnDestroy {
     this.suggestedArticlesBusy$ = this.suggestedListFacade.isLoadingSuggestedAticles();
 
     this.getsuggestedArticle$.pipe(
-      takeUntil(this.onDestroy$),
-      distinctUntilChanged()
+      takeUntil(this.onDestroy$)
     ).subscribe(() => {
       this.suggestedListFacade.getsuggestedArticle({
         pagination: PaginationHelper.createSuggestedPagination(),

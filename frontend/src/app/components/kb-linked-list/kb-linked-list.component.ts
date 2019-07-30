@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil, distinctUntilChanged } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { IArticle } from './../../models/IArticle';
 import { KbLinkedListFacade } from '../../state/linkedArticle/linked-article.facade';
 
@@ -27,8 +27,7 @@ export class KbLinkedListComponent implements OnInit, OnDestroy {
     this.linkedArticlesTotalCount$ = this.linkedListFacade.getTotalObjectCount();
 
     this.getLinkedArticles$.pipe(
-      takeUntil(this.onDestroy$),
-      distinctUntilChanged()
+      takeUntil(this.onDestroy$)
     ).subscribe(() => {
       this.linkedListFacade.getLinkedArticles();
     });
@@ -39,13 +38,4 @@ export class KbLinkedListComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this.onDestroy$.next(true);
   }
-
-  removeLinkedArticle(article){
-    
-  }
-
-  openArticleDetail(){
-
-  }
-
 }

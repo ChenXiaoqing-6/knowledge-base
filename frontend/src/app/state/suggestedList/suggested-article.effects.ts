@@ -27,9 +27,9 @@ export class KbSuggestedArticlesEffects{
             switchMap((action) => {
                 return this.kbService.searchArticles(action.payload)
                     .pipe(
-                        map(response =>new SuggestedArticlesSuccess({
+                        map(response => new SuggestedArticlesSuccess({
                             data:response.data,
-                            totalCount:5
+                            totalCount:response.data.length
                         })),
                         catchError(error => of(new SuggestedArticlesError({error})))
                     );
