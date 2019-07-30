@@ -17,7 +17,7 @@ export class KbDetailComponent implements OnInit {
 
   ngOnInit() {
     // this.article = this.route.snapshot.params as IArticle;
-    if (this.route.snapshot.params instanceof Object){
+    if (this.route.snapshot.params.hasOwnProperty("author")){
       this.article = this.route.snapshot.params as IArticle;
     } else {
       this.article = MockArticle;
