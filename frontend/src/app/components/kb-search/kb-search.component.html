@@ -1,42 +1,31 @@
-<div class="fd-has-padding-tiny container-view">
-  <fd-input-group #searchinput 
-    [button]="true" 
-    [placeholder]="'Enter words to search...'" 
-    [glyph]="'search'"
-    [placement]="'after'" 
-    (addOnButtonClicked)="search(searchinput.inputText)"
-    (keyup.Enter)="search(searchinput.inputText)"
-    ></fd-input-group>
-  <br>
-  <div [attr.aria-busy]="busy$ | async">
-    <div *ngIf="isInit$ | async; else showResultBox">
-      <div class="fd-has-margin-small">
-        <kb-suggested-list></kb-suggested-list>
-        <br>
-        <kb-linked-list></kb-linked-list>
-      </div>
-    </div>
+<div class="fd-has-padding-small container-view">
+    <fd-input-group #searchinput [button]="true" [placeholder]="'Enter words to search...'" [glyph]="'search'" [placement]="'after'" (addOnButtonClicked)="search(searchinput.inputText)" (keyup.Enter)="search(searchinput.inputText)"></fd-input-group>
+    <br>
+    <div [attr.aria-busy]="busy$ | async">
+        <div *ngIf="isInit$ | async; else showResultBox">
+            <div>
+                <kb-suggested-list></kb-suggested-list>
+                <br>
+                <kb-linked-list></kb-linked-list>
+            </div>
+        </div>
 
-    <ng-template #showResultBox>
-        <fd-loading-spinner [loading]="busy$ | async"></fd-loading-spinner>
-        <div *ngIf="notFound$ | async; else showResultList">
-          No articles found.
-        </div>
-        <ng-template #showResultList>
-          <div class="search-result">
-            <p>{{totalCount$ | async}} results
-              <a href="app-kb-search">Back to Suggestions</a>
-            </p>
-          </div>
+        <ng-template #showResultBox>
+            <fd-loading-spinner [loading]="busy$ | async"></fd-loading-spinner>
+            <div *ngIf="notFound$ | async; else showResultList">
+                No articles found.
+            </div>
+            <ng-template #showResultList>
+                <div class="search-result">
+                    <p>{{totalCount$ | async}} results
+                        <a href="app-kb-search">Back to Suggestions</a>
+                    </p>
+                </div>
+            </ng-template>
+            <div fdInfiniteScroll (onScrollAction)="loadMore()" [scrollPercent]="98" class="infinite-scroll-area">
+                <kb-article-list [articles]="articles$ | async"></kb-article-list>
+            </div>
         </ng-template>
-        <div 
-          fdInfiniteScroll 
-          (onScrollAction)="loadMore()" 
-          [scrollPercent]="98" 
-          class="infinite-scroll-area">
-          <kb-article-list [articles]="articles$ | async"></kb-article-list>
-        </div>
-    </ng-template>
-  </div>
+    </div>
 
 </div>

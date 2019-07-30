@@ -1,11 +1,11 @@
-<fd-panel>
+<fd-panel class="fd-has-padding-tiny">
     <div id="articleDetailHeaderContainer">
         <div class="article-actions-container">
             <div class="article-back">
                 <button id="backBtn" fd-button [options]="'light'" [glyph]="'arrow-left'" (click)="onBackToSearchPage()"></button>
             </div>
             <div class="article-actions">
-                <kb-article-actions [article]="article"></kb-article-actions>
+                <kb-article-actions [article]="article" [type]="'SearchedArticleList'"></kb-article-actions>
             </div>
         </div>
 
