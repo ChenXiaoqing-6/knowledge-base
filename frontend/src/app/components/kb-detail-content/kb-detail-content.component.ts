@@ -40,9 +40,8 @@ export class KbDetailContentComponent implements OnInit {
     if (documentElement && iFrame) {
       const iDocumentHeight = documentElement.clientHeight;
       const content: HTMLElement = document.getElementById(this.parentHeaderBarId) as HTMLElement;
-      const iHeaderHeight = content.offsetHeight,
-        iFooterHeight = 47;
-      const iDynamicHeight = iDocumentHeight - iHeaderHeight - iFooterHeight;
+      const iHeaderHeight = content.offsetHeight, iFooterHeight = 47, iBufferHeight = 30;
+      const iDynamicHeight = iDocumentHeight - iHeaderHeight - iFooterHeight - iBufferHeight;
       iFrame.setAttribute("height", `${iDynamicHeight}`);
     }
   }

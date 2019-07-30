@@ -1,15 +1,18 @@
 .infinite-scroll-area {
-    height: -moz-calc(100vh - 170px);
-    height: -webkit-calc(100vh - 170px);
-    height: calc(100vh - 170px);
+    height: -moz-calc(100vh - 100px);
+    height: -webkit-calc(100vh - 100px);
+    height: calc(100vh - 100px);
     overflow-y: auto;
 }
-.container-view{
+
+.container-view {
     background-color: white;
 }
-.search-result p a{
+
+.search-result p a {
     float: right;
 }
-.search-result p{
+
+.search-result p {
     color: #666666;
 }
