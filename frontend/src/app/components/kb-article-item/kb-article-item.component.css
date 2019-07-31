@@ -2,6 +2,6 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 80%;
+    width: 100%;
     cursor: pointer;
 }

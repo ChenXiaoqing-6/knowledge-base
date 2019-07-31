@@ -1,7 +1,7 @@
 <div *ngIf="type == 'SearchedArticleList'">
-    <button class="fd-has-float-right" fd-button [options]="'light'" [glyph]="'overflow'" (click)="onMore()"></button>
-    <button class="fd-has-float-right" fd-button [options]="'light'" [glyph]="'copy'" (click)="copyArticleLink()"></button>
+    <span class="fd-has-margin-left-small fd-has-float-right sap-icon--overflow sap-icon--m icon-container" (click)="copyArticleLink()"></span>
+    <span class="fd-has-margin-left-small fd-has-float-right sap-icon--copy sap-icon--m icon-container" (click)="copyArticleLink()"></span>
 </div>
 <div *ngIf="type == 'LinkedArticleList'">
-    <button class="fd-has-float-right" fd-button [options]="'light'" [glyph]="'delete'" (click)="removeLinkedArticle(article)"></button>
+    <span class="fd-has-margin-left-small fd-has-float-right sap-icon--delete sap-icon--m icon-container" (click)="removeLinkedArticle(article)"></span>
 </div>
