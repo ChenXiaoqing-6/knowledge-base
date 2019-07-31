@@ -1,7 +1,5 @@
-import { IArticle } from './../../models/IArticle';
-
 export interface IKbViewState {
-    currentArticle: IArticle;
+    selectedArticleId: string;
     isContentLoading: boolean;
     isArticleLoading: boolean;
 }

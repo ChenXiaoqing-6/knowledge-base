@@ -44,6 +44,6 @@ describe('KbArticleItemComponent', () => {
 
   it('Test openArticleDetail: KbViewFacade openArticle should be called with article', () => {
     component.openArticleDetail();
-    expect(KbViewFacadeSpy.openArticle).toHaveBeenCalledWith(component.article);
+    expect(KbViewFacadeSpy.openArticle).toHaveBeenCalledWith(component.article.id);
   });
 });

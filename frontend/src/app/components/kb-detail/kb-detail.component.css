@@ -21,18 +21,14 @@
     /* Set same as footer's height */
 }
 
-.article-actions-container {
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-
 .article-back {
-    width: 80%;
-}
-
-.article-actions {
-    width: 20%;
+    /* width: 80%; */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    cursor: pointer;
+    color: #3d6ead;
 }
 
 .article-metadata {

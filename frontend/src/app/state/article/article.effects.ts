@@ -5,7 +5,6 @@ import { catchError, tap, map } from "rxjs/operators";
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ActionTypes, OpenArticle, BackArticle, OpenArticleError } from './article.actions';
-import { IArticle } from './../../models/IArticle';
 
 @Injectable()
 export class KbViewEffects {
@@ -17,8 +16,8 @@ export class KbViewEffects {
     .pipe(
       ofType<OpenArticle>(ActionTypes.OpenArticle),
       map((action: any) => action.payload),
-      tap((payload: IArticle) => {
-        this.router.navigate(['/kbDetail', payload]);
+      tap((articleId: string) => {
+        this.router.navigate([`kbDetail/${articleId}`]);
         return empty();
       }),
       catchError(error => {

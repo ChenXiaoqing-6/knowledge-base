@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { IArticle } from '../../models/IArticle';
 import { KbViewFacade } from '../../state/article/article.facade';
-import { MockArticle } from '../../models/mock/Article.mock';
 
 @Component({
   selector: 'kb-detail',
@@ -10,21 +10,23 @@ import { MockArticle } from '../../models/mock/Article.mock';
   styleUrls: ['./kb-detail.component.css']
 })
 export class KbDetailComponent implements OnInit {
-  
-  public article: IArticle;
-  constructor(private route: ActivatedRoute, private kbViewFacade: KbViewFacade) { 
+
+  public article$: Observable<IArticle | null>;
+  constructor(private route: ActivatedRoute, private kbViewFacade: KbViewFacade) {
   }
 
   ngOnInit() {
-    // this.article = this.route.snapshot.params as IArticle;
-    if (this.route.snapshot.params.hasOwnProperty("author")){
-      this.article = this.route.snapshot.params as IArticle;
-    } else {
-      this.article = MockArticle;
+    if (this.route.snapshot.params.hasOwnProperty("id")) {
+      const articleId: string = this.route.snapshot.params.id;
+      this.getSelectedArticle(articleId);
     }
+  }
+
+  getSelectedArticle(id: string) {
+    this.article$ = this.kbViewFacade.getSelectedArticle(id) as Observable<IArticle | null>;
   }
 
   onBackToSearchPage() {
     this.kbViewFacade.backToSearchPage();
   }
- }
+}

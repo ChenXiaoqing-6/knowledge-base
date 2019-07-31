@@ -1,19 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { IArticle } from '../../models/IArticle';
+import { combineLatest, } from 'rxjs/operators';
 import { IKbState } from '../index';
 import { OpenArticle, BackArticle, LoadIFrameContentSuccess } from './article.actions';
 import { selectIsContentLoading } from './article.selectors';
+import { KbSearchFacade } from '../search/search-article.facade';
+import { KbSuggestedFacade } from '../suggestedList/suggested-article.facade';
+import { IArticle } from '../../models/IArticle';
+import { KbService } from '../../services/kb.service';
 
 @Injectable()
 export class KbViewFacade {
 
-  constructor(private store$: Store<IKbState>) {
+  constructor(private store$: Store<IKbState>, 
+    private kbSearchFacade: KbSearchFacade, 
+    private kbSuggestedFacade: KbSuggestedFacade,
+    private kbService: KbService,
+  ) {
   }
 
-  public openArticle(article: IArticle) {
-    return this.store$.dispatch(new OpenArticle(article));
+  public openArticle(selectedArticleId: string) {
+    return this.store$.dispatch(new OpenArticle(selectedArticleId));
   }
 
   public isSearching(): Observable<boolean> {
@@ -28,4 +36,23 @@ export class KbViewFacade {
     return this.store$.dispatch(new BackArticle());
   }
 
+  public getSelectedArticle(id: string): Observable<IArticle | null> {
+    return this.store$.pipe(
+      select(selectIsContentLoading),
+      combineLatest(
+        this.kbSearchFacade.getSelectedArticleById(id),
+        this.kbSuggestedFacade.getSelectedArticleById(id),
+        (_, _searchedArticle, _suggestedArticle) => {
+          if(_searchedArticle !== undefined) {
+            return _searchedArticle;
+          } else if(_suggestedArticle !== undefined) {
+            return _suggestedArticle;
+          } else {
+            return this.kbService.getArticleDetailById(id); // get article detailed info from backend service  
+          }
+        }
+      )
+    );
+  } 
+  
 }

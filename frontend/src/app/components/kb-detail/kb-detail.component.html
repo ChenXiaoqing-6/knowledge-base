@@ -1,22 +1,18 @@
 <fd-panel class="fd-has-padding-tiny">
     <div id="articleDetailHeaderContainer">
-        <div class="article-actions-container">
-            <div class="article-back">
-                <button id="backBtn" fd-button [options]="'light'" [glyph]="'arrow-left'" (click)="onBackToSearchPage()"></button>
-            </div>
-            <div class="article-actions">
-                <kb-article-actions [article]="article" [type]="'SearchedArticleList'"></kb-article-actions>
-            </div>
+        <kb-article-actions [article]="article$ | async" [type]="'SearchedArticleList'"></kb-article-actions>
+        <div class="fd-has-display-flex fd-has-align-items-center ">
+            <span class="fd-has-margin-left-tiny fd-has-float-right sap-icon--arrow-left sap-icon--m article-back" (click)="onBackToSearchPage()"></span>
         </div>
 
         <div class="fd-has-margin-tiny">
-            <kb-detail-header [article]="article" [isDetailMode]="true"></kb-detail-header>
+            <kb-detail-header [article]="article$ | async" [isDetailMode]="true"></kb-detail-header>
         </div>
     </div>
 
-    <kb-detail-content [parentHeaderBarId]="'articleDetailHeaderContainer'" class="article-detail-content" [article]="article"></kb-detail-content>
+    <kb-detail-content [parentHeaderBarId]="'articleDetailHeaderContainer'" class="article-detail-content" [article]="article$ | async"></kb-detail-content>
 
     <fd-modal-footer class="fd-has-padding-top-tiny fd-has-padding-bottom-tiny article-detail-footer">
-        <kb-detail-footer [article]="article"></kb-detail-footer>
+        <kb-detail-footer [article]="article$ | async"></kb-detail-footer>
     </fd-modal-footer>
 </fd-panel>

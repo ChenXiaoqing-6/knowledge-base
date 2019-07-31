@@ -29,7 +29,7 @@ describe('KbViewFacade facade test', () => {
       service.kbViewFacade.openArticle(article);
 
       expect(service.storeMock.dispatch).toHaveBeenCalledTimes(1);
-      expect(service.storeMock.dispatch).toHaveBeenCalledWith(new OpenArticle(article));
+      expect(service.storeMock.dispatch).toHaveBeenCalledWith(new OpenArticle('5001'));
 
     });
   });

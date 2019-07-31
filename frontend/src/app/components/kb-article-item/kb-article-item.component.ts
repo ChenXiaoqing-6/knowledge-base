@@ -16,6 +16,6 @@ export class KbArticleItemComponent implements OnInit {
   ngOnInit() { }
   
   openArticleDetail() {
-    this.viewFacade.openArticle(this.article);
+    this.viewFacade.openArticle(this.article.id);
   }
 }

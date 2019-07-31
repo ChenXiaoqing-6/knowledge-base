@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, Input } from '@angular/core';
 import { FundamentalNgxModule } from 'fundamental-ngx';
 import { ActivatedRoute } from '@angular/router';
-import { MockArticle } from '../../models/mock/Article.mock';
 import { KbViewFacade } from './../../state/article/article.facade';
 import { KbDetailComponent } from './kb-detail.component';
 
@@ -47,7 +46,7 @@ describe('KbDetailComponent', () => {
         FundamentalNgxModule,
       ],
       providers: [
-        { provide: ActivatedRoute, useValue: {snapshot:{params: MockArticle} }},
+        { provide: ActivatedRoute, useValue: {snapshot:{params: {id: '5001'}} }},
         { provide: KbViewFacade, useValue: KbViewFacadeSpy }
       ],
     })
@@ -57,10 +56,12 @@ describe('KbDetailComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(KbDetailComponent);
     component = fixture.componentInstance;
+    spyOn(component, 'getSelectedArticle');
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

@@ -13,7 +13,8 @@ import {
   selectSearchTerm,
   selectLastPage,
   selectIsError,
-  selectTotalObjectCount
+  selectTotalObjectCount,
+  selectArticleById,
 } from './search-article.selectors';
 import { IPagination } from '../../models/IPagination';
 import { ISearchOptions } from '../../models/IRequestOptions';
@@ -97,6 +98,10 @@ export class KbSearchFacade {
         }
       )
     );
+  }
+
+  public getSelectedArticleById(id): Observable<IArticle> {
+    return this.store$.pipe(select(selectArticleById, {id}));
   }
 
 }

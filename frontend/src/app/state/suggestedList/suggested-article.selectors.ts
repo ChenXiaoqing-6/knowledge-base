@@ -28,3 +28,9 @@ export const selectIsError = createSelector(
     kbSuggestedState,
     (state) => state.isError
 )
+
+export const selectArticleById = createSelector(
+    kbSuggestedState,
+    (state, props) => state.entities[props.id]
+  );
+  
