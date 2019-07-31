@@ -30,6 +30,7 @@ describe('KbSearchComponent', () => {
     'getArticles',
     'isInit',
     'isSearching',
+    'isError',
     'getTotalObjectCount',
     'isNotFound',
     'searchArticles', 
@@ -41,6 +42,7 @@ describe('KbSearchComponent', () => {
     'getsuggestedArticle',
     'getTotalObjectCount',
     'isCompleted',
+    'isError',
     'isLoadingSuggestedAticles'
   ]);
 
@@ -49,6 +51,7 @@ describe('KbSearchComponent', () => {
     'getLinkedArticles',
     'getTotalObjectCount',
     'isCompleted',
+    'isError',
     'isLinkingArticles'
   ]);
 

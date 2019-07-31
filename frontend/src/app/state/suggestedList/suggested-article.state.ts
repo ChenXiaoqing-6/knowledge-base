@@ -5,4 +5,5 @@ export interface IKbSuggestedState extends EntityState<IArticle> {
     totalObjectCount: number;
     isLoading: boolean;
     isCompleted: boolean;
+    isError: boolean;
 }

@@ -1,7 +1,6 @@
 import { TestBed } from "@angular/core/testing";
 import { provideMockActions } from "@ngrx/effects/testing";
 import { Action } from "@ngrx/store";
-import { AlertService } from "fundamental-ngx";
 import { cold, hot } from "jasmine-marbles";
 import { Observable, of } from "rxjs";
 import { IArticle } from "../../models/IArticle";
@@ -20,7 +19,6 @@ describe('KbSearchEffects', () => {
     let effects: KbSearchEffects;
     let kbFacade: jasmine.SpyObj<KbSearchFacade>;
     let kbService: jasmine.SpyObj<KbService>;
-    let alertService: jasmine.SpyObj<AlertService>;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -37,12 +35,6 @@ describe('KbSearchEffects', () => {
                     provide: KbService,
                     useValue: {
                         searchArticles: jasmine.createSpy()
-                    }
-                },
-                {
-                    provide: AlertService,
-                    useValue: {
-                        open: jasmine.createSpy()
                     }
                 }
             ]
@@ -129,23 +121,6 @@ describe('KbSearchEffects', () => {
             actions$ = hot('-a|', { a: action });
             const expected = cold('--|');
             expect(effects.loadNextPage$).toBeObservable(expected);
-        });
-    })
-
-    describe('KbSearchEffects-SearchError$', () => {
-
-        beforeEach(() => {
-            effects = TestBed.get(KbSearchEffects);
-            alertService = TestBed.get(AlertService);
-        });
-
-        it('should display error when loading failed', () => {
-            const searchError = new Error('some error');
-            const errorAction = new SearchArticlesError({ error: searchError });
-            actions$ = hot('-a|', { a: errorAction });
-            const expected = cold('--|');
-            expect(effects.SearchError$).toBeObservable(expected);
-            expect(alertService.open).toHaveBeenCalled();
         });
     })
 

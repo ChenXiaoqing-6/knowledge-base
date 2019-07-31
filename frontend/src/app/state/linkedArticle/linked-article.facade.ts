@@ -8,6 +8,7 @@ import {
     selectIsLoading,
     selectIsCompleted,
     selectAllArticles,
+    selectIsError,
     selectTotalObjectCount
 } from './linked-article.selectors';
 
@@ -35,6 +36,10 @@ export class KbLinkedListFacade {
 
     public isLinkingArticles(): Observable<boolean> {
         return this.store$.pipe(select(selectIsLoading));
+    }
+
+    public isError(): Observable<boolean> {
+        return this.store$.pipe(select(selectIsError));
     }
 
 }

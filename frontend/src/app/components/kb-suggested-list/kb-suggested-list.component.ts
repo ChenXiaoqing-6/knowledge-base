@@ -17,6 +17,7 @@ export class KbSuggestedListComponent implements OnInit, OnDestroy {
   suggestedArticles$: Observable<IArticle[]>;
   suggestedAticlesTotalCount$: Observable<number>;
   suggestedArticlesIsCompleted$: Observable<boolean>;
+  suggestedArticlesIsError$: Observable<boolean>;
   suggestedArticlesBusy$: Observable<boolean>;
   getsuggestedArticle$: Subject<void> = new Subject();
 
@@ -28,6 +29,7 @@ export class KbSuggestedListComponent implements OnInit, OnDestroy {
     this.suggestedAticlesTotalCount$ = this.suggestedListFacade.getTotalObjectCount();
     this.suggestedArticlesIsCompleted$ = this.suggestedListFacade.isCompleted();
     this.suggestedArticlesBusy$ = this.suggestedListFacade.isLoadingSuggestedAticles();
+    this.suggestedArticlesIsError$ = this.suggestedListFacade.isError();
 
     this.getsuggestedArticle$.pipe(
       takeUntil(this.onDestroy$)

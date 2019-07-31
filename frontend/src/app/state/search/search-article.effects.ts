@@ -13,7 +13,6 @@ import {
 } from './search-article.actions';
 import { KbSearchFacade } from './search-article.facade';
 import { ISearchOptions } from '../../models/IRequestOptions';
-import { AlertService } from 'fundamental-ngx';
 
 @Injectable()
 export class KbSearchEffects {
@@ -21,8 +20,7 @@ export class KbSearchEffects {
   constructor(
     private actions$: Actions,
     private facade: KbSearchFacade,
-    private kbService: KbService,
-    private alertService: AlertService) { }
+    private kbService: KbService) { }
 
   @Effect()
   searchArticles$ = this.actions$
@@ -55,20 +53,6 @@ export class KbSearchEffects {
       })
     );
 
-  @Effect({ dispatch: false })
-  SearchError$ = this.actions$
-    .pipe(
-      ofType<SearchArticlesError>(ActionTypes.SearchArticlesError),
-      switchMap((action) => {
-        let errMsg = `Cannot search articles because: ${action.payload.error}`;
-        this.alertService.open(errMsg, {
-          type: 'error',
-          dismissible: false,
-          duration: 3000
-        });
-        return empty();
-      })
-    );
 }
 
 

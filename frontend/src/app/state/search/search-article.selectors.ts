@@ -34,6 +34,11 @@ export const selectLastPage = createSelector(
   (state) => state.lastPage
 );
 
+export const selectIsError = createSelector(
+  kbSearchState,
+  (state) => state.isError
+)
+
 export const selectTotalObjectCount = createSelector(
   kbSearchState,
   (state) => state.totalObjectCount

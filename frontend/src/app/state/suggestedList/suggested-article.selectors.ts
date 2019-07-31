@@ -23,3 +23,8 @@ export const selectTotalObjectCount = createSelector(
     kbSuggestedState,
     (state) => state.totalObjectCount
 );
+
+export const selectIsError = createSelector(
+    kbSuggestedState,
+    (state) => state.isError
+)

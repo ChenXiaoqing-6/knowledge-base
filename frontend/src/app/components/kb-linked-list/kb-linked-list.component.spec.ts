@@ -19,6 +19,7 @@ describe('KbLinkedListComponent', () => {
     'getLinkedArticles',
     'getTotalObjectCount',
     'isCompleted',
+    'isError',
     'isLinkingArticles'
   ]);
 

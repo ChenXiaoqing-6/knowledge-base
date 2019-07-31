@@ -12,6 +12,7 @@ import {
   selectPagination,
   selectSearchTerm,
   selectLastPage,
+  selectIsError,
   selectTotalObjectCount
 } from './search-article.selectors';
 import { IPagination } from '../../models/IPagination';
@@ -60,6 +61,10 @@ export class KbSearchFacade {
 
   public isInit(): Observable<boolean> {
     return this.store$.pipe(select(selectIsInit));
+  }
+
+  public isError(): Observable<boolean> {
+    return this.store$.pipe(select(selectIsError));
   }
 
   public isSearching(): Observable<boolean> {

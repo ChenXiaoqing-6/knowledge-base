@@ -8,6 +8,7 @@ export const adapter: EntityAdapter<IArticle> = createEntityAdapter<IArticle>();
 export const initialKbLinkedArticleState: IkbLinkedArticleState = adapter.getInitialState({
     isCompleted: false,
     isLoading: false,
+    isError: false,
     totalObjectCount: 0
 });
 
@@ -22,7 +23,8 @@ export function reducer(state = initialKbLinkedArticleState, action: Actions): I
             return {
                 ...state,
                 isLoading: true,
-                isCompleted: false
+                isCompleted: false,
+                isError: false
             };
 
         case ActionTypes.GetLinkedArticlesSuccess:
@@ -35,7 +37,7 @@ export function reducer(state = initialKbLinkedArticleState, action: Actions): I
 
         case ActionTypes.GetLinkedArticlesError:
 
-            return { ...state, isCompleted: true, isLoading: false };
+            return { ...state, isCompleted: true, isLoading: false, isError: true };
 
         default: {
 

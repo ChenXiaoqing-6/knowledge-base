@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { KbService } from "../../services/kb.service";
-import { AlertService } from "fundamental-ngx";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 import { ActionTypes } from './suggested-article.actions';
 import { 
@@ -9,15 +8,14 @@ import {
     SuggestedArticlesError
 } from "./suggested-article.actions";
 import { switchMap, catchError, map } from "rxjs/operators";
-import { of, empty } from "rxjs";
+import { of } from "rxjs";
 
 @Injectable()
 export class KbSuggestedArticlesEffects{
 
     constructor(
         private actions$:Actions,
-        private kbService:KbService,
-        private alertService:AlertService
+        private kbService:KbService
     ){ }
 
     @Effect()
@@ -35,18 +33,5 @@ export class KbSuggestedArticlesEffects{
                     );
             })
         );
-    @Effect({dispatch:false})
-    GetSuggestedArticlesError$ = this.actions$
-        .pipe(
-            ofType<SuggestedArticlesError>(ActionTypes.SuggestedArticlesError),
-            switchMap((action)=>{
-                let errMsg = `Cannot get suggested srticles because:${action.payload.error}`;
-                this.alertService.open(errMsg,{
-                    type:'error',
-                    dismissible:false,
-                    duration:3000
-                });
-                return empty();
-            })
-        );
+   
 }

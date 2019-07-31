@@ -23,3 +23,8 @@ export const selectTotalObjectCount = createSelector(
     kbLinkedArticleState,
     (state) => state.totalObjectCount
 );
+
+export const selectIsError = createSelector(
+    kbLinkedArticleState,
+    (state) => state.isError
+)

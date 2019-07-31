@@ -34,7 +34,8 @@ describe("KbLinkedReducers", () => {
         let expectedState = {
             ...initialState,
             isLoading: true,
-            isCompleted: false
+            isCompleted: false,
+            isError: false
         };
         expect(currentState).toEqual(expectedState);
     });
@@ -62,9 +63,10 @@ describe("KbLinkedReducers", () => {
         let action = new fromAction.GetLinkedArticlesError({ error: "error" });
         let currentState = fromLinkedArticle.reducer(initialState, action)
         expect(currentState).toEqual({
-            ...currentState,
+            ...initialState,
             isLoading: false,
-            isCompleted: true
+            isCompleted: true,
+            isError: true
         });
     });
 

@@ -1,7 +1,6 @@
 import { TestBed } from "@angular/core/testing";
 import { provideMockActions } from "@ngrx/effects/testing";
 import { Action } from "@ngrx/store";
-import { AlertService } from "fundamental-ngx";
 import { cold, hot } from "jasmine-marbles";
 import { Observable } from "rxjs";
 import { IArticle } from "../../models/IArticle";
@@ -16,7 +15,6 @@ describe('KbLinkedEffects', () => {
     let actions$: Observable<Action>;
     let effects: KbLinkedArticlesEffects;
     let kbService: jasmine.SpyObj<KbService>;
-    let alertService: jasmine.SpyObj<AlertService>;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -28,18 +26,12 @@ describe('KbLinkedEffects', () => {
                     useValue: {
                         getLinkedArticles: jasmine.createSpy()
                     }
-                },
-                {
-                    provide: AlertService,
-                    useValue: {
-                        open: jasmine.createSpy()
-                    }
                 }
             ]
         });
     });
 
-    describe('KbLinkedEffects-GetLinkedArticleError$', () => {
+    describe('KbLinkedEffects-GetLinkedArticle$', () => {
 
         beforeEach(() => {
             kbService = TestBed.get(KbService);
@@ -75,23 +67,6 @@ describe('KbLinkedEffects', () => {
             kbService.getLinkedArticles.and.returnValue(response);
             const expected = cold('--(b|)', { b: errorAction });
             expect(effects.GetLinkedArticle$).toBeObservable(expected);
-        });
-    })
-
-    describe('KbLinkedEffects-GetLinkedArticleError$', () => {
-
-        beforeEach(() => {
-            effects = TestBed.get(KbLinkedArticlesEffects);
-            alertService = TestBed.get(AlertService);
-        });
-
-        it('should display error when loading failed', () => {
-            const linkedError = new Error('some error');
-            const errorAction = new GetLinkedArticlesError({ error: linkedError });
-            actions$ = hot('-a|', { a: errorAction });
-            const expected = cold('--|');
-            expect(effects.GetLinkedArticleError$).toBeObservable(expected);
-            expect(alertService.open).toHaveBeenCalled();
         });
     })
 

@@ -111,6 +111,30 @@ describe('KbSuggestedFacade', () => {
         });
     }));
 
+    it('should return isError in the state if success', fakeAsync(() => {
+        const isError = true;
+        storeMock.pipe.and.returnValue(of(isError));
+        kbViewFacade.isError().subscribe((_response: any) => {
+            expect(_response).toBeTruthy();
+            expect(storeMock.pipe).toHaveBeenCalledTimes(1);
+            expect(_response).toBe(isError);
+        }, _error => {
+            expect(_error).toBeFalsy();
+        });
+    }));
+
+    it('should throw error -> observable error', fakeAsync(() => {
+        const error = { error: 'TestError' };
+        storeMock.pipe.and.returnValue(throwError(error));
+        kbViewFacade.isError().subscribe((_response: any) => {
+            expect(_response).toBeFalsy();
+        }, _error => {
+            expect(_error).toBeTruthy();
+            expect(storeMock.pipe).toHaveBeenCalledTimes(1);
+            expect(_error).toBe(error);
+        });
+    }));
+
     it('should dispatch SuggestedArticles', fakeAsync(() => {
         let payload = {
             searchTerm: 'test'

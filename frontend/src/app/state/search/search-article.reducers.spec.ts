@@ -29,6 +29,7 @@ describe("KbSearchReducers", () => {
             ...initialState,
             isLoading: true,
             isInit: false,
+            isError: false,
             searchTerm: payload.searchTerm,
             pagination: payload.pagination,
             lastPage: 1,
@@ -48,7 +49,8 @@ describe("KbSearchReducers", () => {
         let action = new fromAction.SearchArticles(payload);
         expect(fromSearchArticle.reducer(currentState, action)).toEqual({
             ...currentState,
-            isLoading: true
+            isLoading: true,
+            isError: false
         });
     });
 
@@ -102,7 +104,8 @@ describe("KbSearchReducers", () => {
         currentState = fromSearchArticle.reducer(currentState, action)
         expect(currentState).toEqual({
             ...currentState,
-            isLoading: false
+            isLoading: false,
+            isError: true
         });
     });
 

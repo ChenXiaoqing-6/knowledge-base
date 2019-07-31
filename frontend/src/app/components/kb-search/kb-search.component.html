@@ -13,19 +13,19 @@
 
         <ng-template #showResultBox>
             <fd-loading-spinner [loading]="busy$ | async"></fd-loading-spinner>
-            <div *ngIf="notFound$ | async; else showResultList">
-                No articles found.
+            <div class="search-result">
+                <p>{{totalCount$ | async}} results
+                    <a href="app-kb-search">Back to Suggestions</a>
+                </p>
+            </div>
+            <div *ngIf="isError$ | async; else showResultList">
+                <p class="error-content fd-has-margin-top-small">The server is currently unavailable, please try again later.</p>
             </div>
             <ng-template #showResultList>
-                <div class="search-result">
-                    <p>{{totalCount$ | async}} results
-                        <a href="app-kb-search">Back to Suggestions</a>
-                    </p>
+                <div fdInfiniteScroll (onScrollAction)="loadMore()" [scrollPercent]="98" class="infinite-scroll-area">
+                    <kb-article-list [articles]="articles$ | async"></kb-article-list>
                 </div>
             </ng-template>
-            <div fdInfiniteScroll (onScrollAction)="loadMore()" [scrollPercent]="98" class="infinite-scroll-area">
-                <kb-article-list [articles]="articles$ | async"></kb-article-list>
-            </div>
         </ng-template>
     </div>
 

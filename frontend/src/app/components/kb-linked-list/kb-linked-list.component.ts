@@ -15,6 +15,7 @@ export class KbLinkedListComponent implements OnInit, OnDestroy {
   linkedArticles$: Observable<IArticle[]>;
   linkedArticlesTotalCount$: Observable<number>;
   linkedArticlesIsCompleted$: Observable<boolean>;
+  linkedArticlesIsError$: Observable<boolean>;
   linkedArticlesBusy$: Observable<boolean>;
   getLinkedArticles$: Subject<void> = new Subject();
 
@@ -26,6 +27,7 @@ export class KbLinkedListComponent implements OnInit, OnDestroy {
     this.linkedArticlesIsCompleted$ = this.linkedListFacade.isCompleted();
     this.linkedArticlesBusy$ = this.linkedListFacade.isLinkingArticles();
     this.linkedArticlesTotalCount$ = this.linkedListFacade.getTotalObjectCount();
+    this.linkedArticlesIsError$ = this.linkedListFacade.isError();
 
     this.getLinkedArticles$.pipe(
       takeUntil(this.onDestroy$)

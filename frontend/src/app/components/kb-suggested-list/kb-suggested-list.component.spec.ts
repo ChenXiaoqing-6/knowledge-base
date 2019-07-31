@@ -18,6 +18,7 @@ describe('KbSuggestedListComponent', () => {
     'getsuggestedArticle',
     'getTotalObjectCount',
     'isCompleted',
+    'isError',
     'isLoadingSuggestedAticles'
   ]);
 

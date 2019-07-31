@@ -9,6 +9,7 @@ export const adapter:EntityAdapter<IArticle> = createEntityAdapter<IArticle>();
 export const initialKbSuggestedState:IKbSuggestedState = adapter.getInitialState({
     isCompleted: false,
     isLoading: false,
+    isError: false,
     totalObjectCount: 0
 })
 
@@ -22,22 +23,24 @@ export function reducer(state = initialKbSuggestedState,action:Actions):IKbSugge
         case ActionTypes.SuggestedArticles:
             return {
                 ...state,
-                isLoading:true
+                isLoading: true,
+                isError: false
             };
 
         case ActionTypes.SuggestedArticlesSuccess:
             return adapter.addAll(action.payload.data,{
                 ...state,
-                isCompleted:true,
-                isLoading:false,
-                totalObjectCount:action.payload.totalCount
+                isCompleted: true,
+                isLoading: false,
+                totalObjectCount: action.payload.totalCount
             });
 
         case ActionTypes.SuggestedArticlesError:
             return {
                 ...state,
-                isCompleted:true,
-                isLoading:false
+                isCompleted: true,
+                isLoading: false,
+                isError: true
             };
         default: {
             return state;

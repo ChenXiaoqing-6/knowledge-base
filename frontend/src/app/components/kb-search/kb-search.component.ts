@@ -20,6 +20,7 @@ export class KbSearchComponent implements OnInit, OnDestroy {
   articles$: Observable<IArticle[]>;
   totalCount$: Observable<number>;
   isInit$: Observable<boolean>;
+  isError$: Observable<boolean>;
   busy$: Observable<boolean>;
   notFound$: Observable<boolean>;
   search$: Subject<string> = new Subject();
@@ -30,6 +31,7 @@ export class KbSearchComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.articles$ = this.searchFacade.getArticles();
     this.isInit$ = this.searchFacade.isInit();
+    this.isError$ = this.searchFacade.isError();
     this.busy$ = this.searchFacade.isSearching();
     this.totalCount$ = this.searchFacade.getTotalObjectCount();
     this.notFound$ = this.searchFacade.isNotFound();

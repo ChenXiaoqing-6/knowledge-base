@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { of, empty } from 'rxjs';
+import { of } from 'rxjs';
 import { catchError, switchMap, map } from "rxjs/operators";
 
 import { ActionTypes } from './linked-article.actions';
@@ -10,15 +10,13 @@ import {
   GetLinkedArticlesSuccess,
   GetLinkedArticlesError
 } from './linked-article.actions';
-import { AlertService } from 'fundamental-ngx';
 
 @Injectable()
 export class KbLinkedArticlesEffects {
 
   constructor(
     private actions$: Actions,
-    private kbService: KbService,
-    private alertService: AlertService) { }
+    private kbService: KbService) { }
 
   @Effect()
   GetLinkedArticle$ = this.actions$
@@ -38,18 +36,4 @@ export class KbLinkedArticlesEffects {
       })
     );
 
-  @Effect({ dispatch: false })
-  GetLinkedArticleError$ = this.actions$
-    .pipe(
-      ofType<GetLinkedArticlesError>(ActionTypes.GetLinkedArticlesError),
-      switchMap((action) => {
-        let errMsg = `Cannot get linked articles because: ${action.payload.error}`;
-        this.alertService.open(errMsg, {
-          type: 'error',
-          dismissible: false,
-          duration: 3000
-        });
-        return empty();
-      })
-    );
 }

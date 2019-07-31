@@ -9,3 +9,13 @@
     letter-spacing: normal;
     color: #333333;
 }
+.error-content {
+    font-family: 72;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #666666;
+}

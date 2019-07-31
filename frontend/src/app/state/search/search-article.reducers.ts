@@ -9,6 +9,7 @@ export const adapter: EntityAdapter<IArticle> = createEntityAdapter<IArticle>();
 export const initialKbSearchState: IKbSearchState = adapter.getInitialState({
     isInit: true,
     isLoading: false,
+    isError: false,
     searchTerm: "",
     pagination: PaginationHelper.create(),
     lastPage: 1,
@@ -25,6 +26,7 @@ export function reducer(state = initialKbSearchState, action: Actions): IKbSearc
                     ...state,
                     isLoading: true,
                     isInit: false,
+                    isError: false,
                     searchTerm: action.payload.searchTerm,
                     pagination: action.payload.pagination,
                     lastPage: 1,
@@ -33,7 +35,8 @@ export function reducer(state = initialKbSearchState, action: Actions): IKbSearc
             } else {
                 return {
                     ...state,
-                    isLoading: true
+                    isLoading: true,
+                    isError: false
                 };
             }
 
@@ -58,7 +61,7 @@ export function reducer(state = initialKbSearchState, action: Actions): IKbSearc
 
         case ActionTypes.SearchArticlesError:
 
-            return { ...state, isLoading: false };
+            return { ...state, isLoading: false, isError: true };
 
         case ActionTypes.SearchArticlesReset:
 

@@ -8,7 +8,8 @@ import {
     selectAllArticles,
     selectTotalObjectCount,
     selectIsCompleted,
-    selectIsLoading
+    selectIsLoading,
+    selectIsError
 } from './suggested-article.selectors';
 import { ISearchOptions } from "../../models/IRequestOptions";
 
@@ -36,6 +37,10 @@ export class KbSuggestedFacade {
     public getsuggestedArticle(options: ISearchOptions) {
         this.store$.dispatch(new InitSuggestedArticles());
         this.store$.dispatch(new SuggestedArticles(options));
+    }
+
+    public isError(): Observable<boolean> {
+        return this.store$.pipe(select(selectIsError));
     }
 
 }

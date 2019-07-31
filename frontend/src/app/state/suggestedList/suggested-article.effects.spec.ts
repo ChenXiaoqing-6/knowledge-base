@@ -2,7 +2,6 @@ import { Observable } from "rxjs";
 import { Action } from "@ngrx/store";
 import { KbSuggestedArticlesEffects } from "./suggested-article.effects";
 import { KbService } from "../../services/kb.service";
-import { AlertService } from "fundamental-ngx";
 import { TestBed } from "@angular/core/testing";
 import { provideMockActions } from "@ngrx/effects/testing";
 import { Helper as PageHelper } from "../../models/IPagination";
@@ -16,7 +15,6 @@ describe('KbSuggestedArticlesEffects', () => {
     let actions$: Observable<Action>;
     let effects: KbSuggestedArticlesEffects;
     let kbService: jasmine.SpyObj<KbService>;
-    let alertService: jasmine.SpyObj<AlertService>;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -27,12 +25,6 @@ describe('KbSuggestedArticlesEffects', () => {
                     provide: KbService,
                     useValue: {
                         searchArticles: jasmine.createSpy()
-                    }
-                },
-                {
-                    provide: AlertService,
-                    useValue: {
-                        open: jasmine.createSpy()
                     }
                 }
             ]
@@ -81,23 +73,6 @@ describe('KbSuggestedArticlesEffects', () => {
             kbService.searchArticles.and.returnValue(response);
             const expected = cold('--(b|)', { b: errorAction });
             expect(effects.GetSuggestedArticles$).toBeObservable(expected);
-        });
-    });
-
-    describe('KbSuggestedArticlesEffects-GetSuggestedArticlesError', () => {
-
-        beforeEach(() => {
-            effects = TestBed.get(KbSuggestedArticlesEffects);
-            alertService = TestBed.get(AlertService);
-        });
-
-        it('should display error when loading failed', () => {
-            const suggestedError = new Error('some error');
-            const errorAction = new SuggestedArticlesError({ error: suggestedError });
-            actions$ = hot('-a|', { a: errorAction });
-            const expected = cold('--|');
-            expect(effects.GetSuggestedArticlesError$).toBeObservable(expected);
-            expect(alertService.open).toHaveBeenCalled();
         });
     });
 
