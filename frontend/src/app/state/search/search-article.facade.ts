@@ -100,7 +100,7 @@ export class KbSearchFacade {
     );
   }
 
-  public getSelectedArticleById(id): Observable<IArticle> {
+  public getSelectedArticleById(id: string): Observable<IArticle> {
     return this.store$.pipe(select(selectArticleById, {id}));
   }
 

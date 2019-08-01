@@ -5,6 +5,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http'; 
 import { FundamentalNgxModule } from 'fundamental-ngx';
 import { AppComponent } from './app.component';
 import { KbSearchComponent } from './components/kb-search/kb-search.component';
@@ -47,6 +48,7 @@ import { KbSuggestedFacade } from './state/suggestedList/suggested-article.facad
     BrowserModule,
     BrowserAnimationsModule,
     FundamentalNgxModule,
+    HttpClientModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states

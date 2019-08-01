@@ -38,17 +38,16 @@ export class KbViewFacade {
 
   public getSelectedArticle(id: string): Observable<IArticle> {
     return this.store$.pipe(
-      select(selectIsContentLoading),
       combineLatest(
         this.kbSuggestedFacade.getSelectedArticleById(id),
         this.kbSearchFacade.getSelectedArticleById(id),
-        (_, _suggestedArticle, _searchedArticle) => {
+        (_store, _suggestedArticle, _searchedArticle) => {
           if(_suggestedArticle !== undefined) {
             return _suggestedArticle;
           } else if(_searchedArticle !== undefined) {
             return _searchedArticle;
           } else {
-            return this.kbService.getArticleDetailById(id); //get article detailed info from backend service  
+            return this.kbService.getArticle(id); //get article detailed info from backend service  
           }
         }
       )
