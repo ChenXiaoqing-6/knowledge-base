@@ -8,7 +8,7 @@ import { KbSuggestedFacade } from '../../state/suggestedList/suggested-article.f
 import { KbLinkedListFacade } from '../../state/linkedArticle/linked-article.facade';
 
 @Component({
-  selector: 'app-kb-search',
+  selector: 'kb-search',
   templateUrl: './kb-search.component.html',
   styleUrls: ['./kb-search.component.css']
 })

@@ -15,7 +15,7 @@
             <fd-loading-spinner id="loadingSpinnerSearch" [loading]="busy$ | async"></fd-loading-spinner>
             <div class="search-result">
                 <p id="textSearchResultCount">{{totalCount$ | async}} results
-                    <a id="linkBackToSuggestions" href="app-kb-search">Back to Suggestions</a>
+                    <a id="linkBackToSuggestions" href="/">Back to Suggestions</a>
                 </p>
             </div>
             <div *ngIf="isError$ | async; else showResultList">
