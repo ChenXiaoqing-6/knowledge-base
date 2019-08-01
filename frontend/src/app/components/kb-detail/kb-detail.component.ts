@@ -11,7 +11,7 @@ import { KbViewFacade } from '../../state/article/article.facade';
 })
 export class KbDetailComponent implements OnInit {
 
-  public article$: Observable<IArticle | null>;
+  public article$: Observable<IArticle>;
   constructor(private route: ActivatedRoute, private kbViewFacade: KbViewFacade) {
   }
 
@@ -23,7 +23,7 @@ export class KbDetailComponent implements OnInit {
   }
 
   getSelectedArticle(id: string) {
-    this.article$ = this.kbViewFacade.getSelectedArticle(id) as Observable<IArticle | null>;
+    this.article$ = this.kbViewFacade.getSelectedArticle(id) as Observable<IArticle>;
   }
 
   onBackToSearchPage() {

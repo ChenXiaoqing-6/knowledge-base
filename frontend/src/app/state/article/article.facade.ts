@@ -36,19 +36,19 @@ export class KbViewFacade {
     return this.store$.dispatch(new BackArticle());
   }
 
-  public getSelectedArticle(id: string): Observable<IArticle | null> {
+  public getSelectedArticle(id: string): Observable<IArticle> {
     return this.store$.pipe(
       select(selectIsContentLoading),
       combineLatest(
-        this.kbSearchFacade.getSelectedArticleById(id),
         this.kbSuggestedFacade.getSelectedArticleById(id),
-        (_, _searchedArticle, _suggestedArticle) => {
-          if(_searchedArticle !== undefined) {
-            return _searchedArticle;
-          } else if(_suggestedArticle !== undefined) {
+        this.kbSearchFacade.getSelectedArticleById(id),
+        (_, _suggestedArticle, _searchedArticle) => {
+          if(_suggestedArticle !== undefined) {
             return _suggestedArticle;
+          } else if(_searchedArticle !== undefined) {
+            return _searchedArticle;
           } else {
-            return this.kbService.getArticleDetailById(id); // get article detailed info from backend service  
+            return this.kbService.getArticleDetailById(id); //get article detailed info from backend service  
           }
         }
       )

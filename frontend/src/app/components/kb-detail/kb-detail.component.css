@@ -22,10 +22,6 @@
 }
 
 .article-back {
-    /* width: 80%; */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     width: 100%;
     cursor: pointer;
     color: #3d6ead;

@@ -1,9 +1,9 @@
 <div class="fd-has-margin-y-small">
-  <kb-article-actions [article]="article" [type]="type"></kb-article-actions>
-  <div class="fd-has-display-flex fd-has-align-items-center">
-    <a class="article-link" title="{{article.title}}" (click)="openArticleDetail()">
+    <kb-article-actions [article]="article" [type]="type"></kb-article-actions>
+    <div class="fd-has-display-flex fd-has-align-items-center">
+        <a id="linkArticleTitle" class="article-link" title="{{article.title}}" (click)="openArticleDetail()">
       {{article.title}}
     </a>
-  </div>
-  <kb-detail-header [article]="article" [isDetailMode]="false"></kb-detail-header>
+    </div>
+    <kb-detail-header [article]="article" [isDetailMode]="false"></kb-detail-header>
 </div>

@@ -1,7 +1,7 @@
-<div class="kbDetailContent" [attr.aria-busy]="isContentLoading$ | async">
-    <fd-loading-spinner [loading]="isContentLoading$ | async"></fd-loading-spinner>
+<div class="article-detail-content-container" [attr.aria-busy]="isContentLoading$ | async">
+    <fd-loading-spinner id="loadingSpinnerArticleContent" [loading]="isContentLoading$ | async"></fd-loading-spinner>
 
-    <iframe title="iframe" id="iFrame" (load)="onIFrameLoad($event)" [src]="article.renderValue | safeUrl" class="kbDetailContentIFrame">
+    <iframe id="iframeArticleContent" class="article-detail-content" id="iFrame" (load)="onIFrameLoad($event)" [src]="article.renderValue | safeUrl">
     </iframe>
 
 </div>

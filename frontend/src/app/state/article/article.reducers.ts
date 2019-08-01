@@ -8,8 +8,7 @@ export const adapter: EntityAdapter<IArticle> = createEntityAdapter<IArticle>();
 
 export const initialKbState: IKbViewState = adapter.getInitialState({
     selectedArticleId: '',
-    isContentLoading: false,
-    isArticleLoading: false
+    isContentLoading: false
 });
 
 export function reducer(state = initialKbState, action: Actions): IKbViewState {

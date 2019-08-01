@@ -1,10 +1,10 @@
-.kbDetailContent {
+.article-detail-content-container {
     width: 100%;
     overflow-y: hidden !important;
     position: relative;
 }
 
-.kbDetailContentIFrame {
+.article-detail-content {
     width: 100%;
     margin: 0;
     border: 0;

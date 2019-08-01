@@ -1,8 +1,8 @@
 <div class="fd-has-padding-small container-view">
-    <fd-input-group #searchinput [button]="true" [placeholder]="'Enter words to search...'" [glyph]="'search'" [placement]="'after'" (addOnButtonClicked)="search(searchinput.inputText)" (keyup.Enter)="search(searchinput.inputText)"></fd-input-group>
+    <fd-input-group id="inputSearch" #searchinput [button]="true" [placeholder]="'Enter words to search...'" [glyph]="'search'" [placement]="'after'" (addOnButtonClicked)="search(searchinput.inputText)" (keyup.Enter)="search(searchinput.inputText)"></fd-input-group>
     <br>
     <div [attr.aria-busy]="busy$ | async">
-        <fd-loading-spinner [loading]="(isSuggestedListBusy$ | async) && (isLinkedListBusy$ | async)"></fd-loading-spinner>
+        <fd-loading-spinner id="loadingSpinnerSuggestedAndLinked" [loading]="(isSuggestedListBusy$ | async) && (isLinkedListBusy$ | async)"></fd-loading-spinner>
         <div *ngIf="isInit$ | async; else showResultBox">
             <div [hidden]="(isSuggestedListBusy$ | async) && (isLinkedListBusy$ | async)">
                 <kb-suggested-list></kb-suggested-list>
@@ -12,14 +12,14 @@
         </div>
 
         <ng-template #showResultBox>
-            <fd-loading-spinner [loading]="busy$ | async"></fd-loading-spinner>
+            <fd-loading-spinner id="loadingSpinnerSearch" [loading]="busy$ | async"></fd-loading-spinner>
             <div class="search-result">
-                <p>{{totalCount$ | async}} results
-                    <a href="app-kb-search">Back to Suggestions</a>
+                <p id="textSearchResultCount">{{totalCount$ | async}} results
+                    <a id="linkBackToSuggestions" href="app-kb-search">Back to Suggestions</a>
                 </p>
             </div>
             <div *ngIf="isError$ | async; else showResultList">
-                <p class="error-content fd-has-margin-top-small">The server is currently unavailable, please try again later.</p>
+                <p id="textSearchErrorMsg" class="error-content fd-has-margin-top-small">The server is currently unavailable, please try again later.</p>
             </div>
             <ng-template #showResultList>
                 <div fdInfiniteScroll (onScrollAction)="loadMore()" [scrollPercent]="98" class="infinite-scroll-area">

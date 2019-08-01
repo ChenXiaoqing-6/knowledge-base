@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { of, empty } from 'rxjs';
-import { catchError, tap, map } from "rxjs/operators";
+import { empty } from 'rxjs';
+import { tap, map } from "rxjs/operators";
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { ActionTypes, OpenArticle, BackArticle, OpenArticleError } from './article.actions';
+import { ActionTypes, OpenArticle, BackArticle } from './article.actions';
 
 @Injectable()
 export class KbViewEffects {
@@ -19,10 +19,6 @@ export class KbViewEffects {
       tap((articleId: string) => {
         this.router.navigate([`kbDetail/${articleId}`]);
         return empty();
-      }),
-      catchError(error => {
-        debugger;
-        return of(new OpenArticleError(error));
       })
     );
 

@@ -1,12 +1,12 @@
 <div *ngIf="suggestedArticlesIsCompleted$ | async">
-  <p class="title-text">Suggested Articles ({{suggestedAticlesTotalCount$ | async}})</p>
+    <p id="titleSuggestedArticles" class="title-text">Suggested Articles ({{suggestedAticlesTotalCount$ | async}})</p>
 </div>
-<fd-loading-spinner [loading]="suggestedArticlesBusy$ | async"></fd-loading-spinner>
+<fd-loading-spinner id="loadingSpinnerSuggestedArticles" [loading]="suggestedArticlesBusy$ | async"></fd-loading-spinner>
 <div *ngIf="suggestedArticlesIsError$ | async; else showResultList">
-    <p class="error-content fd-has-margin-top-small">Currently, the provider’s system is temporarily unavailable, please try again later.</p>
+    <p id="textSuggestedArticlesErrorMsg" class="error-content fd-has-margin-top-small">Currently, the provider’s system is temporarily unavailable, please try again later.</p>
 </div>
 <ng-template #showResultList>
-  <div *ngFor="let article of (suggestedArticles$ | async)">
-    <kb-article-item [article]="article" [type]="type"></kb-article-item>
-  </div>
+    <div *ngFor="let article of (suggestedArticles$ | async)">
+        <kb-article-item [article]="article" [type]="type"></kb-article-item>
+    </div>
 </ng-template>
