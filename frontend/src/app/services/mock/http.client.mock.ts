@@ -1,6 +1,4 @@
-import {} from 'jasmine';
-
-export class KbaHttpClientMock {
+export class BaseHttpClientMock {
   public get: jasmine.Spy = jasmine.createSpy();
   public post: jasmine.Spy = jasmine.createSpy();
   public patch: jasmine.Spy = jasmine.createSpy();

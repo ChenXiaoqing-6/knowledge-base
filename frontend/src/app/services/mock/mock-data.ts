@@ -179,7 +179,7 @@ export function mockSearch(options: ISearchOptions): Observable<CollectionRespon
       }
   
       let data: Array<IArticle> = [];
-      let types: Array<string> = ["Java", "Angular", "Nodejs", "Javascript"];
+      let types: Array<string> = ["Java", "Angular", "phone", "Javascript"];
       for (let i = 1; i <= 100; i++) {
         let tag = types[i % types.length];
         data.push({ ...MockArticleResponse, id: 5000 + i, title: `mockArticle-${i}-tag[${tag}]` });
