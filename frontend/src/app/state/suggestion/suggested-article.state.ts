@@ -4,6 +4,6 @@ import { IArticle } from "../../models/IArticle";
 export interface IKbSuggestedState extends EntityState<IArticle> {
     totalObjectCount: number;
     isLoading: boolean;
-    isCompleted: boolean;
+    isInit: boolean;
     isError: boolean;
 }

@@ -9,9 +9,9 @@ export const selectIsLoading = createSelector(
     (state) => state.isLoading
 );
 
-export const selectIsCompleted = createSelector(
+export const selectIsInit = createSelector(
     kbLinkedArticleState,
-    (state) => state.isCompleted
+    (state) => state.isInit
 );
 
 export const selectAllArticles = createSelector(

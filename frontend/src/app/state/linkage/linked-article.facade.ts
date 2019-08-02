@@ -3,10 +3,10 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { IArticle } from '../../models/IArticle';
 import { IKbState } from '../index';
-import { GetLinkedArticles, InitLinkedArticles } from './linked-article.actions';
+import { GetLinkedArticles } from './linked-article.actions';
 import {
     selectIsLoading,
-    selectIsCompleted,
+    selectIsInit,
     selectAllArticles,
     selectIsError,
     selectTotalObjectCount
@@ -22,7 +22,6 @@ export class KbLinkedListFacade {
     }
 
     public getLinkedArticles() {
-        this.store$.dispatch(new InitLinkedArticles());
         this.store$.dispatch(new GetLinkedArticles());
     }
 
@@ -30,8 +29,8 @@ export class KbLinkedListFacade {
         return this.store$.pipe(select(selectTotalObjectCount));
     }
 
-    public isCompleted(): Observable<boolean> {
-        return this.store$.pipe(select(selectIsCompleted));
+    public isInit(): Observable<boolean> {
+        return this.store$.pipe(select(selectIsInit));
     }
 
     public isLinkingArticles(): Observable<boolean> {

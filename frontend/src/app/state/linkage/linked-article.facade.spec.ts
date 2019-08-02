@@ -1,4 +1,4 @@
-import { GetLinkedArticles, InitLinkedArticles } from './linked-article.actions';
+import { GetLinkedArticles } from './linked-article.actions';
 import { of, throwError } from 'rxjs';
 import { StoreMock } from '../mock/store.mock';
 import { KbLinkedListFacade } from './linked-article.facade';
@@ -37,10 +37,9 @@ describe('KbLinkedFacade', () => {
         });
     }));
 
-    it('should dispatch InitLinkedArticles and GetLinkedArticles when getLinkedArticles', () => {
+    it('should dispatch GetLinkedArticles when getLinkedArticles', () => {
         kbViewFacade.getLinkedArticles();
-        expect(storeMock.dispatch).toHaveBeenCalledTimes(2);
-        expect(storeMock.dispatch).toHaveBeenCalledWith(new InitLinkedArticles());
+        expect(storeMock.dispatch).toHaveBeenCalledTimes(1);
         expect(storeMock.dispatch).toHaveBeenCalledWith(new GetLinkedArticles());
     });
 
@@ -71,7 +70,7 @@ describe('KbLinkedFacade', () => {
     it('should return isCompleted in the state if success', fakeAsync(() => {
         const isInit = true;
         storeMock.pipe.and.returnValue(of(isInit));
-        kbViewFacade.isCompleted().subscribe((_response: any) => {
+        kbViewFacade.isInit().subscribe((_response: any) => {
             expect(_response).toBeTruthy();
             expect(storeMock.pipe).toHaveBeenCalledTimes(1);
             expect(_response).toBe(isInit);
@@ -83,7 +82,7 @@ describe('KbLinkedFacade', () => {
     it('should throw error -> observable error', fakeAsync(() => {
         const error = { error: 'TestError' };
         storeMock.pipe.and.returnValue(throwError(error));
-        kbViewFacade.isCompleted().subscribe((_response: any) => {
+        kbViewFacade.isInit().subscribe((_response: any) => {
             expect(_response).toBeFalsy();
         }, _error => {
             expect(_error).toBeTruthy();

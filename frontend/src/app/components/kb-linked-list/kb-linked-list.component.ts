@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { IArticle } from './../../models/IArticle';
 import { KbLinkedListFacade } from '../../state/linkage/linked-article.facade';
 import { ActionDisplayType } from './../../models/ActionDisplayType.enum';
@@ -14,28 +13,20 @@ export class KbLinkedListComponent implements OnInit, OnDestroy {
   private onDestroy$: Subject<boolean> = new Subject();
   linkedArticles$: Observable<IArticle[]>;
   linkedArticlesTotalCount$: Observable<number>;
-  linkedArticlesIsCompleted$: Observable<boolean>;
+  linkedArticlesIsInit$: Observable<boolean>;
   linkedArticlesIsError$: Observable<boolean>;
   linkedArticlesBusy$: Observable<boolean>;
-  getLinkedArticles$: Subject<void> = new Subject();
 
   type: ActionDisplayType = ActionDisplayType.LINKED_ARTICLE_LIST;
   constructor(private linkedListFacade: KbLinkedListFacade) { }
 
   ngOnInit() {
     this.linkedArticles$ = this.linkedListFacade.getArticles();
-    this.linkedArticlesIsCompleted$ = this.linkedListFacade.isCompleted();
+    this.linkedArticlesIsInit$ = this.linkedListFacade.isInit();
     this.linkedArticlesBusy$ = this.linkedListFacade.isLinkingArticles();
     this.linkedArticlesTotalCount$ = this.linkedListFacade.getTotalObjectCount();
     this.linkedArticlesIsError$ = this.linkedListFacade.isError();
-
-    this.getLinkedArticles$.pipe(
-      takeUntil(this.onDestroy$)
-    ).subscribe(() => {
-      this.linkedListFacade.getLinkedArticles();
-    });
-
-    this.getLinkedArticles$.next();
+    this.linkedListFacade.getLinkedArticles();
   }
 
   public ngOnDestroy(): void {

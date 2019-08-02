@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { IArticle } from '../../models/IArticle';
 import { Helper as PaginationHelper } from '../../models/IPagination';
 import { KbSuggestedFacade } from '../../state/suggestion/suggested-article.facade';
@@ -16,10 +15,9 @@ export class KbSuggestedListComponent implements OnInit, OnDestroy {
   private onDestroy$: Subject<boolean> = new Subject();
   suggestedArticles$: Observable<IArticle[]>;
   suggestedAticlesTotalCount$: Observable<number>;
-  suggestedArticlesIsCompleted$: Observable<boolean>;
+  suggestedArticlesIsInit$: Observable<boolean>;
   suggestedArticlesIsError$: Observable<boolean>;
   suggestedArticlesBusy$: Observable<boolean>;
-  getsuggestedArticle$: Subject<void> = new Subject();
 
   type: ActionDisplayType = ActionDisplayType.SEARCHED_ARTICLE_LIST;
   constructor(private suggestedListFacade: KbSuggestedFacade) { }
@@ -27,20 +25,13 @@ export class KbSuggestedListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.suggestedArticles$ = this.suggestedListFacade.getArticles();
     this.suggestedAticlesTotalCount$ = this.suggestedListFacade.getTotalObjectCount();
-    this.suggestedArticlesIsCompleted$ = this.suggestedListFacade.isCompleted();
+    this.suggestedArticlesIsInit$ = this.suggestedListFacade.isInit();
     this.suggestedArticlesBusy$ = this.suggestedListFacade.isLoadingSuggestedAticles();
     this.suggestedArticlesIsError$ = this.suggestedListFacade.isError();
-
-    this.getsuggestedArticle$.pipe(
-      takeUntil(this.onDestroy$)
-    ).subscribe(() => {
-      this.suggestedListFacade.getsuggestedArticle({
-        pagination: PaginationHelper.createSuggestedPagination(),
-        searchTerm: "Angular"
-      });
+    this.suggestedListFacade.getsuggestedArticle({
+      pagination: PaginationHelper.createSuggestedPagination(),
+      searchTerm: "Angular"
     });
-
-    this.getsuggestedArticle$.next();
   }
 
   public ngOnDestroy(): void {

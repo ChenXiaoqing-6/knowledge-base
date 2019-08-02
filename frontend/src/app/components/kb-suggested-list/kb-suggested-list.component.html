@@ -1,4 +1,4 @@
-<div *ngIf="suggestedArticlesIsCompleted$ | async">
+<div *ngIf="(suggestedArticlesIsInit$ | async) && !(suggestedArticlesBusy$ | async)">
     <p id="titleSuggestedArticles" class="title-text">Suggested Articles ({{suggestedAticlesTotalCount$ | async}})</p>
 </div>
 <fd-loading-spinner id="loadingSpinnerSuggestedArticles" [loading]="suggestedArticlesBusy$ | async"></fd-loading-spinner>

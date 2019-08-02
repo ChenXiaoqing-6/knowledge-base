@@ -11,22 +11,6 @@ describe("KbLinkedReducers", () => {
         expect(fromLinkedArticle.reducer(currentState, action)).toBe(currentState);
     });
 
-    it('InitLinkedArticles', () => {
-        let initialState = fromLinkedArticle.initialKbLinkedArticleState;
-        let payload = {
-            data: [{ id: '5' }, { id: '6' }, { id: '7' }] as IArticle[],
-            totalCount: 20
-        };
-        let action = new fromAction.GetLinkedArticlesSuccess(payload);
-        let currentState = fromLinkedArticle.reducer(initialState, action);
-        let action2 = new fromAction.InitLinkedArticles();
-        currentState = fromLinkedArticle.reducer(currentState, action2);
-        let expectedState = { 
-            ...initialState
-         };
-        expect(currentState).toEqual(expectedState);
-    });
-
     it('GetLinkedArticles', () => {
         let initialState = fromLinkedArticle.initialKbLinkedArticleState;
         let action = new fromAction.GetLinkedArticles();
@@ -34,7 +18,7 @@ describe("KbLinkedReducers", () => {
         let expectedState = {
             ...initialState,
             isLoading: true,
-            isCompleted: false,
+            isInit: true,
             isError: false
         };
         expect(currentState).toEqual(expectedState);
@@ -52,7 +36,6 @@ describe("KbLinkedReducers", () => {
         let expectedState = fromLinkedArticle.adapter.addAll(payload.data, {
             ...initialState,
             isLoading: false,
-            isCompleted: true,
             totalObjectCount: payload.totalCount
         });
         expect(currentState).toEqual(expectedState);
@@ -65,7 +48,6 @@ describe("KbLinkedReducers", () => {
         expect(currentState).toEqual({
             ...initialState,
             isLoading: false,
-            isCompleted: true,
             isError: true
         });
     });

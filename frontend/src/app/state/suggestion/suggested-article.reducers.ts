@@ -7,7 +7,7 @@ import { ActionTypes, Actions } from "./suggested-article.actions";
 export const adapter:EntityAdapter<IArticle> = createEntityAdapter<IArticle>();
 
 export const initialKbSuggestedState:IKbSuggestedState = adapter.getInitialState({
-    isCompleted: false,
+    isInit: false,
     isLoading: false,
     isError: false,
     totalObjectCount: 0
@@ -17,20 +17,16 @@ export function reducer(state = initialKbSuggestedState,action:Actions):IKbSugge
 
     switch(action.type){
 
-        case ActionTypes.InitSuggestedArticles:
-            return { ...initialKbSuggestedState };
-        
         case ActionTypes.SuggestedArticles:
             return {
-                ...state,
-                isLoading: true,
-                isError: false
+                ...initialKbSuggestedState,
+                isInit: true,
+                isLoading: true
             };
 
         case ActionTypes.SuggestedArticlesSuccess:
             return adapter.addAll(action.payload.data,{
                 ...state,
-                isCompleted: true,
                 isLoading: false,
                 totalObjectCount: action.payload.totalCount
             });
@@ -38,7 +34,6 @@ export function reducer(state = initialKbSuggestedState,action:Actions):IKbSugge
         case ActionTypes.SuggestedArticlesError:
             return {
                 ...state,
-                isCompleted: true,
                 isLoading: false,
                 isError: true
             };

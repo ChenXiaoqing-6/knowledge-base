@@ -6,7 +6,7 @@ import { Actions, ActionTypes } from './linked-article.actions';
 export const adapter: EntityAdapter<IArticle> = createEntityAdapter<IArticle>();
 
 export const initialKbLinkedArticleState: IkbLinkedArticleState = adapter.getInitialState({
-    isCompleted: false,
+    isInit: false,
     isLoading: false,
     isError: false,
     totalObjectCount: 0
@@ -16,28 +16,24 @@ export function reducer(state = initialKbLinkedArticleState, action: Actions): I
 
     switch (action.type) {
 
-        case ActionTypes.InitLinkedArticles:
-            return { ...initialKbLinkedArticleState };
-
         case ActionTypes.GetLinkedArticles:
             return {
-                ...state,
+                ...initialKbLinkedArticleState,
                 isLoading: true,
-                isCompleted: false,
+                isInit: true,
                 isError: false
             };
 
         case ActionTypes.GetLinkedArticlesSuccess:
             return adapter.addAll(action.payload.data, {
                 ...state,
-                isCompleted: true,
                 isLoading: false,
                 totalObjectCount: action.payload.totalCount
             });
 
         case ActionTypes.GetLinkedArticlesError:
 
-            return { ...state, isCompleted: true, isLoading: false, isError: true };
+            return { ...state, isLoading: false, isError: true };
 
         default: {
 

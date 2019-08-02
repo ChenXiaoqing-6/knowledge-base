@@ -1,4 +1,4 @@
-<div *ngIf="linkedArticlesIsCompleted$ | async">
+<div *ngIf="(linkedArticlesIsInit$ | async) && !(linkedArticlesBusy$ | async)">
     <p class="title-text">Linked Articles ({{linkedArticlesTotalCount$ | async}})</p>
 </div>
 <fd-loading-spinner id="loadingSpinnerLinkedArticles" [loading]="linkedArticlesBusy$ | async"></fd-loading-spinner>

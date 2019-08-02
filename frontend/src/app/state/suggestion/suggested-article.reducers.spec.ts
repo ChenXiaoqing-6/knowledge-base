@@ -17,18 +17,13 @@ describe("KbSuggestedReducers", () => {
         expect(fromSuggestedArticle.reducer(currentState, action)).toBe(currentState);
     });
 
-    it('InitSuggestedArticles should return the default state', () => {
-        let action = new fromAction.InitSuggestedArticles();
-        currentState = fromSuggestedArticle.reducer(currentState, action);
-        expect(currentState).toEqual(initialState);
-    });
-
     it('SuggestedArticles should return the expected state', () => {
         let payload = {} as ISearchOptions;
         let action = new fromAction.SuggestedArticles(payload);
         currentState = fromSuggestedArticle.reducer(currentState, action);
         let expectedState = {
-            ...currentState,
+            ...initialState,
+            isInit: true,
             isLoading: true,
             isError: false
         }
@@ -44,7 +39,6 @@ describe("KbSuggestedReducers", () => {
         currentState = fromSuggestedArticle.reducer(currentState, action);
         let expectedState = fromSuggestedArticle.adapter.addAll(payload.data, {
             ...initialState,
-            isCompleted: true,
             isLoading: false,
             totalObjectCount: 2
         });
@@ -56,7 +50,6 @@ describe("KbSuggestedReducers", () => {
         currentState = fromSuggestedArticle.reducer(currentState, action);
         expect(currentState).toEqual({
             ...currentState,
-            isCompleted: true,
             isLoading: false,
             isError: true
         });

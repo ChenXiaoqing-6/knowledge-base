@@ -3,11 +3,11 @@ import { Store, select } from "@ngrx/store";
 import { IKbState } from "../index";
 import { Observable } from "rxjs";
 import { IArticle } from "../../models/IArticle";
-import { SuggestedArticles, InitSuggestedArticles } from './suggested-article.actions';
+import { SuggestedArticles } from './suggested-article.actions';
 import {
     selectAllArticles,
     selectTotalObjectCount,
-    selectIsCompleted,
+    selectIsInit,
     selectIsLoading,
     selectIsError,
     selectArticleById
@@ -27,8 +27,8 @@ export class KbSuggestedFacade {
         return this.store$.pipe(select(selectTotalObjectCount));
     }
 
-    public isCompleted(): Observable<boolean> {
-        return this.store$.pipe(select(selectIsCompleted));
+    public isInit(): Observable<boolean> {
+        return this.store$.pipe(select(selectIsInit));
     }
 
     public isLoadingSuggestedAticles(): Observable<boolean> {
@@ -36,7 +36,6 @@ export class KbSuggestedFacade {
     }
 
     public getsuggestedArticle(options: ISearchOptions) {
-        this.store$.dispatch(new InitSuggestedArticles());
         this.store$.dispatch(new SuggestedArticles(options));
     }
 
