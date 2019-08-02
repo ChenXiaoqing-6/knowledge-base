@@ -1,9 +1,9 @@
 <div *ngIf="(linkedArticlesIsInit$ | async) && !(linkedArticlesBusy$ | async)">
-    <p class="title-text">Linked Articles ({{linkedArticlesTotalCount$ | async}})</p>
+    <p class="fd-has-type-1 fd-has-color-text-1">Linked Articles ({{linkedArticlesTotalCount$ | async}})</p>
 </div>
 <fd-loading-spinner id="loadingSpinnerLinkedArticles" [loading]="linkedArticlesBusy$ | async"></fd-loading-spinner>
 <div *ngIf="linkedArticlesIsError$ | async; else showResultList">
-    <p id="textLinkedArticlesErrorMsg" class="error-content fd-has-margin-top-small">Currently, the provider’s system is temporarily unavailable, please try again later.</p>
+    <p id="textLinkedArticlesErrorMsg" class="fd-has-type fd-has-color-text-3 fd-has-margin-top-small">Currently, the provider’s system is temporarily unavailable, please try again later.</p>
 </div>
 <ng-template #showResultList>
     <div *ngFor="let article of (linkedArticles$ | async)">

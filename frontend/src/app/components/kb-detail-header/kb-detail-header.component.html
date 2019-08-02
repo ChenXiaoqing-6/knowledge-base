@@ -7,11 +7,11 @@
 </div>
 
 <div *ngIf="!isDetailMode">
-    <div class="detail-show">
+    <div class="fd-has-type-minus-1 fd-has-color-text-3 fd-has-margin-top-tiny">
         <fd-icon id="iconShowViewCountList" [glyph]="'show'" [size]="'s'"></fd-icon>
         {{article.views}} | {{article.lastUpdated | date}}
     </div>
-    <div class="detail-author">
-        <span id="textAuthorList">Author:</span> {{article.author}}
+    <div class="fd-has-type-minus-1 fd-has-color-text-1 fd-has-margin-top-tiny">
+        <span id="textAuthorList" class="fd-has-color-text-3">Author:</span> {{article.author}}
     </div>
 </div>
