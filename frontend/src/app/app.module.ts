@@ -26,8 +26,8 @@ import { appRoutes } from './router/routes';
 import { KbService } from './services/kb.service';
 import { KbSearchFacade } from './state/search/search-article.facade';
 import { KbViewFacade } from './state/article/article.facade';
-import { KbLinkedListFacade } from './state/linkedArticle/linked-article.facade';
-import { KbSuggestedFacade } from './state/suggestedList/suggested-article.facade';
+import { KbLinkedListFacade } from './state/linkage/linked-article.facade';
+import { KbSuggestedFacade } from './state/suggestion/suggested-article.facade';
 
 @NgModule({
   declarations: [

@@ -1,36 +1,30 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { IKbSuggestedState } from './suggested-article.state';
-import * as fromReducers from '../suggestedList/suggested-article.reducers';
+import { IkbLinkedArticleState } from './linked-article.state';
+import * as fromReducers from './linked-article.reducers';
 
-export const kbSuggestedState = createFeatureSelector<IKbSuggestedState>('kbSuggested');
+export const kbLinkedArticleState = createFeatureSelector<IkbLinkedArticleState>('kbLinkedArticle');
 
 export const selectIsLoading = createSelector(
-    kbSuggestedState,
+    kbLinkedArticleState,
     (state) => state.isLoading
 );
 
 export const selectIsCompleted = createSelector(
-    kbSuggestedState,
+    kbLinkedArticleState,
     (state) => state.isCompleted
 );
 
 export const selectAllArticles = createSelector(
-    kbSuggestedState,
+    kbLinkedArticleState,
     fromReducers.selectAll
 );
 
 export const selectTotalObjectCount = createSelector(
-    kbSuggestedState,
+    kbLinkedArticleState,
     (state) => state.totalObjectCount
 );
 
 export const selectIsError = createSelector(
-    kbSuggestedState,
+    kbLinkedArticleState,
     (state) => state.isError
 )
-
-export const selectArticleById = createSelector(
-    kbSuggestedState,
-    (state, props) => state.entities[props.id]
-  );
-  

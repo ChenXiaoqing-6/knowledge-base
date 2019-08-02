@@ -2,7 +2,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FundamentalNgxModule } from 'fundamental-ngx';
 import { Component, Input } from '@angular/core';
-import { KbLinkedListFacade } from '../../state/linkedArticle/linked-article.facade';
+import { KbLinkedListFacade } from '../../state/linkage/linked-article.facade';
 import { KbLinkedListComponent } from './kb-linked-list.component';
 
 @Component({ selector: 'kb-article-item', template: '' })

@@ -4,8 +4,8 @@ import { FundamentalNgxModule } from 'fundamental-ngx';
 import { IArticle } from '../../models/IArticle';
 import { Helper as PageHelper } from '../../models/IPagination';
 import { KbSearchFacade } from '../../state/search/search-article.facade';
-import { KbSuggestedFacade } from '../../state/suggestedList/suggested-article.facade';
-import { KbLinkedListFacade } from '../../state/linkedArticle/linked-article.facade';
+import { KbSuggestedFacade } from '../../state/suggestion/suggested-article.facade';
+import { KbLinkedListFacade } from '../../state/linkage/linked-article.facade';
 import { KbSearchComponent } from './kb-search.component';
 
 @Component({ selector: 'kb-article-list', template: '' })

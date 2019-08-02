@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FundamentalNgxModule } from 'fundamental-ngx';
 import { Component, Input } from '@angular/core';
-import { KbSuggestedFacade } from '../../state/suggestedList/suggested-article.facade';
+import { KbSuggestedFacade } from '../../state/suggestion/suggested-article.facade';
 import { KbSuggestedListComponent } from './kb-suggested-list.component';
 
 @Component({ selector: 'kb-article-item', template: '' })

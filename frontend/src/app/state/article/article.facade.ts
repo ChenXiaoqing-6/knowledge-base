@@ -6,7 +6,7 @@ import { IKbState } from '../index';
 import { OpenArticle, BackArticle, LoadIFrameContentSuccess } from './article.actions';
 import { selectIsContentLoading } from './article.selectors';
 import { KbSearchFacade } from '../search/search-article.facade';
-import { KbSuggestedFacade } from '../suggestedList/suggested-article.facade';
+import { KbSuggestedFacade } from '../suggestion/suggested-article.facade';
 import { IArticle } from '../../models/IArticle';
 import { KbService } from '../../services/kb.service';
 

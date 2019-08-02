@@ -4,8 +4,8 @@ import { debounceTime, takeUntil, distinctUntilChanged } from 'rxjs/operators';
 import { IArticle } from '../../models/IArticle';
 import { Helper as PaginationHelper } from '../../models/IPagination';
 import { KbSearchFacade } from '../../state/search/search-article.facade';
-import { KbSuggestedFacade } from '../../state/suggestedList/suggested-article.facade';
-import { KbLinkedListFacade } from '../../state/linkedArticle/linked-article.facade';
+import { KbSuggestedFacade } from '../../state/suggestion/suggested-article.facade';
+import { KbLinkedListFacade } from '../../state/linkage/linked-article.facade';
 
 @Component({
   selector: 'kb-search',

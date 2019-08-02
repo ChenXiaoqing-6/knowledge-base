@@ -3,7 +3,7 @@ import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { IArticle } from '../../models/IArticle';
 import { Helper as PaginationHelper } from '../../models/IPagination';
-import { KbSuggestedFacade } from '../../state/suggestedList/suggested-article.facade';
+import { KbSuggestedFacade } from '../../state/suggestion/suggested-article.facade';
 import { ActionDisplayType } from './../../models/ActionDisplayType.enum';
 
 @Component({

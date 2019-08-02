@@ -1,6 +1,6 @@
 import { GetLinkedArticles, InitLinkedArticles } from './linked-article.actions';
 import { of, throwError } from 'rxjs';
-import { StoreMock } from './../mock/store.mock';
+import { StoreMock } from '../mock/store.mock';
 import { KbLinkedListFacade } from './linked-article.facade';
 import { fakeAsync } from '@angular/core/testing';
 

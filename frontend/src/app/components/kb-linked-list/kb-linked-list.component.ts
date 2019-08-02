@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { IArticle } from './../../models/IArticle';
-import { KbLinkedListFacade } from '../../state/linkedArticle/linked-article.facade';
+import { KbLinkedListFacade } from '../../state/linkage/linked-article.facade';
 import { ActionDisplayType } from './../../models/ActionDisplayType.enum';
 
 @Component({
