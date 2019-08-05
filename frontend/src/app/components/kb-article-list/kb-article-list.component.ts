@@ -14,4 +14,8 @@ export class KbArticleListComponent implements OnInit {
   ngOnInit() {
   }
 
+  trackByFn(index: number, article: IArticle) {
+    return article.id;
+  }
+
 }

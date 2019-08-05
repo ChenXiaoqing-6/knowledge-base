@@ -17,7 +17,7 @@ export class KbViewEffects {
       ofType<OpenArticle>(ActionTypes.OpenArticle),
       map((action: any) => action.payload),
       tap((articleId: string) => {
-        this.router.navigate([`kbDetail/${articleId}`]);
+        this.router.navigate([`article/${articleId}`]);
         return empty();
       })
     );

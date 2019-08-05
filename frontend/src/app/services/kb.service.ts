@@ -1,34 +1,29 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { AppConfig } from '../../config';
 import { IArticle } from '../models/IArticle';
 import { ISearchOptions } from '../models/IRequestOptions';
-import { CollectionResponse } from '../models/IResponse';
-import { /*mockSearch,*/ MockLinkedArticles, MockArticleResponse } from '../services/mock/mock-data';
+import { CollectionResponse, SingleResponse } from '../models/IResponse';
+import { MockLinkedArticles, MockArticleResponse } from '../services/mock/mock-data';
+import { CloudService } from './cloud.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class KbService {
 
-  constructor(private http: HttpClient) { }
-
-  public getUrl(endpoint: string) {
-    return `${AppConfig.facadeBaseURL}/${endpoint}`;
-  }
+  constructor(private cloudService: CloudService) { }
 
   public searchArticles(options: ISearchOptions): Observable<CollectionResponse<IArticle>> {
-
-    //return mockSearch(options);
-
     const params = new HttpParams()
       .set('page', '' + options.pagination.pageIndex)
       .set('pageSize', '' + options.pagination.pageSize)
       .set('search', options.searchTerm);
 
-    return this.http.get(this.getUrl("search"), { params }).pipe(
+    return this.cloudService.getHttp().get(
+      this.cloudService.getUrl("search"), { params }
+    ).pipe(
       switchMap((response: Object) => {
         return of(Object.assign({
           data: [],
@@ -40,10 +35,21 @@ export class KbService {
       })
     );
   }
-
+  
   public getArticle(id: string): IArticle {
     return MockArticleResponse;
-    //TODO:
+  }
+
+  public getArticle2(id: string): Observable<IArticle> {
+    const params = new HttpParams().set('provider', 'MindTouch')
+
+    return this.cloudService.getHttp().get(
+      this.cloudService.getUrl(id), { params }
+    ).pipe(
+      switchMap((response: SingleResponse<IArticle>) => {
+        return of(response.data[0]);
+      })
+    );
   }
 
   public getLinkedArticles(): Observable<CollectionResponse<IArticle>> {

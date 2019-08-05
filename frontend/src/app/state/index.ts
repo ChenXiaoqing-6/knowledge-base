@@ -12,7 +12,12 @@ import { KbViewEffects } from './article/article.effects';
 import { KbLinkedArticlesEffects } from './linkage/linked-article.effects';
 import { KbSuggestedArticlesEffects } from './suggestion/suggested-article.effects';
 
+import { AuthContextEffects } from './authContext/authContext.effects';
+import { reducer as authContextReducer } from './authContext/authContext.reducer';
+import { State as IAuthContextState } from './authContext/authContext.state';
+
 export interface IKbState {
+  kbAuthContext: IAuthContextState,
   kbSearch: IKbSearchState,
   kbView: IKbViewState,
   kbLinkedArticle: IkbLinkedArticleState,
@@ -20,6 +25,7 @@ export interface IKbState {
 }
 
 export const reducers: ActionReducerMap<IKbState> = {
+  kbAuthContext: authContextReducer,
   kbSearch: kbSearchReducer,
   kbView: kbViewReducer,
   kbLinkedArticle: kbLinkedArticleReducer,
@@ -27,6 +33,7 @@ export const reducers: ActionReducerMap<IKbState> = {
 };
 
 export const effects = [
+  AuthContextEffects,
   KbSearchEffects,
   KbViewEffects,
   KbLinkedArticlesEffects,

@@ -11,7 +11,7 @@ export const environment: IEnvironment = {
   clientIdentifier: appConfigJson.appConfig.clientIdentifier,
   clientSecret: appConfigJson.appConfig.clientSecret,
   version: appConfigJson.appConfig.version,
-  baseUrl: 'http://localhost:8001/portal',
-  iFrameOriginUrl: 'http://localhost:8080', // WFM => 'http://localhost:3000' put here the host of the app opening the frame
+  baseUrl: 'http://10.130.228.190:8001/portal',
+  iFrameOriginUrl: 'http://10.130.228.190:3001', // WFM => 'http://localhost:3000' put here the host of the app opening the frame
   cloudHostOverWrite: null // When running WFM locally '{env}.dev.coresuite.com'
 };

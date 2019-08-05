@@ -5,7 +5,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FundamentalNgxModule } from 'fundamental-ngx';
 import { AppComponent } from './app.component';
 import { KbSearchComponent } from './components/kb-search/kb-search.component';
@@ -23,11 +23,16 @@ import { KbArticleActionsComponent } from './components/kb-article-actions/kb-ar
 
 import { effects, reducers, metaReducers } from './state';
 import { appRoutes } from './router/routes';
+import { CloudService } from './services/cloud.service';
 import { KbService } from './services/kb.service';
 import { KbSearchFacade } from './state/search/search-article.facade';
 import { KbViewFacade } from './state/article/article.facade';
 import { KbLinkedListFacade } from './state/linkage/linked-article.facade';
 import { KbSuggestedFacade } from './state/suggestion/suggested-article.facade';
+
+import { IFrameMessageAdapter } from './services/iframe.message.service';
+import { EnsureAuthContextGuard } from './guards/ensure-auth-context.guard';
+import { AuthContextInterceptor } from './state/authContext/authContext.interceptor';
 
 @NgModule({
   declarations: [
@@ -67,7 +72,11 @@ import { KbSuggestedFacade } from './state/suggestion/suggested-article.facade';
     KbViewFacade,
     KbLinkedListFacade,
     KbSuggestedFacade,
-    KbService
+    CloudService,
+    KbService,
+    EnsureAuthContextGuard,
+    IFrameMessageAdapter,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthContextInterceptor, multi: true}
   ],
   bootstrap: [AppComponent],
   entryComponents: [

@@ -4,6 +4,7 @@ import { IArticle } from '../../models/IArticle';
 import { Helper as PaginationHelper } from '../../models/IPagination';
 import { KbSuggestedFacade } from '../../state/suggestion/suggested-article.facade';
 import { ActionDisplayType } from './../../models/ActionDisplayType.enum';
+import { IFrameMessageAdapter } from '../../services/iframe.message.service';
 
 @Component({
   selector: 'kb-suggested-list',
@@ -20,7 +21,7 @@ export class KbSuggestedListComponent implements OnInit, OnDestroy {
   suggestedArticlesBusy$: Observable<boolean>;
 
   type: ActionDisplayType = ActionDisplayType.SEARCHED_ARTICLE_LIST;
-  constructor(private suggestedListFacade: KbSuggestedFacade) { }
+  constructor(private suggestedListFacade: KbSuggestedFacade, private frameMessageAdapter: IFrameMessageAdapter) { }
 
   ngOnInit() {
     this.suggestedArticles$ = this.suggestedListFacade.getArticles();
@@ -28,9 +29,16 @@ export class KbSuggestedListComponent implements OnInit, OnDestroy {
     this.suggestedArticlesIsInit$ = this.suggestedListFacade.isInit();
     this.suggestedArticlesBusy$ = this.suggestedListFacade.isLoadingSuggestedAticles();
     this.suggestedArticlesIsError$ = this.suggestedListFacade.isError();
-    this.suggestedListFacade.getsuggestedArticle({
-      pagination: PaginationHelper.createSuggestedPagination(),
-      searchTerm: "Angular"
+    // this.suggestedListFacade.getsuggestedArticle({
+    //   pagination: PaginationHelper.createSuggestedPagination(),
+    //   searchTerm: "Angular"
+    // });
+
+    this.frameMessageAdapter.getSearchTermFromActiveCase().subscribe((searchTerm: string)=>{
+      this.suggestedListFacade.getsuggestedArticle({
+        pagination: PaginationHelper.createSuggestedPagination(),
+        searchTerm: searchTerm
+      });
     });
   }
 
