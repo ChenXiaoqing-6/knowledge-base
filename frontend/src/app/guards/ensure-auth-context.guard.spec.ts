@@ -1,8 +1,8 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { StoreModule } from '@ngrx/store';
 import { EnsureAuthContextGuard } from './ensure-auth-context.guard';
-import { reducer } from '../../authContext/authContext.reducer';
-import { State } from '../../authContext/authContext.state';
+import { reducer } from '../state/authContext/authContext.reducer';
+import { State } from '../state/authContext/authContext.state';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs';
 import * as sinon from 'sinon';

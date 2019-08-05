@@ -2,7 +2,7 @@ import { fakeAsync } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
 import { AppConfig } from '../../config';
 import { CloudService } from './cloud.service';
-import { BaseHttpClientMock } from './mock/http.client.mock';
+import { HttpClientMock as BaseHttpClientMock } from './mock/http.client.mock';
 
 describe('cloud service test', () => {
 
@@ -23,7 +23,7 @@ describe('cloud service test', () => {
 
     it('should get the translations', fakeAsync(() => {
       const serviceMock = setup();
-      const response = {translation: 'TestResponse'};
+      const response = { translation: 'TestResponse' };
       const language: string = 'it';
       const expectedUrl = `${AppConfig.facadeBaseURL}/localisation/${language}`;
 
@@ -43,7 +43,7 @@ describe('cloud service test', () => {
       const serviceMock = setup();
       const language: string = 'de';
       const expectedUrl = `${AppConfig.facadeBaseURL}/localisation/${language}`;
-      const error = {error: 'TestError'};
+      const error = { error: 'TestError' };
 
       serviceMock.httpMock.get.and.returnValue(throwError(error));
 
