@@ -4,17 +4,19 @@ import { FundamentalNgxModule } from 'fundamental-ngx';
 import { Component, Input } from '@angular/core';
 import { KbLinkedListFacade } from '../../state/linkage/linked-article.facade';
 import { KbLinkedListComponent } from './kb-linked-list.component';
+import { IArticleAction } from '../../models/IArticleAction';
+import { KbActionService } from '../../services/kbAction.service';
 
 @Component({ selector: 'kb-article-item', template: '' })
 class KbArticleItemComponent {
   @Input() article: any;
-  @Input() type: any;
+  @Input() actions: IArticleAction[];
 }
 
 describe('KbLinkedListComponent', () => {
   let component: KbLinkedListComponent;
   let fixture: ComponentFixture<KbLinkedListComponent>;
-  let facadeSpy = jasmine.createSpyObj('KbLinkedListFacade', [
+  const facadeSpy = jasmine.createSpyObj('KbLinkedListFacade', [
     'getArticles',
     'getLinkedArticles',
     'getTotalObjectCount',
@@ -22,6 +24,7 @@ describe('KbLinkedListComponent', () => {
     'isError',
     'isLinkingArticles'
   ]);
+  const kbActionServiceSpy = jasmine.createSpyObj('KbActionService', ['getAction']);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -30,7 +33,8 @@ describe('KbLinkedListComponent', () => {
         KbArticleItemComponent
       ],
       providers: [
-        { provide: KbLinkedListFacade, useValue: facadeSpy }
+        { provide: KbLinkedListFacade, useValue: facadeSpy },
+        { provide: KbActionService, useValue: kbActionServiceSpy }
       ],
       imports: [
         FundamentalNgxModule

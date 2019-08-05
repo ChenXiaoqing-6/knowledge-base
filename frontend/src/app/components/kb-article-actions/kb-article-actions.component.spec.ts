@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FundamentalNgxModule } from 'fundamental-ngx';
 import { KbArticleActionsComponent } from './kb-article-actions.component';
 import { MockArticle } from '../../models/mock/Article.mock';
+import { IArticle } from '../../models/IArticle';
+import { IArticleAction } from '../../models/IArticleAction';
 
 describe('KbArticleActionsComponent', () => {
   let component: KbArticleActionsComponent;
@@ -9,10 +11,10 @@ describe('KbArticleActionsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ KbArticleActionsComponent ],
-      imports: [ FundamentalNgxModule ]
+      declarations: [KbArticleActionsComponent],
+      imports: [FundamentalNgxModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -26,18 +28,16 @@ describe('KbArticleActionsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Test copyArticleLink: execCommand should called with copy', () => {
-    spyOn(document, 'execCommand');
-    component.copyArticleLink();
-    expect(document.execCommand).toHaveBeenCalledWith('copy');
-    expect(document.body.getElementsByTagName("textarea").length).toBe(0);
+  it('should call "action.handler" function in onClick', () => {
+    const handler = (article: IArticle) => { 
+      expect(article).toBe(MockArticle);
+    };
+    const action: IArticleAction = {
+      title: 'More',
+      icon: 'sap-icon--overflow',
+      handler: handler
+    };
+    component.onClick(action);
   });
 
-  it('Test copyArticleLink if execCommand throw error', () => {
-    spyOn(document, 'execCommand').and.callFake(() => {
-      throw 'error';
-    });
-    component.copyArticleLink();
-    expect(document.body.getElementsByTagName("textarea").length).toBe(0);
-  });
 });

@@ -41,9 +41,9 @@ export class KbViewFacade {
   public getSelectedArticle(id: string): Observable<IArticle> {
     return this.store$.pipe(
       combineLatest(
-        this.kbSuggestedFacade.getSelectedArticleById(id),
-        this.kbSearchFacade.getSelectedArticleById(id),
-        this.kbLinkedFacade.getSelectedArticleById(id),
+        this.kbSuggestedFacade.getSelectedArticle(id),
+        this.kbSearchFacade.getSelectedArticle(id),
+        this.kbLinkedFacade.getSelectedArticle(id),
         (_store, _suggestedArticle, _searchedArticle, _linkedArticle) => {
           if(_suggestedArticle !== undefined) {
             return _suggestedArticle;
@@ -52,7 +52,7 @@ export class KbViewFacade {
           } else if(_linkedArticle !== undefined) {
             return _linkedArticle;
           } else {
-            return this.kbService.getArticle(id); //get article detailed info from backend service  
+            return this.kbService.getArticle(id); //get article detail info from backend service  
           }
         }
       )

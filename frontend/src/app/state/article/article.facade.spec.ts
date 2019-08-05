@@ -1,17 +1,22 @@
 import { fakeAsync } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-
 import { StoreMock } from '../mock/store.mock';
 import { KbViewFacade } from './article.facade';
 import { OpenArticle, LoadIFrameContentSuccess } from './article.actions';
-import { IArticle } from '../../models/IArticle';
-import { MockArticle } from '../../models/mock/Article.mock';
 
 describe('KbViewFacade facade test', () => {
   function setup() {
     const storeMock = new StoreMock();
+    const kbSearchFacadeSpy = jasmine.createSpyObj('KbSearchFacade', ['getSelectedArticle']);
+    const kbSuggestedFacadeSpy = jasmine.createSpyObj('KbSuggestedFacade', ['getSelectedArticle']);
+    const kbLinkedListFacadeSpy = jasmine.createSpyObj('KbLinkedListFacade', ['getSelectedArticle']);
+    const kbService = jasmine.createSpyObj('KbService', ['getArticle']);
     const kbViewFacade = new KbViewFacade(
-      <any>storeMock
+      <any>storeMock,
+      kbSearchFacadeSpy,
+      kbSuggestedFacadeSpy,
+      kbLinkedListFacadeSpy,
+      kbService
     );
 
     return {
@@ -24,12 +29,12 @@ describe('KbViewFacade facade test', () => {
 
     it('shoudl dispatch to open article', () => {
       const service = setup();
-      let article: IArticle = MockArticle;
+      const articleId = '100';
 
-      service.kbViewFacade.openArticle(article);
+      service.kbViewFacade.openArticle(articleId);
 
       expect(service.storeMock.dispatch).toHaveBeenCalledTimes(1);
-      expect(service.storeMock.dispatch).toHaveBeenCalledWith(new OpenArticle('5001'));
+      expect(service.storeMock.dispatch).toHaveBeenCalledWith(new OpenArticle(articleId));
 
     });
   });

@@ -42,7 +42,7 @@ export class KbLinkedListFacade {
         return this.store$.pipe(select(selectIsError));
     }
 
-    public getSelectedArticleById(id: string): Observable<IArticle> {
+    public getSelectedArticle(id: string): Observable<IArticle> {
         return this.store$.pipe(select(selectArticleById, {id}));
     }
 

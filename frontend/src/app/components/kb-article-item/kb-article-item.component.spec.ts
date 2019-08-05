@@ -4,6 +4,7 @@ import { Component, Input } from '@angular/core';
 import { MockArticle } from '../../models/mock/Article.mock';
 import { KbViewFacade } from './../../state/article/article.facade';
 import { KbArticleItemComponent } from './kb-article-item.component';
+import { IArticleAction } from '../../models/IArticleAction';
 
 @Component({ selector: 'kb-detail-header', template: '' })
 class KbDetailHeaderComponent {
@@ -14,7 +15,7 @@ class KbDetailHeaderComponent {
 @Component({ selector: 'kb-article-actions', template: '' })
 class KbArticleActionsComponent {
   @Input() article: any;
-  @Input() type: any;
+  @Input() actions: IArticleAction[];
 }
 
 describe('KbArticleItemComponent', () => {
