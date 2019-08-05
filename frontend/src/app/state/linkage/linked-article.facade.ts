@@ -9,7 +9,8 @@ import {
     selectIsInit,
     selectAllArticles,
     selectIsError,
-    selectTotalObjectCount
+    selectTotalObjectCount,
+    selectArticleById
 } from './linked-article.selectors';
 
 @Injectable()
@@ -39,6 +40,10 @@ export class KbLinkedListFacade {
 
     public isError(): Observable<boolean> {
         return this.store$.pipe(select(selectIsError));
+    }
+
+    public getSelectedArticleById(id: string): Observable<IArticle> {
+        return this.store$.pipe(select(selectArticleById, {id}));
     }
 
 }

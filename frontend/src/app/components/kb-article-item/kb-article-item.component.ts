@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { KbViewFacade } from '../../state/article/article.facade';
 import { IArticle } from './../../models/IArticle';
-import { ActionDisplayType } from './../../models/ActionDisplayType.enum';
+import { IArticleAction } from '../../models/IArticleAction';
 
 @Component({
   selector: 'kb-article-item',
@@ -10,7 +10,7 @@ import { ActionDisplayType } from './../../models/ActionDisplayType.enum';
 })
 export class KbArticleItemComponent implements OnInit {
   @Input() article: IArticle;
-  @Input() type: ActionDisplayType;
+  @Input() actions: IArticleAction[];
   constructor( private viewFacade: KbViewFacade) { }
 
   ngOnInit() { }

@@ -25,6 +25,7 @@ import { effects, reducers, metaReducers } from './state';
 import { appRoutes } from './router/routes';
 import { CloudService } from './services/cloud.service';
 import { KbService } from './services/kb.service';
+import { KbActionService } from './services/kbAction.service';
 import { KbSearchFacade } from './state/search/search-article.facade';
 import { KbViewFacade } from './state/article/article.facade';
 import { KbLinkedListFacade } from './state/linkage/linked-article.facade';
@@ -74,6 +75,7 @@ import { AuthContextInterceptor } from './state/authContext/authContext.intercep
     KbSuggestedFacade,
     CloudService,
     KbService,
+    KbActionService,
     EnsureAuthContextGuard,
     IFrameMessageAdapter,
     {provide: HTTP_INTERCEPTORS, useClass: AuthContextInterceptor, multi: true}

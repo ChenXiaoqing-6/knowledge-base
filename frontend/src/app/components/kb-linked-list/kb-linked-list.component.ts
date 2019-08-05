@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { IArticle } from './../../models/IArticle';
 import { KbLinkedListFacade } from '../../state/linkage/linked-article.facade';
-import { ActionDisplayType } from './../../models/ActionDisplayType.enum';
+import { IArticleAction, ARTICLE_ACTION_TYPE } from '../../models/IArticleAction';
+import { KbActionService } from '../../services/kbAction.service';
 
 @Component({
   selector: 'kb-linked-list',
@@ -16,9 +17,12 @@ export class KbLinkedListComponent implements OnInit, OnDestroy {
   linkedArticlesIsInit$: Observable<boolean>;
   linkedArticlesIsError$: Observable<boolean>;
   linkedArticlesBusy$: Observable<boolean>;
+  articleActions: IArticleAction[];
 
-  type: ActionDisplayType = ActionDisplayType.LINKED_ARTICLE_LIST;
-  constructor(private linkedListFacade: KbLinkedListFacade) { }
+  constructor(private linkedListFacade: KbLinkedListFacade,
+    private kbActionService: KbActionService) { 
+      
+    }
 
   ngOnInit() {
     this.linkedArticles$ = this.linkedListFacade.getArticles();
@@ -27,6 +31,9 @@ export class KbLinkedListComponent implements OnInit, OnDestroy {
     this.linkedArticlesTotalCount$ = this.linkedListFacade.getTotalObjectCount();
     this.linkedArticlesIsError$ = this.linkedListFacade.isError();
     this.linkedListFacade.getLinkedArticles();
+    this.articleActions = [
+      this.kbActionService.getAction(ARTICLE_ACTION_TYPE.DELETE) as IArticleAction
+    ]
   }
 
   public ngOnDestroy(): void {
