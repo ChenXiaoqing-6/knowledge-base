@@ -3,25 +3,34 @@ import { of, throwError } from 'rxjs';
 import { StoreMock } from '../mock/store.mock';
 import { KbViewFacade } from './article.facade';
 import { OpenArticle, LoadIFrameContentSuccess } from './article.actions';
+import { MockArticle } from '../../models/mock/Article.mock';
+import { KbSearchFacadeMock } from '../search/mock/search-article.facade.mock';
+import { KbSuggestedFacadeMock } from '../suggestion/mock/suggested-article.facade.mock';
+import { KbLinkedListFacadeMock } from '../linkage/mock/linked-article.facade.mock';
+import { KbServiceMock } from '../../services/mock/kb.service.mock';
 
 describe('KbViewFacade facade test', () => {
   function setup() {
     const storeMock = new StoreMock();
-    const kbSearchFacadeSpy = jasmine.createSpyObj('KbSearchFacade', ['getSelectedArticle']);
-    const kbSuggestedFacadeSpy = jasmine.createSpyObj('KbSuggestedFacade', ['getSelectedArticle']);
-    const kbLinkedListFacadeSpy = jasmine.createSpyObj('KbLinkedListFacade', ['getSelectedArticle']);
-    const kbService = jasmine.createSpyObj('KbService', ['getArticle']);
+    const kbSearchFacadeSpy = new KbSearchFacadeMock();
+    const kbSuggestedFacadeSpy = new KbSuggestedFacadeMock();
+    const kbLinkedListFacadeSpy = new KbLinkedListFacadeMock();
+    const kbService = new KbServiceMock();
     const kbViewFacade = new KbViewFacade(
       <any>storeMock,
-      kbSearchFacadeSpy,
-      kbSuggestedFacadeSpy,
-      kbLinkedListFacadeSpy,
-      kbService
+      <any>kbSearchFacadeSpy,
+      <any>kbSuggestedFacadeSpy,
+      <any>kbLinkedListFacadeSpy,
+      <any>kbService
     );
 
     return {
       kbViewFacade,
-      storeMock
+      storeMock,
+      kbSearchFacadeSpy,
+      kbSuggestedFacadeSpy,
+      kbLinkedListFacadeSpy,
+      kbService
     };
   }
 
@@ -78,5 +87,21 @@ describe('KbViewFacade facade test', () => {
       expect(service.storeMock.dispatch).toHaveBeenCalledTimes(1);
       expect(service.storeMock.dispatch).toHaveBeenCalledWith(new LoadIFrameContentSuccess());
     });
+  });
+
+  describe(': getSelectedArticle ', () => {
+
+    it('shoudl the selected article is from suggested atricle if the suggested has it', fakeAsync(() => {
+      const service = setup();
+      service.kbSuggestedFacadeSpy.getSelectedArticle.and.returnValue(of(MockArticle));
+      service.kbLinkedListFacadeSpy.getSelectedArticle.and.returnValue(of(undefined));
+      service.kbSearchFacadeSpy.getSelectedArticle.and.returnValue(of(undefined));
+      service.storeMock.pipe.and.returnValue(of(MockArticle));
+      service.kbViewFacade.getSelectedArticle('100').subscribe((selectArticle) => {
+        expect(selectArticle).toBe(MockArticle);
+      });
+    }));
+
+
   });
 });

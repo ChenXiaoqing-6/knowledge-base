@@ -31,7 +31,7 @@ describe('KbLinkedEffects', () => {
         });
     });
 
-    describe('KbLinkedEffects-GetLinkedArticle$', () => {
+    describe('KbLinkedEffects-getLinkedArticle$', () => {
 
         beforeEach(() => {
             kbService = TestBed.get(KbService);
@@ -55,7 +55,7 @@ describe('KbLinkedEffects', () => {
             const response = cold('-a|', { a: linkedResult });
             kbService.getLinkedArticles.and.returnValue(response);
             const expected = cold('--b', { b: successAction });
-            expect(effects.GetLinkedArticle$).toBeObservable(expected);
+            expect(effects.getLinkedArticle$).toBeObservable(expected);
         });
 
         it('should return a stream with error when load failed', () => {
@@ -66,7 +66,7 @@ describe('KbLinkedEffects', () => {
             const response = cold('-#|', {}, linkedError);
             kbService.getLinkedArticles.and.returnValue(response);
             const expected = cold('--(b|)', { b: errorAction });
-            expect(effects.GetLinkedArticle$).toBeObservable(expected);
+            expect(effects.getLinkedArticle$).toBeObservable(expected);
         });
     })
 

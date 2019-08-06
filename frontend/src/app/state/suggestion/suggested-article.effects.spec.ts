@@ -31,7 +31,7 @@ describe('KbSuggestedArticlesEffects', () => {
         });
     });
 
-    describe('KbSuggestedArticlesEffects-GetSuggestedArticles$', () => {
+    describe('KbSuggestedArticlesEffects-getSuggestedArticles$', () => {
 
         beforeEach(() => {
             kbService = TestBed.get(KbService);
@@ -57,7 +57,7 @@ describe('KbSuggestedArticlesEffects', () => {
             const response = cold('-a|', { a: suggestedResult });
             kbService.searchArticles.and.returnValue(response);
             const expected = cold('--b', { b: successAction });
-            expect(effects.GetSuggestedArticles$).toBeObservable(expected);
+            expect(effects.getSuggestedArticles$).toBeObservable(expected);
         });
 
         it('should return a stream with error when load failed', () => {
@@ -72,7 +72,7 @@ describe('KbSuggestedArticlesEffects', () => {
             const response = cold('-#|', {}, searchError);
             kbService.searchArticles.and.returnValue(response);
             const expected = cold('--(b|)', { b: errorAction });
-            expect(effects.GetSuggestedArticles$).toBeObservable(expected);
+            expect(effects.getSuggestedArticles$).toBeObservable(expected);
         });
     });
 

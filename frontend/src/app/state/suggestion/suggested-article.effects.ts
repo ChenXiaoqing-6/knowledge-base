@@ -19,7 +19,7 @@ export class KbSuggestedArticlesEffects{
     ){ }
 
     @Effect()
-    GetSuggestedArticles$ = this.actions$
+    getSuggestedArticles$ = this.actions$
         .pipe(
             ofType<SuggestedArticles>(ActionTypes.SuggestedArticles),
             switchMap((action) => {

@@ -81,8 +81,5 @@ import { AuthContextInterceptor } from './state/authContext/authContext.intercep
     {provide: HTTP_INTERCEPTORS, useClass: AuthContextInterceptor, multi: true}
   ],
   bootstrap: [AppComponent],
-  entryComponents: [
-    KbDetailComponent
-  ]
 })
 export class AppModule { }

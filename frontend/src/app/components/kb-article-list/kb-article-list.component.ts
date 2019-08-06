@@ -17,7 +17,7 @@ export class KbArticleListComponent implements OnInit {
     this.articleActions = [
       this.kbActionService.getAction(ARTICLE_ACTION_TYPE.MORE) as IArticleAction,
       this.kbActionService.getAction(ARTICLE_ACTION_TYPE.COPY) as IArticleAction,
-    ]
+    ];
   }
 
   trackByFn(index: number, article: IArticle) {
