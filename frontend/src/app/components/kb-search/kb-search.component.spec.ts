@@ -7,6 +7,9 @@ import { KbSearchFacade } from '../../state/search/search-article.facade';
 import { KbSuggestedFacade } from '../../state/suggestion/suggested-article.facade';
 import { KbLinkedListFacade } from '../../state/linkage/linked-article.facade';
 import { KbSearchComponent } from './kb-search.component';
+import { KbSearchFacadeMock } from '../../state/search/mock/search-article.facade.mock';
+import { KbSuggestedFacadeMock } from '../../state/suggestion/mock/suggested-article.facade.mock';
+import { KbLinkedListFacadeMock } from '../../state/linkage/mock/linked-article.facade.mock';
 
 @Component({ selector: 'kb-article-list', template: '' })
 class KbArticleListComponent {
@@ -26,34 +29,9 @@ class KbLinkedListComponent {
 describe('KbSearchComponent', () => {
   let component: KbSearchComponent;
   let fixture: ComponentFixture<KbSearchComponent>;
-  let KbSearchFacadeSpy = jasmine.createSpyObj('KbSearchFacade', [
-    'getArticles',
-    'isInit',
-    'isSearching',
-    'isError',
-    'getTotalObjectCount',
-    'isNotFound',
-    'searchArticles', 
-    'loadMoreArticles'
-  ]);
-
-  let KbSuggestedFacadeSpy = jasmine.createSpyObj('KbSuggestedFacade', [
-    'getArticles',
-    'getsuggestedArticle',
-    'getTotalObjectCount',
-    'isInit',
-    'isError',
-    'isLoadingSuggestedAticles'
-  ]);
-
-  let KbLinkedListFacadeSpy = jasmine.createSpyObj('KbLinkedListFacade', [
-    'getArticles',
-    'getLinkedArticles',
-    'getTotalObjectCount',
-    'isInit',
-    'isError',
-    'isLinkingArticles'
-  ]);
+  let KbSearchFacadeSpy = new KbSearchFacadeMock();
+  let KbSuggestedFacadeSpy = new KbSuggestedFacadeMock();
+  let KbLinkedListFacadeSpy = new KbLinkedListFacadeMock();
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

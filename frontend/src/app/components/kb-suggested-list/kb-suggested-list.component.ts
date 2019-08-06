@@ -3,7 +3,7 @@ import { Observable, Subject } from 'rxjs';
 import { IArticle } from '../../models/IArticle';
 import { Helper as PaginationHelper } from '../../models/IPagination';
 import { KbSuggestedFacade } from '../../state/suggestion/suggested-article.facade';
-// import { IFrameMessageAdapter } from '../../services/iframe.message.service';
+import { IFrameMessageAdapter } from '../../services/iframe.message.service';
 import { IArticleAction, ARTICLE_ACTION_TYPE } from '../../models/IArticleAction';
 import { KbActionService } from '../../services/kbAction.service';
 
@@ -23,7 +23,7 @@ export class KbSuggestedListComponent implements OnInit, OnDestroy {
   articleActions: IArticleAction[];
 
   constructor(private suggestedListFacade: KbSuggestedFacade, 
-    // private frameMessageAdapter: IFrameMessageAdapter,
+    private frameMessageAdapter: IFrameMessageAdapter,
     private kbActionService: KbActionService) { }
 
   ngOnInit() {
@@ -32,17 +32,17 @@ export class KbSuggestedListComponent implements OnInit, OnDestroy {
     this.suggestedArticlesIsInit$ = this.suggestedListFacade.isInit();
     this.suggestedArticlesBusy$ = this.suggestedListFacade.isLoadingSuggestedAticles();
     this.suggestedArticlesIsError$ = this.suggestedListFacade.isError();
-    this.suggestedListFacade.getsuggestedArticle({
-      pagination: PaginationHelper.createSuggestedPagination(),
-      searchTerm: 'Angular'
-    });
-
-    // this.frameMessageAdapter.getSearchTermFromActiveCase().subscribe((searchTerm: string)=>{
-    //   this.suggestedListFacade.getsuggestedArticle({
-    //     pagination: PaginationHelper.createSuggestedPagination(),
-    //     searchTerm: searchTerm
-    //   });
+    // this.suggestedListFacade.getSuggestedArticle({
+    //   pagination: PaginationHelper.createSuggestedPagination(),
+    //   searchTerm: 'Angular'
     // });
+
+    this.frameMessageAdapter.getSearchTermFromActiveCase().subscribe((searchTerm: string)=>{
+      this.suggestedListFacade.getSuggestedArticle({
+        pagination: PaginationHelper.createSuggestedPagination(),
+        searchTerm: searchTerm
+      });
+    });
 
     this.articleActions = [
       this.kbActionService.getAction(ARTICLE_ACTION_TYPE.MORE) as IArticleAction,

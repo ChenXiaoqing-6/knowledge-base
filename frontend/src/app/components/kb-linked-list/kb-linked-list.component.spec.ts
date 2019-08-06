@@ -6,6 +6,8 @@ import { KbLinkedListFacade } from '../../state/linkage/linked-article.facade';
 import { KbLinkedListComponent } from './kb-linked-list.component';
 import { IArticleAction } from '../../models/IArticleAction';
 import { KbActionService } from '../../services/kbAction.service';
+import { KbActionServiceMock } from '../../services/mock/kbAction.service.mock';
+import { KbLinkedListFacadeMock } from '../../state/linkage/mock/linked-article.facade.mock';
 
 @Component({ selector: 'kb-article-item', template: '' })
 class KbArticleItemComponent {
@@ -16,15 +18,8 @@ class KbArticleItemComponent {
 describe('KbLinkedListComponent', () => {
   let component: KbLinkedListComponent;
   let fixture: ComponentFixture<KbLinkedListComponent>;
-  const facadeSpy = jasmine.createSpyObj('KbLinkedListFacade', [
-    'getArticles',
-    'getLinkedArticles',
-    'getTotalObjectCount',
-    'isInit',
-    'isError',
-    'isLinkingArticles'
-  ]);
-  const kbActionServiceSpy = jasmine.createSpyObj('KbActionService', ['getAction']);
+  const facadeSpy = new KbLinkedListFacadeMock();
+  const kbActionServiceSpy = new KbActionServiceMock();
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

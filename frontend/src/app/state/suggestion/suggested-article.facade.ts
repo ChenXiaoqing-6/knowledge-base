@@ -35,7 +35,7 @@ export class KbSuggestedFacade {
         return this.store$.pipe(select(selectIsLoading));
     }
 
-    public getsuggestedArticle(options: ISearchOptions) {
+    public getSuggestedArticle(options: ISearchOptions) {
         this.store$.dispatch(new SuggestedArticles(options));
     }
 

@@ -6,6 +6,8 @@ import { KbViewFacade } from './../../state/article/article.facade';
 import { KbDetailComponent } from './kb-detail.component';
 import { KbActionService } from '../../services/kbAction.service';
 import { IArticleAction } from '../../models/IArticleAction';
+import { KbActionServiceMock } from '../../services/mock/kbAction.service.mock';
+import { KbViewFacadeMock } from '../../state/article/mock/article.facade.mock';
 
 @Component({ selector: 'kb-detail-header', template: '' })
 class KbDetailHeaderComponent {
@@ -33,8 +35,8 @@ class KbArticleActionsComponent {
 describe('KbDetailComponent', () => {
   let component: KbDetailComponent;
   let fixture: ComponentFixture<KbDetailComponent>;
-  const KbViewFacadeSpy = jasmine.createSpyObj('KbViewFacade', ['getSelectedArticle', 'backToSearchPage']);
-  const KbActionServiceSpy = jasmine.createSpyObj('KbActionService', ['getAction']);
+  const KbViewFacadeSpy = new KbViewFacadeMock();
+  const KbActionServiceSpy = new KbActionServiceMock();
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

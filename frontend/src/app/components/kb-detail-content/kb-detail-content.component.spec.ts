@@ -5,11 +5,12 @@ import { KbDetailContentComponent } from './kb-detail-content.component';
 import { SafeUrlPipe } from '../../pipes/safeUrl.pipe';
 import { KbViewFacade } from '../../state/article/article.facade';
 import { MockArticle } from '../../models/mock/Article.mock';
+import { KbViewFacadeMock } from '../../state/article/mock/article.facade.mock';
 
 describe('KbDetailContentComponent', () => {
     let component: KbDetailContentComponent;
     let fixture: ComponentFixture<KbDetailContentComponent>;
-    const kbViewFacadeSpy: KbViewFacade = jasmine.createSpyObj('KbViewFacade', ['setContentLoadSuccess', 'isSearching']);
+    const kbViewFacadeSpy: KbViewFacade = <any>new KbViewFacadeMock();
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({

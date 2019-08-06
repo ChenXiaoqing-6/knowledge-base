@@ -139,7 +139,7 @@ describe('KbSuggestedFacade', () => {
         let payload = {
             searchTerm: 'test'
         } as ISearchOptions;
-        kbViewFacade.getsuggestedArticle(payload);
+        kbViewFacade.getSuggestedArticle(payload);
         expect(storeMock.dispatch).toHaveBeenCalledTimes(1);
         expect(storeMock.dispatch).toHaveBeenCalledWith(new SuggestedArticles(payload));
     }));

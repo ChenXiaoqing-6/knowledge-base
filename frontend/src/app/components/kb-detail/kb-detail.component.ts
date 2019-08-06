@@ -21,7 +21,7 @@ export class KbDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.route.snapshot.params.hasOwnProperty("id")) {
+    if (this.route.snapshot.params.hasOwnProperty('id')) {
       const articleId: string = this.route.snapshot.params.id;
       this.getSelectedArticle(articleId);
     }
