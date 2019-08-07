@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FundamentalNgxModule } from 'fundamental-ngx';
-
+import { TranslateModule } from '@ngx-translate/core';
 import { KbDetailHeaderComponent } from './kb-detail-header.component';
 import { MockArticle } from '../../models/mock/Article.mock';
 
@@ -15,6 +15,7 @@ describe('KbDetailHeaderComponent', () => {
       ],
       imports: [
         FundamentalNgxModule,
+        TranslateModule.forRoot(),
       ],
     })
     .compileComponents();

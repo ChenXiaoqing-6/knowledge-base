@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FundamentalNgxModule } from 'fundamental-ngx';
+import { TranslateModule } from '@ngx-translate/core';
 import { IArticle } from '../../models/IArticle';
 import { Helper as PageHelper } from '../../models/IPagination';
 import { KbSearchFacade } from '../../state/search/search-article.facade';
@@ -47,7 +48,8 @@ describe('KbSearchComponent', () => {
         { provide: KbLinkedListFacade, useValue: KbLinkedListFacadeSpy }
       ],
       imports: [
-        FundamentalNgxModule
+        FundamentalNgxModule,
+        TranslateModule.forRoot(),
       ]
     }).compileComponents();
   }));

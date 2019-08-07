@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IArticle } from '../../models/IArticle';
 import { Helper as PaginationHelper } from '../../models/IPagination';
 import { KbSuggestedFacade } from '../../state/suggestion/suggested-article.facade';
@@ -13,8 +13,6 @@ import { KbActionService } from '../../services/kbAction.service';
   styleUrls: ['./kb-suggested-list.component.css']
 })
 export class KbSuggestedListComponent implements OnInit, OnDestroy {
-
-  private onDestroy$: Subject<boolean> = new Subject();
   suggestedArticles$: Observable<IArticle[]>;
   suggestedAticlesTotalCount$: Observable<number>;
   suggestedArticlesIsInit$: Observable<boolean>;
@@ -51,7 +49,6 @@ export class KbSuggestedListComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.onDestroy$.next(true);
   }
 
 }

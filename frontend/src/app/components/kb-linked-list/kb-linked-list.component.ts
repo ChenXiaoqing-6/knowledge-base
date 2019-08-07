@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IArticle } from './../../models/IArticle';
 import { KbLinkedListFacade } from '../../state/linkage/linked-article.facade';
 import { IArticleAction, ARTICLE_ACTION_TYPE } from '../../models/IArticleAction';
@@ -11,7 +11,6 @@ import { KbActionService } from '../../services/kbAction.service';
   styleUrls: ['./kb-linked-list.component.css']
 })
 export class KbLinkedListComponent implements OnInit, OnDestroy {
-  private onDestroy$: Subject<boolean> = new Subject();
   linkedArticles$: Observable<IArticle[]>;
   linkedArticlesTotalCount$: Observable<number>;
   linkedArticlesIsInit$: Observable<boolean>;
@@ -19,10 +18,8 @@ export class KbLinkedListComponent implements OnInit, OnDestroy {
   linkedArticlesBusy$: Observable<boolean>;
   articleActions: IArticleAction[];
 
-  constructor(private linkedListFacade: KbLinkedListFacade,
-    private kbActionService: KbActionService) { 
-      
-    }
+  constructor(private linkedListFacade: KbLinkedListFacade, private kbActionService: KbActionService) {     
+  }
 
   ngOnInit() {
     this.linkedArticles$ = this.linkedListFacade.getArticles();
@@ -37,6 +34,5 @@ export class KbLinkedListComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.onDestroy$.next(true);
   }
 }

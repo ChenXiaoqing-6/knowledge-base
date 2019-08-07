@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FundamentalNgxModule } from 'fundamental-ngx';
 import { Component, Input } from '@angular/core';
+import { of } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 import { KbSuggestedFacade } from '../../state/suggestion/suggested-article.facade';
 import { KbSuggestedListComponent } from './kb-suggested-list.component';
 import { KbActionService } from '../../services/kbAction.service';
@@ -9,7 +11,6 @@ import { IFrameMessageAdapter } from '../../services/iframe.message.service';
 import { KbActionServiceMock } from '../../services/mock/kbAction.service.mock';
 import { KbSuggestedFacadeMock } from '../../state/suggestion/mock/suggested-article.facade.mock';
 import { IFrameMessageAdapterMock } from '../../services/mock/iframe.message.service.mock';
-import { of } from 'rxjs';
 
 @Component({ selector: 'kb-article-item', template: '' })
 class KbArticleItemComponent {
@@ -36,7 +37,8 @@ describe('KbSuggestedListComponent', () => {
         { provide: IFrameMessageAdapter, useValue: frameMessageAdapterSpy}
       ],
       imports: [
-        FundamentalNgxModule
+        FundamentalNgxModule,
+        TranslateModule.forRoot(),
       ]
     })
     .compileComponents();

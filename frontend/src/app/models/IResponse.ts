@@ -1,4 +1,3 @@
-
 export interface CollectionResponse<T> {
     data: Array<T>;
     pageSize: number;
