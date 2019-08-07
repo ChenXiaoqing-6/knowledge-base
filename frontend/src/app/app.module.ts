@@ -6,6 +6,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
 import { FundamentalNgxModule } from 'fundamental-ngx';
 import { AppComponent } from './app.component';
 import { KbSearchComponent } from './components/kb-search/kb-search.component';
@@ -55,6 +56,7 @@ import { AuthContextInterceptor } from './state/authContext/authContext.intercep
     BrowserAnimationsModule,
     FundamentalNgxModule,
     HttpClientModule,
+    TranslateModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states

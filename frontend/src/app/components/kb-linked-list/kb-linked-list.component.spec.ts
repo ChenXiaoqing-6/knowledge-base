@@ -2,6 +2,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FundamentalNgxModule } from 'fundamental-ngx';
 import { Component, Input } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { KbLinkedListFacade } from '../../state/linkage/linked-article.facade';
 import { KbLinkedListComponent } from './kb-linked-list.component';
 import { IArticleAction } from '../../models/IArticleAction';
@@ -32,7 +33,8 @@ describe('KbLinkedListComponent', () => {
         { provide: KbActionService, useValue: kbActionServiceSpy }
       ],
       imports: [
-        FundamentalNgxModule
+        FundamentalNgxModule,
+        TranslateModule.forRoot(),
       ]
     })
       .compileComponents();

@@ -5,9 +5,10 @@ import { MockArticle } from '../models/mock/Article.mock';
 
 describe('KbActionService', () => {
     const alertService: jasmine.Spy = jasmine.createSpy();
+    const translateService = jasmine.createSpyObj('TranslateService', ['instant']);
     let kbActionService: KbActionService;
     beforeEach(() => {
-        kbActionService = new KbActionService(<any> alertService);
+        kbActionService = new KbActionService(<any> alertService, <any> translateService);
     });
 
     it('should be created', () => {

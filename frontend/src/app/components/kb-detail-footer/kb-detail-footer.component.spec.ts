@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FundamentalNgxModule } from 'fundamental-ngx';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { KbDetailFooterComponent } from './kb-detail-footer.component';
 
@@ -14,6 +15,7 @@ describe('KbDetailFooterComponent', () => {
       ],
       imports: [
         FundamentalNgxModule,
+        TranslateModule.forRoot(),
       ],
     })
     .compileComponents();
