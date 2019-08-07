@@ -21,7 +21,7 @@ export class EnsureAuthContextGuard implements CanActivate {
       map(ctx => !!ctx && !!ctx.authToken)
     );
 
-    // // request the ctx if no token
+    // request the ctx if no token
     isLoaded$.pipe(
       take(1),
       filter(loaded => !loaded),
