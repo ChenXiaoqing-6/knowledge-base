@@ -1,7 +1,6 @@
 
 import { reducer, initialKbState } from './article.reducers';
 import { LoadIFrameContentSuccess, OpenArticle } from './article.actions';
-import { MockArticle } from '../../models/mock/Article.mock';
 import { Actions } from './article.actions';
 
 describe('ArticleReducer', () => {
@@ -12,10 +11,11 @@ describe('ArticleReducer', () => {
     });
 
     it('should set isContentLoading to true and currentArticle to action payload when the action is OpenArticle', () => {
-        const action = new OpenArticle(MockArticle);
+        const selectedArticleId = '100';
+        const action = new OpenArticle(selectedArticleId);
         const state = reducer(undefined, action);
         expect(state.isContentLoading).toBe(true);
-        expect(state.currentArticle).toBe(MockArticle);
+        expect(state.selectedArticleId).toBe(selectedArticleId);
     });
 
     it('should set isContentLoading to false when the action is LoadIFrameContentSuccess', () => {

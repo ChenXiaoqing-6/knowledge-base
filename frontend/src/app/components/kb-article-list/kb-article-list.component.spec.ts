@@ -2,23 +2,32 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, Input } from '@angular/core';
 
 import { KbArticleListComponent } from './kb-article-list.component';
+import { IArticleAction } from '../../models/IArticleAction';
+import { KbActionService } from '../../services/kbAction.service';
+import { KbActionServiceMock } from '../../services/mock/kbAction.service.mock';
 
 @Component({ selector: 'kb-article-item', template: '' })
 class KbArticleItemComponent {
   @Input() article: any;
-  @Input() type: any;
+  @Input() actions: IArticleAction;
 }
 
 describe('KbArticleListComponent', () => {
   let component: KbArticleListComponent;
   let fixture: ComponentFixture<KbArticleListComponent>;
+  const KbActionServiceSpy = new KbActionServiceMock();
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         KbArticleListComponent,
         KbArticleItemComponent
-      ]
+      ],
+      providers: [
+        { 
+          provide: KbActionService, useValue: KbActionServiceSpy 
+        }
+      ],
     })
       .compileComponents();
   }));

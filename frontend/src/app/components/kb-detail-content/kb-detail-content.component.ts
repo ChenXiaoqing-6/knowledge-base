@@ -15,10 +15,10 @@ export class KbDetailContentComponent implements OnInit {
   public isContentLoading$: Observable<boolean>;
 
   constructor(private viewFacade: KbViewFacade) {
-    this.isContentLoading$ = this.viewFacade.isSearching();
   }
 
   public ngOnInit() {
+    this.isContentLoading$ = this.viewFacade.isSearching();
   }
 
   public ngAfterViewInit(): void {
@@ -42,7 +42,7 @@ export class KbDetailContentComponent implements OnInit {
       const content: HTMLElement = document.getElementById(this.parentHeaderBarId) as HTMLElement;
       const iHeaderHeight = content.offsetHeight, iFooterHeight = 47, iBufferHeight = 30;
       const iDynamicHeight = iDocumentHeight - iHeaderHeight - iFooterHeight - iBufferHeight;
-      iFrame.setAttribute("height", `${iDynamicHeight}`);
+      iFrame.setAttribute('height', `${iDynamicHeight}`);
     }
   }
 }

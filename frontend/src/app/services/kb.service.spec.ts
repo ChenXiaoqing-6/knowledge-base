@@ -1,12 +1,15 @@
-import { TestBed } from '@angular/core/testing';
-
 import { KbService } from './kb.service';
+import { CloudServiceMock } from './mock/cloud.service.mock';
 
-describe('KbaService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
 
-  it('should be created', () => {
-    const service: KbService = TestBed.get(KbService);
-    expect(service).toBeTruthy();
-  });
+describe('KbService', () => {
+    let kbService: KbService;
+    const cloudService = new CloudServiceMock();
+    beforeEach(() => {
+        kbService = new KbService(<any> cloudService);
+    });
+
+    it('should be created', () => {
+        expect(kbService).toBeTruthy();
+    });
 });

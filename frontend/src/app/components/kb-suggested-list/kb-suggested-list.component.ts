@@ -3,8 +3,9 @@ import { Observable, Subject } from 'rxjs';
 import { IArticle } from '../../models/IArticle';
 import { Helper as PaginationHelper } from '../../models/IPagination';
 import { KbSuggestedFacade } from '../../state/suggestion/suggested-article.facade';
-import { ActionDisplayType } from './../../models/ActionDisplayType.enum';
 import { IFrameMessageAdapter } from '../../services/iframe.message.service';
+import { IArticleAction, ARTICLE_ACTION_TYPE } from '../../models/IArticleAction';
+import { KbActionService } from '../../services/kbAction.service';
 
 @Component({
   selector: 'kb-suggested-list',
@@ -19,9 +20,11 @@ export class KbSuggestedListComponent implements OnInit, OnDestroy {
   suggestedArticlesIsInit$: Observable<boolean>;
   suggestedArticlesIsError$: Observable<boolean>;
   suggestedArticlesBusy$: Observable<boolean>;
+  articleActions: IArticleAction[];
 
-  type: ActionDisplayType = ActionDisplayType.SEARCHED_ARTICLE_LIST;
-  constructor(private suggestedListFacade: KbSuggestedFacade, private frameMessageAdapter: IFrameMessageAdapter) { }
+  constructor(private suggestedListFacade: KbSuggestedFacade, 
+    private frameMessageAdapter: IFrameMessageAdapter,
+    private kbActionService: KbActionService) { }
 
   ngOnInit() {
     this.suggestedArticles$ = this.suggestedListFacade.getArticles();
@@ -29,17 +32,22 @@ export class KbSuggestedListComponent implements OnInit, OnDestroy {
     this.suggestedArticlesIsInit$ = this.suggestedListFacade.isInit();
     this.suggestedArticlesBusy$ = this.suggestedListFacade.isLoadingSuggestedAticles();
     this.suggestedArticlesIsError$ = this.suggestedListFacade.isError();
-    // this.suggestedListFacade.getsuggestedArticle({
+    // this.suggestedListFacade.getSuggestedArticle({
     //   pagination: PaginationHelper.createSuggestedPagination(),
-    //   searchTerm: "Angular"
+    //   searchTerm: 'Angular'
     // });
 
     this.frameMessageAdapter.getSearchTermFromActiveCase().subscribe((searchTerm: string)=>{
-      this.suggestedListFacade.getsuggestedArticle({
+      this.suggestedListFacade.getSuggestedArticle({
         pagination: PaginationHelper.createSuggestedPagination(),
         searchTerm: searchTerm
       });
     });
+
+    this.articleActions = [
+      this.kbActionService.getAction(ARTICLE_ACTION_TYPE.MORE) as IArticleAction,
+      this.kbActionService.getAction(ARTICLE_ACTION_TYPE.COPY) as IArticleAction,
+    ];
   }
 
   public ngOnDestroy(): void {

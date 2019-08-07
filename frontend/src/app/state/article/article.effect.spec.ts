@@ -1,12 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { /*cold,*/ hot } from 'jasmine-marbles';
+import { hot } from 'jasmine-marbles';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { OpenArticle, BackArticle /*, OpenArticleError*/ } from './article.actions';
+import { OpenArticle, BackArticle } from './article.actions';
 import { KbViewEffects } from './article.effects';
-import { MockArticle } from '../../models/mock/Article.mock';
 
 describe('ArticleEffects', () => {
     let actions$: Observable<any>;
@@ -39,27 +38,18 @@ describe('ArticleEffects', () => {
         location = TestBed.get(Location);
     });
 
-    describe('openArticle', () => {
+    describe(': openArticle', () => {
         it('should navigate to corresponding route', () => {
-            const action = new OpenArticle(MockArticle);
+            const articleId = '100';
+            const action = new OpenArticle(articleId);
             actions$ = hot('--a', { a: action });
             effects.openArticle$.subscribe(() => {
-                expect(router.navigate).toHaveBeenCalledWith(['/kbDetail', MockArticle]);
-            })
-        }); 
-
-        // it('should return a stream with error when open failed', () => {
-        //     const openError = new Error('some error');
-        //     const action = new OpenArticle(MockArticle);
-        //     const errorAction = new OpenArticleError('error message');
-        //     actions$ = hot('-a|', { a: action });
-        //     spyOn(router, 'navigate').and.returnValue(openError);
-        //     const expected = cold('--|', { b: errorAction });
-        //     expect(effects.openArticle$).toBeObservable(expected);
-        // });  
+                expect(router.navigate).toHaveBeenCalledWith([`article/${articleId}`]);
+            });
+        });  
     });
 
-    describe('backArticle', () => {
+    describe(': backToSearchPage', () => {
         it('should back to search page', () => {
             const action = new BackArticle();
             actions$ = hot('-a', {a: action});

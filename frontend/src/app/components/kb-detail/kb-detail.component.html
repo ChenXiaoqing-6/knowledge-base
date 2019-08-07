@@ -1,6 +1,6 @@
 <fd-panel class="fd-has-padding-tiny">
     <div id="articleDetailHeaderContainer">
-        <kb-article-actions [article]="article$ | async" [type]="'SearchedArticleList'"></kb-article-actions>
+        <kb-article-actions [article]="article$ | async" [actions]="articleActions"></kb-article-actions>
         <div class="fd-has-display-flex fd-has-align-items-center ">
             <span id="btnBack" class="fd-has-margin-left-tiny fd-has-float-right sap-icon--arrow-left sap-icon--m article-back fd-has-color-action-3" (click)="onBackToSearchPage()"></span>
         </div>

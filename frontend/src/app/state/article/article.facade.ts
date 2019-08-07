@@ -9,6 +9,7 @@ import { KbSearchFacade } from '../search/search-article.facade';
 import { KbSuggestedFacade } from '../suggestion/suggested-article.facade';
 import { IArticle } from '../../models/IArticle';
 import { KbService } from '../../services/kb.service';
+import { KbLinkedListFacade } from '../linkage/linked-article.facade';
 
 @Injectable()
 export class KbViewFacade {
@@ -16,6 +17,7 @@ export class KbViewFacade {
   constructor(private store$: Store<IKbState>, 
     private kbSearchFacade: KbSearchFacade, 
     private kbSuggestedFacade: KbSuggestedFacade,
+    private kbLinkedFacade: KbLinkedListFacade,
     private kbService: KbService,
   ) {
   }
@@ -39,15 +41,18 @@ export class KbViewFacade {
   public getSelectedArticle(id: string): Observable<IArticle> {
     return this.store$.pipe(
       combineLatest(
-        this.kbSuggestedFacade.getSelectedArticleById(id),
-        this.kbSearchFacade.getSelectedArticleById(id),
-        (_store, _suggestedArticle, _searchedArticle) => {
+        this.kbSuggestedFacade.getSelectedArticle(id),
+        this.kbSearchFacade.getSelectedArticle(id),
+        this.kbLinkedFacade.getSelectedArticle(id),
+        (_store, _suggestedArticle, _searchedArticle, _linkedArticle) => {
           if(_suggestedArticle !== undefined) {
             return _suggestedArticle;
           } else if(_searchedArticle !== undefined) {
             return _searchedArticle;
+          } else if(_linkedArticle !== undefined) {
+            return _linkedArticle;
           } else {
-            return this.kbService.getArticle(id); //get article detailed info from backend service  
+            return this.kbService.getArticle(id); //get article detail info from backend service  
           }
         }
       )

@@ -35,7 +35,7 @@ export class KbSuggestedFacade {
         return this.store$.pipe(select(selectIsLoading));
     }
 
-    public getsuggestedArticle(options: ISearchOptions) {
+    public getSuggestedArticle(options: ISearchOptions) {
         this.store$.dispatch(new SuggestedArticles(options));
     }
 
@@ -43,7 +43,7 @@ export class KbSuggestedFacade {
         return this.store$.pipe(select(selectIsError));
     }
 
-    public getSelectedArticleById(id: string): Observable<IArticle> {
+    public getSelectedArticle(id: string): Observable<IArticle> {
         return this.store$.pipe(select(selectArticleById, {id}));
     }
 

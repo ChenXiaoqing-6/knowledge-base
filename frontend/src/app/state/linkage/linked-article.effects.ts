@@ -19,7 +19,7 @@ export class KbLinkedArticlesEffects {
     private kbService: KbService) { }
 
   @Effect()
-  GetLinkedArticle$ = this.actions$
+  getLinkedArticle$ = this.actions$
     .pipe(
       ofType<GetLinkedArticles>(ActionTypes.GetLinkedArticles),
       switchMap((action) => {

@@ -3,24 +3,26 @@ import { FundamentalNgxModule } from 'fundamental-ngx';
 import { Component, Input } from '@angular/core';
 import { KbSuggestedFacade } from '../../state/suggestion/suggested-article.facade';
 import { KbSuggestedListComponent } from './kb-suggested-list.component';
+import { KbActionService } from '../../services/kbAction.service';
+import { IArticleAction } from '../../models/IArticleAction';
+import { IFrameMessageAdapter } from '../../services/iframe.message.service';
+import { KbActionServiceMock } from '../../services/mock/kbAction.service.mock';
+import { KbSuggestedFacadeMock } from '../../state/suggestion/mock/suggested-article.facade.mock';
+import { IFrameMessageAdapterMock } from '../../services/mock/iframe.message.service.mock';
+import { of } from 'rxjs';
 
 @Component({ selector: 'kb-article-item', template: '' })
 class KbArticleItemComponent {
   @Input() article: any;
-  @Input() type: any;
+  @Input() actions: IArticleAction[];
 }
 
 describe('KbSuggestedListComponent', () => {
   let component: KbSuggestedListComponent;
   let fixture: ComponentFixture<KbSuggestedListComponent>;
-  let facadeSpy = jasmine.createSpyObj('KbSuggestedFacade', [
-    'getArticles',
-    'getsuggestedArticle',
-    'getTotalObjectCount',
-    'isInit',
-    'isError',
-    'isLoadingSuggestedAticles'
-  ]);
+  const facadeSpy = new KbSuggestedFacadeMock();
+  const kbActionServiceSpy = new KbActionServiceMock();
+  const frameMessageAdapterSpy = new IFrameMessageAdapterMock();
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -29,7 +31,9 @@ describe('KbSuggestedListComponent', () => {
         KbArticleItemComponent
       ],
       providers: [
-        { provide: KbSuggestedFacade, useValue: facadeSpy }
+        { provide: KbSuggestedFacade, useValue: facadeSpy },
+        { provide: KbActionService, useValue: kbActionServiceSpy },
+        { provide: IFrameMessageAdapter, useValue: frameMessageAdapterSpy}
       ],
       imports: [
         FundamentalNgxModule
@@ -41,6 +45,7 @@ describe('KbSuggestedListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(KbSuggestedListComponent);
     component = fixture.componentInstance;
+    frameMessageAdapterSpy.getSearchTermFromActiveCase.and.returnValue(of('unitTest'));
     fixture.detectChanges();
   });
 

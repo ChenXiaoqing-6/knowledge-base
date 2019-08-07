@@ -4,6 +4,10 @@ import { FundamentalNgxModule } from 'fundamental-ngx';
 import { ActivatedRoute } from '@angular/router';
 import { KbViewFacade } from './../../state/article/article.facade';
 import { KbDetailComponent } from './kb-detail.component';
+import { KbActionService } from '../../services/kbAction.service';
+import { IArticleAction } from '../../models/IArticleAction';
+import { KbActionServiceMock } from '../../services/mock/kbAction.service.mock';
+import { KbViewFacadeMock } from '../../state/article/mock/article.facade.mock';
 
 @Component({ selector: 'kb-detail-header', template: '' })
 class KbDetailHeaderComponent {
@@ -25,13 +29,14 @@ class KbDetailContentComponent {
 @Component({ selector: 'kb-article-actions', template: '' })
 class KbArticleActionsComponent {
   @Input() article: any;
-  @Input() type: any;
+  @Input() actions: IArticleAction[];
 }
 
 describe('KbDetailComponent', () => {
   let component: KbDetailComponent;
   let fixture: ComponentFixture<KbDetailComponent>;
-  let KbViewFacadeSpy = jasmine.createSpyObj('KbViewFacade', ['openArticle']);
+  const KbViewFacadeSpy = new KbViewFacadeMock();
+  const KbActionServiceSpy = new KbActionServiceMock();
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -47,7 +52,8 @@ describe('KbDetailComponent', () => {
       ],
       providers: [
         { provide: ActivatedRoute, useValue: {snapshot:{params: {id: '5001'}} }},
-        { provide: KbViewFacade, useValue: KbViewFacadeSpy }
+        { provide: KbViewFacade, useValue: KbViewFacadeSpy },
+        { provide: KbActionService, useValue: KbActionServiceSpy }
       ],
     })
       .compileComponents();
@@ -62,6 +68,11 @@ describe('KbDetailComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should KbViewFacade backToSearchPage be called if onBackToSearchPage is called', () => {
+    component.onBackToSearchPage();
+    expect(KbViewFacadeSpy.backToSearchPage).toHaveBeenCalled();
   });
 
 });
