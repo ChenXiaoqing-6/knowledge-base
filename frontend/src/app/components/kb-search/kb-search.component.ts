@@ -29,7 +29,7 @@ export class KbSearchComponent implements OnInit, OnDestroy {
   constructor(private searchFacade: KbSearchFacade, private suggestedFacade: KbSuggestedFacade, private linkedFacade: KbLinkedListFacade) { }
 
   ngOnInit() {
-    this.articles$ = this.searchFacade.getArticles();
+    this.articles$ = this.searchFacade.getArticlesBasedLinkage();
     this.isInit$ = this.searchFacade.isInit();
     this.isError$ = this.searchFacade.isError();
     this.busy$ = this.searchFacade.isSearching();

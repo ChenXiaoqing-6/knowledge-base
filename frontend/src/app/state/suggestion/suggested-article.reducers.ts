@@ -10,7 +10,6 @@ export const initialKbSuggestedState:IKbSuggestedState = adapter.getInitialState
     isInit: false,
     isLoading: false,
     isError: false,
-    totalObjectCount: 0
 })
 
 export function reducer(state = initialKbSuggestedState,action:Actions):IKbSuggestedState{
@@ -44,5 +43,6 @@ export function reducer(state = initialKbSuggestedState,action:Actions):IKbSugge
 }
 
 export const{
-    selectAll
+    selectAll,
+    selectTotal
 } = adapter.getSelectors();

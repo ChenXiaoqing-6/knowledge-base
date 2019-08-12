@@ -3,15 +3,19 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { IArticle } from '../../models/IArticle';
 import { IKbState } from '../index';
-import { GetLinkedArticles } from './linked-article.actions';
+import { 
+    GetLinkedArticles, 
+    LinkArticle, 
+    UnlinkArticle 
+} from './linked-article.actions';
 import {
     selectIsLoading,
     selectIsInit,
     selectAllArticles,
     selectIsError,
     selectTotalObjectCount,
-    selectArticleById
 } from './linked-article.selectors';
+import { IArticleLinkage, IExtendArticleLinkage } from '../../models/IArticleLinkage';
 
 @Injectable()
 export class KbLinkedListFacade {
@@ -42,8 +46,12 @@ export class KbLinkedListFacade {
         return this.store$.pipe(select(selectIsError));
     }
 
-    public getSelectedArticle(id: string): Observable<IArticle> {
-        return this.store$.pipe(select(selectArticleById, {id}));
+    public linkArticle(extendArticleLinkage: IExtendArticleLinkage) {
+        this.store$.dispatch(new LinkArticle(extendArticleLinkage));
+    }
+
+    public unlinkArticle(articleLinkage: IArticleLinkage) {
+        this.store$.dispatch(new UnlinkArticle(articleLinkage));
     }
 
 }

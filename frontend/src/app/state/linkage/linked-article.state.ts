@@ -1,9 +1,10 @@
 import { EntityState } from '@ngrx/entity';
-import { IArticle } from '../../models/IArticle';
+import { IExtendArticleLinkage } from '../../models/IArticleLinkage';
 
-export interface IkbLinkedArticleState extends EntityState<IArticle> {
+export interface IkbLinkedArticleState extends EntityState<IExtendArticleLinkage> {
     isInit: boolean;
     isLoading: boolean;
     isError: boolean;
-    totalObjectCount: number;
+    isLinkArticleError: boolean,
+    isUnlinkArticleError: boolean,
 }

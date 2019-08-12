@@ -14,8 +14,8 @@ import { KbLinkedListFacade } from '../linkage/linked-article.facade';
 @Injectable()
 export class KbViewFacade {
 
-  constructor(private store$: Store<IKbState>, 
-    private kbSearchFacade: KbSearchFacade, 
+  constructor(private store$: Store<IKbState>,
+    private kbSearchFacade: KbSearchFacade,
     private kbSuggestedFacade: KbSuggestedFacade,
     private kbLinkedFacade: KbLinkedListFacade,
     private kbService: KbService,
@@ -41,22 +41,25 @@ export class KbViewFacade {
   public getSelectedArticle(id: string): Observable<IArticle> {
     return this.store$.pipe(
       combineLatest(
-        this.kbSuggestedFacade.getSelectedArticle(id),
-        this.kbSearchFacade.getSelectedArticle(id),
-        this.kbLinkedFacade.getSelectedArticle(id),
-        (_store, _suggestedArticle, _searchedArticle, _linkedArticle) => {
-          if(_suggestedArticle !== undefined) {
-            return _suggestedArticle;
-          } else if(_searchedArticle !== undefined) {
-            return _searchedArticle;
-          } else if(_linkedArticle !== undefined) {
-            return _linkedArticle;
+        this.kbLinkedFacade.getArticles(),
+        this.kbSuggestedFacade.getArticles(),
+        this.kbSearchFacade.getArticles(),
+        (_store,  _linkedArticles, _suggestedArticles, _searchedArticles) => {
+          const selectedArticleFomLinkage: IArticle | undefined = _linkedArticles ? _linkedArticles.find((item) => item.id == id) : undefined, 
+              selectedArticleFromSuggestion: IArticle | undefined = _suggestedArticles ? _suggestedArticles.find((item) => item.id == id) : undefined, 
+              selectedArticleFromSearch: IArticle | undefined = _searchedArticles ? _searchedArticles.find((item) => item.id == id) : undefined;
+          if (selectedArticleFomLinkage) {
+            return selectedArticleFomLinkage;
+          } else if(selectedArticleFromSuggestion) {
+            return selectedArticleFromSuggestion;
+          } else if(selectedArticleFromSearch) {
+            return selectedArticleFromSearch;
           } else {
             return this.kbService.getArticle(id); //get article detail info from backend service  
           }
         }
       )
-    );
-  } 
-  
+    )
+  }
+
 }

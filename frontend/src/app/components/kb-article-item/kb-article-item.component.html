@@ -4,6 +4,7 @@
         <a id="linkArticleTitle" class="article-link two-lines-content" title="{{article.title}}" (click)="openArticleDetail()">
       {{article.title}}
     </a>
+        <span *ngIf="article.isLinked && isShowLinkedIcon" [ngClass]="['fd-has-margin-left-tiny','sap-icon--s','sap-icon--chain-link']"></span>
     </div>
     <kb-detail-header [article]="article" [isDetailMode]="false"></kb-detail-header>
     <div class="fd-has-margin-top-tiny fd-has-color-text-3 fd-has-type-minus-1 two-lines-content">{{article.content}}</div>

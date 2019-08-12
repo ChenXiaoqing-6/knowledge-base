@@ -15,5 +15,6 @@ export interface IArticle {
     category?: string,  //TBD: enum or string?
     upvotes?: number,
     devotes?: number,
-    tag?: Array<string>
+    tag?: Array<string>,
+    isLinked?: boolean
 }

@@ -43,8 +43,3 @@ export const selectTotalObjectCount = createSelector(
   kbSearchState,
   (state) => state.totalObjectCount
 );
-
-export const selectArticleById = createSelector(
-  kbSearchState,
-  (state, props) => state.entities[props.id]
-);

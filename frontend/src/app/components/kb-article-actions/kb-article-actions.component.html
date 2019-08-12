@@ -1,3 +1,25 @@
 <div *ngFor="let action of actions">
-    <span [title]="action.title" [ngClass]="['fd-has-margin-left-small','fd-has-float-right','sap-icon--m','fd-has-color-action-3','icon-container', action.icon]" (click)="onClick(action)"></span>
+    <div *ngIf="!action.childActions; else showChildActions">
+        <span [title]="action.title(article)" [ngClass]="['fd-has-margin-left-small','fd-has-float-right','sap-icon--m','fd-has-color-action-3','icon-container', action.icon(article)]" (click)="onClick(action)"></span>
+    </div>
+
+    <ng-template #showChildActions>
+        <div *ngFor="let childAction of action.childActions">
+            <fd-popover [noArrow]="false" [(isOpen)]="isOpen" placement="bottom-end" [ngClass]="['fd-has-margin-left-small','fd-has-float-right','sap-icon--m','fd-has-color-action-3','icon-container']">
+                <fd-popover-control>
+                    <span [ngClass]="[action.icon(article)]"></span>
+                </fd-popover-control>
+                <fd-popover-body>
+                    <fd-menu>
+                        <ul fd-menu-list>
+                            <li fd-menu-item [ngClass]="['fd-has-margin-tiny']">
+                                <span [ngClass]="['fd-has-margin-tiny','fd-has-color-action-3',childAction.icon(article)]"></span>
+                                <a (click)="onChildActionClick(childAction)">{{childAction.title(article)}}</a>
+                            </li>
+                        </ul>
+                    </fd-menu>
+                </fd-popover-body>
+            </fd-popover>
+        </div>
+    </ng-template>
 </div>

@@ -21,16 +21,10 @@ export const selectAllArticles = createSelector(
 
 export const selectTotalObjectCount = createSelector(
     kbLinkedArticleState,
-    (state) => state.totalObjectCount
+    fromReducers.selectTotal
 );
 
 export const selectIsError = createSelector(
     kbLinkedArticleState,
     (state) => state.isError
 );
-
-export const selectArticleById = createSelector(
-    kbLinkedArticleState,
-    (state, props) => state.entities[props.id]
-  );
-  

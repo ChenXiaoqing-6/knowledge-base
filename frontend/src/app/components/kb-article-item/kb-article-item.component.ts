@@ -11,6 +11,7 @@ import { IArticleAction } from '../../models/IArticleAction';
 export class KbArticleItemComponent implements OnInit {
   @Input() article: IArticle;
   @Input() actions: IArticleAction[];
+  @Input() public isShowLinkedIcon: boolean;
   constructor( private viewFacade: KbViewFacade) { }
 
   ngOnInit() { }

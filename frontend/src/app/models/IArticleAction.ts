@@ -1,9 +1,10 @@
 import { IArticle } from "./IArticle";
 
 export interface IArticleAction {
-    title: string;
-    icon: string;
+    title:  (article: IArticle) => string;
+    icon: (article: IArticle) => string;
     handler: (article: IArticle) => void;
+    childActions?: IArticleAction[];
 }
 
 export enum ARTICLE_ACTION_TYPE {

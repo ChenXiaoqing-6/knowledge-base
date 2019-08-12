@@ -7,6 +7,6 @@
 </div>
 <ng-template #showResultList>
     <div *ngFor="let article of (linkedArticles$ | async)">
-        <kb-article-item [article]="article" [actions]="articleActions"></kb-article-item>
+        <kb-article-item [article]="article" [actions]="articleActions" [isShowLinkedIcon]="false"></kb-article-item>
     </div>
 </ng-template>

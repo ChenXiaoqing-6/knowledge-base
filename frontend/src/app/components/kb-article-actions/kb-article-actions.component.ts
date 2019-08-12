@@ -12,6 +12,7 @@ export class KbArticleActionsComponent implements OnInit {
   @Input() article: IArticle;
   @Input() actions: IArticleAction[];
 
+  public isOpen: boolean = false;
   constructor() { }
 
   ngOnInit() {
@@ -19,5 +20,10 @@ export class KbArticleActionsComponent implements OnInit {
 
   onClick(action: IArticleAction) {
     action.handler(this.article);
+  }
+
+  onChildActionClick(childAction: IArticleAction) {
+    this.isOpen = false;
+    childAction.handler(this.article);
   }
 }
