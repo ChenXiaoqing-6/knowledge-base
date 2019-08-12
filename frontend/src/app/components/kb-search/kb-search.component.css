@@ -12,3 +12,10 @@
 .search-result p a {
     float: right;
 }
+
+.error-page {
+    height: 87.5vh;
+    display:flex ;
+    align-items:center; 
+    justify-content:center;
+}

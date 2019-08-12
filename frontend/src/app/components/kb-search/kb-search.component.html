@@ -1,5 +1,6 @@
 <div class="fd-has-padding-small container-view">
-    <fd-input-group id="inputSearch" #searchinput [button]="true" [placeholder]="'Enter words to search...'" [glyph]="'search'" [placement]="'after'" (addOnButtonClicked)="search(searchinput.inputText)" (keyup.Enter)="search(searchinput.inputText)"></fd-input-group>
+    <fd-input-group id="inputSearch" #searchinput [button]="true" [placeholder]="'Enter words to search...'" [glyph]="'search'"
+        [placement]="'after'" (addOnButtonClicked)="search(searchinput.inputText)" (keyup.Enter)="search(searchinput.inputText)"></fd-input-group>
     <br>
     <div [attr.aria-busy]="busy$ | async">
         <fd-loading-spinner id="loadingSpinnerSuggestedAndLinked" [loading]="(isSuggestedListBusy$ | async) && (isLinkedListBusy$ | async)"></fd-loading-spinner>
@@ -12,21 +13,33 @@
         </div>
 
         <ng-template #showResultBox>
-            <fd-loading-spinner id="loadingSpinnerSearch" [loading]="busy$ | async"></fd-loading-spinner>
-            <div class="search-result">
-                <p id="textSearchResultCount" class="fd-has-color-text-3">{{totalCount$ | async}} results
-                    <a id="linkBackToSuggestions" href="/">Back to Suggestions</a>
-                </p>
+            <div *ngIf="isError$ | async; else showNormalResultBox">
+                <p class="fd-has-type-minus-1 fd-has-text-align-right"><a id="linkBackToSuggestions" href="/">Back</a></p>
+                <div class="fd-has-align-items-center error-page">
+                    <div>
+                        <p class="fd-has-text-align-center">
+                            <fd-icon [glyph]="'error'" [size]="'xl'"></fd-icon>
+                        </p>
+                        <p class="fd-has-type-1 fd-has-color-text-3 fd-has-text-align-center fd-has-padding-medium fd-has-padding-top-none">Service
+                            is
+                            unavailable.
+                            Please try again later.</p>
+                    </div>
+                </div>
             </div>
-            <div *ngIf="isError$ | async; else showResultList">
-                <p id="textSearchErrorMsg" class="fd-has-color-text-3 fd-has-type fd-has-margin-top-small">The server is currently unavailable, please try again later.</p>
-            </div>
-            <ng-template #showResultList>
+            <ng-template #showNormalResultBox>
+                <fd-loading-spinner id="loadingSpinnerSearch" [loading]="busy$ | async"></fd-loading-spinner>
+                <div class="search-result">
+                    <p id="textSearchResultCount" class="fd-has-color-text-3">{{totalCount$ | async}} results
+                        <a id="linkBackToSuggestions" href="/">Back to Suggestions</a>
+                    </p>
+                </div>
                 <div fdInfiniteScroll (onScrollAction)="loadMore()" [scrollPercent]="98" class="infinite-scroll-area">
                     <kb-article-list [articles]="articles$ | async"></kb-article-list>
                 </div>
             </ng-template>
         </ng-template>
     </div>
+
 
 </div>

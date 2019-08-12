@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, takeUntil, distinctUntilChanged } from 'rxjs/operators';
 import { IArticle } from '../../models/IArticle';
@@ -7,13 +7,15 @@ import { KbSearchFacade } from '../../state/search/search-article.facade';
 import { KbSuggestedFacade } from '../../state/suggestion/suggested-article.facade';
 import { KbLinkedListFacade } from '../../state/linkage/linked-article.facade';
 
+
 @Component({
   selector: 'kb-search',
   templateUrl: './kb-search.component.html',
   styleUrls: ['./kb-search.component.css']
 })
 export class KbSearchComponent implements OnInit, OnDestroy {
-
+  @ViewChild('searchinput')
+  private inputGroup: any;
   private onDestroy$: Subject<boolean> = new Subject();
   isSuggestedListBusy$: Observable<boolean>;
   isLinkedListBusy$: Observable<boolean>;
@@ -25,10 +27,12 @@ export class KbSearchComponent implements OnInit, OnDestroy {
   notFound$: Observable<boolean>;
   search$: Subject<string> = new Subject();
   loadMore$: Subject<void> = new Subject();
+  searchTerm$: Observable<string>;
 
   constructor(private searchFacade: KbSearchFacade, private suggestedFacade: KbSuggestedFacade, private linkedFacade: KbLinkedListFacade) { }
 
   ngOnInit() {
+    this.searchTerm$ = this.searchFacade.getSerachTerm();
     this.articles$ = this.searchFacade.getArticles();
     this.isInit$ = this.searchFacade.isInit();
     this.isError$ = this.searchFacade.isError();
@@ -37,7 +41,6 @@ export class KbSearchComponent implements OnInit, OnDestroy {
     this.notFound$ = this.searchFacade.isNotFound();
     this.isSuggestedListBusy$ = this.suggestedFacade.isLoadingSuggestedAticles();
     this.isLinkedListBusy$ = this.linkedFacade.isLinkingArticles();
-
     this.search$.pipe(
       takeUntil(this.onDestroy$),
       distinctUntilChanged(),
@@ -55,6 +58,13 @@ export class KbSearchComponent implements OnInit, OnDestroy {
     ).subscribe(() => {
       this.searchFacade.loadMoreArticles();
     });
+    this.searchTerm$.pipe(
+      takeUntil(this.onDestroy$)
+    ).subscribe(
+      searchTerm => {
+        this.inputGroup.inputText = searchTerm;
+      }
+    );
 
   }
 
@@ -69,5 +79,4 @@ export class KbSearchComponent implements OnInit, OnDestroy {
   loadMore() {
     this.loadMore$.next();
   }
-
 }
