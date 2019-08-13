@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { IArticle } from '../../models/IArticle';
 import { Helper as PaginationHelper } from '../../models/IPagination';
 import { KbSuggestedFacade } from '../../state/suggestion/suggested-article.facade';
@@ -32,9 +33,12 @@ export class KbSuggestedListComponent implements OnInit, OnDestroy {
     this.suggestedArticlesIsInit$ = this.suggestedListFacade.isInit();
     this.suggestedArticlesBusy$ = this.suggestedListFacade.isLoadingSuggestedAticles();
     this.suggestedArticlesIsError$ = this.suggestedListFacade.isError();
-    this.suggestedListFacade.getSuggestedArticle({
-      pagination: PaginationHelper.createSuggestedPagination(),
-      searchTerm: 'Angular'
+    
+    this.suggestedListFacade.isInit().pipe(filter(isInit => !isInit)).subscribe(() => {
+      this.suggestedListFacade.getSuggestedArticle({
+        pagination: PaginationHelper.createSuggestedPagination(),
+        searchTerm: 'Angular'
+      });
     });
 
     // this.frameMessageAdapter.getSearchTermFromActiveCase().subscribe((searchTerm: string)=>{

@@ -19,4 +19,11 @@ export class Helper {
         };
     };
 
+    public static createLinkagePagination(): IPagination {
+        return {
+            pageSize: 50,
+            pageIndex: 1
+        };
+    };
+
 }
