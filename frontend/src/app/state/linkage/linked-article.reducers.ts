@@ -1,10 +1,10 @@
 import { createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 import { IArticle } from '../../models/IArticle';
+import { IArticleLinkage } from '../../models/IArticleLinkage';
 import { IkbLinkedArticleState } from './linked-article.state';
 import { Actions, ActionTypes } from './linked-article.actions';
-import { IExtendArticleLinkage } from '../../models/IArticleLinkage';
 
-export const adapter: EntityAdapter<IExtendArticleLinkage> = createEntityAdapter<IExtendArticleLinkage>();
+export const adapter: EntityAdapter<IArticle> = createEntityAdapter<IArticle>();
 
 export const initialKbLinkedArticleState: IkbLinkedArticleState = adapter.getInitialState({
     isInit: false,
@@ -12,6 +12,7 @@ export const initialKbLinkedArticleState: IkbLinkedArticleState = adapter.getIni
     isError: false,
     isLinkArticleError: false,
     isUnlinkArticleError: false,
+    articleLinkages: []
 });
 
 export function reducer(state = initialKbLinkedArticleState, action: Actions): IkbLinkedArticleState {
@@ -27,11 +28,16 @@ export function reducer(state = initialKbLinkedArticleState, action: Actions): I
             };
 
         case ActionTypes.GetLinkedArticlesSuccess:
-            const linkedArticles: IArticle[] = Object.assign([], action.payload.data);
-            linkedArticles.map((item) => item.isLinked = true);
+            let linkedArticles: IArticle[] = [], articleLinkages: IArticleLinkage[] = [];
+            action.payload.data.map(item => {
+                item.article.isLinked = true;
+                linkedArticles.push(item.article);
+                articleLinkages.push(item.articleLinkage);
+            });
             return adapter.addAll(linkedArticles, {
                 ...state,
                 isLoading: false,
+                articleLinkages: articleLinkages,
                 totalObjectCount: action.payload.totalCount
             });
 

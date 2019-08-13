@@ -20,9 +20,11 @@ export class KbSuggestedListComponent implements OnInit, OnDestroy {
   suggestedArticlesBusy$: Observable<boolean>;
   articleActions: IArticleAction[];
 
-  constructor(private suggestedListFacade: KbSuggestedFacade, 
+  constructor(private suggestedListFacade: KbSuggestedFacade,
     // private frameMessageAdapter: IFrameMessageAdapter,
-    private kbActionService: KbActionService) { }
+    private kbActionService: KbActionService) {
+
+  }
 
   ngOnInit() {
     this.suggestedArticles$ = this.suggestedListFacade.getSuggestedArticlesBasedLinkage();

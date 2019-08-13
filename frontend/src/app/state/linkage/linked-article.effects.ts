@@ -34,7 +34,7 @@ export class KbLinkedArticlesEffects {
     .pipe(
       ofType<GetLinkedArticles>(ActionTypes.GetLinkedArticles),
       switchMap((action) => {
-        return this.kbService.getLinkedArticles()
+        return this.kbService.getLinkedArticles(action.payload)
           .pipe(
             map(response => new GetLinkedArticlesSuccess(
               {

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertService } from 'fundamental-ngx';
+import { ClipboardService } from 'ngx-clipboard';
 import { ARTICLE_ACTION_TYPE, IArticleAction } from '../models/IArticleAction';
 import { IArticle } from '../models/IArticle';
 import { KbLinkedListFacade } from '../state/linkage/linked-article.facade';
@@ -10,7 +11,10 @@ export class KbActionService {
 
     private defaultActions: Map<ARTICLE_ACTION_TYPE, IArticleAction> = new Map();
 
-    constructor(private alertService: AlertService, private translateService: TranslateService, private kbLinkageFacade: KbLinkedListFacade) {
+    constructor(private alertService: AlertService, 
+                private translateService: TranslateService, 
+                private kbLinkageFacade: KbLinkedListFacade,
+                private _clipboardService: ClipboardService) {
         this.defaultActions = this.setDefaultActions();
     }
 
@@ -49,9 +53,9 @@ export class KbActionService {
                     },
                     handler: (article: IArticle) => {
                         if (article.isLinked) {
-                            this.kbLinkageFacade.unlinkArticle({ articleId: article.id, objectRef: 'test' });
+                            this.kbLinkageFacade.unlinkArticle({ articleId: article.id, objectRef: {objectId:'test', objectType: 'test'} });
                         } else {
-                            this.kbLinkageFacade.linkArticle({ article: article, articleLinkage: { articleId: article.id, objectRef: 'test' }});
+                            this.kbLinkageFacade.linkArticle({ article: article, articleLinkage: { articleId: article.id, objectRef: {objectId:'test', objectType: 'test'}}});
                         }
                     }
                 }
@@ -60,31 +64,18 @@ export class KbActionService {
             title: () => this.translateService.instant('KB_ARTICLE_ACTIONS_REMOVE_TITLE'),
             icon: () => 'sap-icon--delete',
             handler: (article: IArticle) => {
-                this.kbLinkageFacade.unlinkArticle({ articleId: article.id, objectRef: 'test' });
+                this.kbLinkageFacade.unlinkArticle({ articleId: article.id, objectRef: {objectId:'test', objectType: 'test'} });
             }
         });
         return defaultActions;
     }
 
     private handleCopyArticleLink(article: IArticle) {
-        if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
-            let textarea = document.createElement('textarea');
-            textarea.textContent = article.link;
-            textarea.style.position = 'fixed'; 
-            document.body.appendChild(textarea);
-            textarea.select();
-            try {
-                document.execCommand('copy');
-                this.alertService.open(this.translateService.instant('KB_ARTICLE_ACTIONS_COPY_MESSGAE_TOAST'), {
-                    type: 'information',
-                    dismissible: false,
-                    duration: 3000
-                });
-            } catch (ex) {
-                console.log(ex);
-            } finally {
-                document.body.removeChild(textarea);
-            }
-        }
+        this._clipboardService.copyFromContent(article.link);
+        this.alertService.open(this.translateService.instant('KB_ARTICLE_ACTIONS_COPY_MESSGAE_TOAST'), {
+            type: 'information',
+            dismissible: false,
+            duration: 3000
+        });
     }
 }

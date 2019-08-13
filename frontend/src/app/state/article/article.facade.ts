@@ -8,6 +8,7 @@ import { selectIsContentLoading } from './article.selectors';
 import { KbSearchFacade } from '../search/search-article.facade';
 import { KbSuggestedFacade } from '../suggestion/suggested-article.facade';
 import { IArticle } from '../../models/IArticle';
+
 import { KbService } from '../../services/kb.service';
 import { KbLinkedListFacade } from '../linkage/linked-article.facade';
 
@@ -44,7 +45,7 @@ export class KbViewFacade {
         this.kbLinkedFacade.getArticles(),
         this.kbSuggestedFacade.getArticles(),
         this.kbSearchFacade.getArticles(),
-        (_store,  _linkedArticles, _suggestedArticles, _searchedArticles) => {
+        (_store, _linkedArticles, _suggestedArticles, _searchedArticles) => {
           const selectedArticleFomLinkage: IArticle | undefined = _linkedArticles ? _linkedArticles.find((item) => item.id == id) : undefined, 
               selectedArticleFromSuggestion: IArticle | undefined = _suggestedArticles ? _suggestedArticles.find((item) => item.id == id) : undefined, 
               selectedArticleFromSearch: IArticle | undefined = _searchedArticles ? _searchedArticles.find((item) => item.id == id) : undefined;

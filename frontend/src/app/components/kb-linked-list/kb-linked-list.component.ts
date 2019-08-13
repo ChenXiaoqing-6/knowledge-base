@@ -18,7 +18,7 @@ export class KbLinkedListComponent implements OnInit, OnDestroy {
   linkedArticlesBusy$: Observable<boolean>;
   articleActions: IArticleAction[];
 
-  constructor(private linkedListFacade: KbLinkedListFacade, private kbActionService: KbActionService) {     
+  constructor(private linkedListFacade: KbLinkedListFacade, private kbActionService: KbActionService) {
   }
 
   ngOnInit() {
@@ -27,7 +27,10 @@ export class KbLinkedListComponent implements OnInit, OnDestroy {
     this.linkedArticlesBusy$ = this.linkedListFacade.isLinkingArticles();
     this.linkedArticlesTotalCount$ = this.linkedListFacade.getTotalObjectCount();
     this.linkedArticlesIsError$ = this.linkedListFacade.isError();
-    this.linkedListFacade.getLinkedArticles();
+    this.linkedListFacade.getLinkedArticles({
+      pagination:  { pageSize: 50, pageIndex: 1 },
+      objectRef: { objectId: 'test', objectType: 'CASE' }   // TODO: replace objectId with caseId 
+    });
     this.articleActions = [
       this.kbActionService.getAction(ARTICLE_ACTION_TYPE.DELETE) as IArticleAction
     ]

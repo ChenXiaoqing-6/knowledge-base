@@ -1,6 +1,5 @@
 import { Action } from '@ngrx/store';
-import { IArticle } from '../../models/IArticle';
-import { IArticleLinkage, IExtendArticleLinkage } from '../../models/IArticleLinkage';
+import { IArticleLinkage, IExtendArticleLinkage, IArticleLinkageOptions } from '../../models/IArticleLinkage';
 
 export enum ActionTypes {
   GetLinkedArticles = '[KB-LINKED-ARTICLE] GetLinkedArticles',
@@ -16,12 +15,12 @@ export enum ActionTypes {
 
 export class GetLinkedArticles implements Action {
   public readonly type = ActionTypes.GetLinkedArticles;
-  constructor() { }
+  constructor(public payload: IArticleLinkageOptions) { }
 }
 
 export class GetLinkedArticlesSuccess implements Action {
   public readonly type = ActionTypes.GetLinkedArticlesSuccess;
-  constructor(public payload: { data: IArticle[] , totalCount: number }) { }
+  constructor(public payload: { data: IExtendArticleLinkage[] , totalCount: number }) { }
 }
 
 export class GetLinkedArticlesError implements Action {

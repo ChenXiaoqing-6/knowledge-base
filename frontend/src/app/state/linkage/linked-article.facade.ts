@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { IArticle } from '../../models/IArticle';
 import { IKbState } from '../index';
 import { 
     GetLinkedArticles, 
@@ -15,7 +14,8 @@ import {
     selectIsError,
     selectTotalObjectCount,
 } from './linked-article.selectors';
-import { IArticleLinkage, IExtendArticleLinkage } from '../../models/IArticleLinkage';
+import { IArticleLinkage, IExtendArticleLinkage, IArticleLinkageOptions } from '../../models/IArticleLinkage';
+import { IArticle } from '../../models/IArticle';
 
 @Injectable()
 export class KbLinkedListFacade {
@@ -26,8 +26,8 @@ export class KbLinkedListFacade {
         return this.store$.pipe(select(selectAllArticles));
     }
 
-    public getLinkedArticles() {
-        this.store$.dispatch(new GetLinkedArticles());
+    public getLinkedArticles(linkageOption: IArticleLinkageOptions) {
+        this.store$.dispatch(new GetLinkedArticles(linkageOption));
     }
 
     public getTotalObjectCount(): Observable<number> {

@@ -46,6 +46,7 @@
     "moment": "^2.22.2",
     "ng5-slider": "^1.1.14",
     "ngrx-store-freeze": "^0.2.0",
+    "ngx-clipboard": "^12.2.0",
     "rxjs": "^6.5.1",
     "rxjs-compat": "^6.2.1",
     "save": "^2.3.2",
