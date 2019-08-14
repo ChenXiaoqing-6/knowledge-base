@@ -4,15 +4,17 @@ import { fakeAsync } from "@angular/core/testing";
 import { of, throwError } from 'rxjs';
 import { ISearchOptions } from "../../models/IRequestOptions";
 import { SuggestedArticles } from "./suggested-article.actions";
+import { KbLinkedListFacadeMock } from '../linkage/mock/linked-article.facade.mock';
 
 
 describe('KbSuggestedFacade', () => {
     let storeMock: StoreMock;
     let kbViewFacade: KbSuggestedFacade;
+    const kbLinkedListFacade = new KbLinkedListFacadeMock();    
 
     beforeEach(() => {
         storeMock = new StoreMock();
-        kbViewFacade = new KbSuggestedFacade(<any>storeMock);
+        kbViewFacade = new KbSuggestedFacade(<any>storeMock, <any> kbLinkedListFacade);
     });
 
     it('should return all articles in the state if success', fakeAsync(() => {
@@ -143,30 +145,4 @@ describe('KbSuggestedFacade', () => {
         expect(storeMock.dispatch).toHaveBeenCalledTimes(1);
         expect(storeMock.dispatch).toHaveBeenCalledWith(new SuggestedArticles(payload));
     }));
-
-    it('should return selectedArticle in the state if success', fakeAsync(() => {
-        const articles = [{ id: '1' }, { id: '2' }, { id: '3' }];
-        storeMock.pipe.and.returnValue(of(articles));
-        kbViewFacade.getSelectedArticle('1').subscribe((_response: any) => {
-            expect(_response).toBeTruthy();
-            expect(storeMock.pipe).toHaveBeenCalledTimes(1);
-            expect(_response).toBe(articles);
-        }, _error => {
-            expect(_error).toBeFalsy();
-        });
-    }));
-
-    it('should throw error -> observable error', fakeAsync(() => {
-        const error = { error: 'TestError' };
-        storeMock.pipe.and.returnValue(throwError(error));
-        kbViewFacade.getSelectedArticle("1").subscribe((_response: any) => {
-            expect(_response).toBeFalsy();
-        }, _error => {
-            expect(_error).toBeTruthy();
-            expect(storeMock.pipe).toHaveBeenCalledTimes(1);
-            expect(_error).toBe(error);
-        });
-    }));
-
-
 });

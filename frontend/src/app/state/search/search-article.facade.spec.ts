@@ -5,20 +5,22 @@ import { of, throwError } from 'rxjs';
 import { StoreMock } from './../mock/store.mock';
 import { KbSearchFacade } from './search-article.facade';
 import { fakeAsync } from '@angular/core/testing';
+import { KbLinkedListFacadeMock } from '../linkage/mock/linked-article.facade.mock';
 
 describe('KbSearchFacade', () => {
     let storeMock: StoreMock;
-    let kbViewFacade: KbSearchFacade;
+    let kbSearchFacade: KbSearchFacade;
+    const kbLinkedListFacade = new KbLinkedListFacadeMock();    
 
     beforeEach(() => {
         storeMock = new StoreMock();
-        kbViewFacade = new KbSearchFacade(<any>storeMock);
+        kbSearchFacade = new KbSearchFacade(<any>storeMock, <any>kbLinkedListFacade);
     });
 
     it('should return all articles in the state if success', fakeAsync(() => {
         const articles = [{ id: '1' }, { id: '2' }, , { id: '3' }];
         storeMock.pipe.and.returnValue(of(articles));
-        kbViewFacade.getArticles().subscribe((_response: any) => {
+        kbSearchFacade.getArticles().subscribe((_response: any) => {
             expect(_response).toBeTruthy();
             expect(storeMock.pipe).toHaveBeenCalledTimes(1);
             expect(_response).toBe(articles);
@@ -30,7 +32,7 @@ describe('KbSearchFacade', () => {
     it('should throw error -> observable error', fakeAsync(() => {
         const error = { error: 'TestError' };
         storeMock.pipe.and.returnValue(throwError(error));
-        kbViewFacade.getArticles().subscribe((_response: any) => {
+        kbSearchFacade.getArticles().subscribe((_response: any) => {
             expect(_response).toBeFalsy();
         }, _error => {
             expect(_error).toBeTruthy();
@@ -40,7 +42,7 @@ describe('KbSearchFacade', () => {
     }));
 
     it('should dispatch SearchArticlesReset if the search term is empty', () => {
-        kbViewFacade.searchArticles({
+        kbSearchFacade.searchArticles({
             searchTerm: ' '
         } as ISearchOptions);
         expect(storeMock.dispatch).toHaveBeenCalledTimes(1);
@@ -51,19 +53,19 @@ describe('KbSearchFacade', () => {
         let payload = {
             searchTerm: 'test'
         } as ISearchOptions;
-        kbViewFacade.searchArticles(payload);
+        kbSearchFacade.searchArticles(payload);
         expect(storeMock.dispatch).toHaveBeenCalledTimes(1);
         expect(storeMock.dispatch).toHaveBeenCalledWith(new SearchArticles(payload));
     });
 
     it('should dispatch LoadNextPage if user scroll down to load more articles', () => {
-        kbViewFacade.loadMoreArticles();
+        kbSearchFacade.loadMoreArticles();
         expect(storeMock.dispatch).toHaveBeenCalledTimes(1);
         expect(storeMock.dispatch).toHaveBeenCalledWith(new LoadNextPage());
     });
 
     it('should dispatch SearchArticlesReset if call resetSearch', () => {
-        kbViewFacade.resetSearch();
+        kbSearchFacade.resetSearch();
         expect(storeMock.dispatch).toHaveBeenCalledTimes(1);
         expect(storeMock.dispatch).toHaveBeenCalledWith(new SearchArticlesReset());
     });
@@ -71,7 +73,7 @@ describe('KbSearchFacade', () => {
     it('should return Pagination in the state if success', fakeAsync(() => {
         const pagination = PaginationHelper.create();
         storeMock.pipe.and.returnValue(of(pagination));
-        kbViewFacade.getPagination().subscribe((_response: any) => {
+        kbSearchFacade.getPagination().subscribe((_response: any) => {
             expect(_response).toBeTruthy();
             expect(storeMock.pipe).toHaveBeenCalledTimes(1);
             expect(_response).toBe(pagination);
@@ -83,7 +85,7 @@ describe('KbSearchFacade', () => {
     it('should throw error -> observable error', fakeAsync(() => {
         const error = { error: 'TestError' };
         storeMock.pipe.and.returnValue(throwError(error));
-        kbViewFacade.getPagination().subscribe((_response: any) => {
+        kbSearchFacade.getPagination().subscribe((_response: any) => {
             expect(_response).toBeFalsy();
         }, _error => {
             expect(_error).toBeTruthy();
@@ -95,7 +97,7 @@ describe('KbSearchFacade', () => {
     it('should return SerachTerm in the state if success', fakeAsync(() => {
         const serachTerm = "search term";
         storeMock.pipe.and.returnValue(of(serachTerm));
-        kbViewFacade.getSerachTerm().subscribe((_response: any) => {
+        kbSearchFacade.getSerachTerm().subscribe((_response: any) => {
             expect(_response).toBeTruthy();
             expect(storeMock.pipe).toHaveBeenCalledTimes(1);
             expect(_response).toBe(serachTerm);
@@ -107,7 +109,7 @@ describe('KbSearchFacade', () => {
     it('should throw error -> observable error', fakeAsync(() => {
         const error = { error: 'TestError' };
         storeMock.pipe.and.returnValue(throwError(error));
-        kbViewFacade.getSerachTerm().subscribe((_response: any) => {
+        kbSearchFacade.getSerachTerm().subscribe((_response: any) => {
             expect(_response).toBeFalsy();
         }, _error => {
             expect(_error).toBeTruthy();
@@ -119,7 +121,7 @@ describe('KbSearchFacade', () => {
     it('should return LastPage in the state if success', fakeAsync(() => {
         const lastPage = 1;
         storeMock.pipe.and.returnValue(of(lastPage));
-        kbViewFacade.getLastPage().subscribe((_response: any) => {
+        kbSearchFacade.getLastPage().subscribe((_response: any) => {
             expect(_response).toBeTruthy();
             expect(storeMock.pipe).toHaveBeenCalledTimes(1);
             expect(_response).toBe(lastPage);
@@ -131,7 +133,7 @@ describe('KbSearchFacade', () => {
     it('should throw error -> observable error', fakeAsync(() => {
         const error = { error: 'TestError' };
         storeMock.pipe.and.returnValue(throwError(error));
-        kbViewFacade.getLastPage().subscribe((_response: any) => {
+        kbSearchFacade.getLastPage().subscribe((_response: any) => {
             expect(_response).toBeFalsy();
         }, _error => {
             expect(_error).toBeTruthy();
@@ -143,7 +145,7 @@ describe('KbSearchFacade', () => {
     it('should return TotalObjectCount in the state if success', fakeAsync(() => {
         const totalObjectCount = 100;
         storeMock.pipe.and.returnValue(of(totalObjectCount));
-        kbViewFacade.getTotalObjectCount().subscribe((_response: any) => {
+        kbSearchFacade.getTotalObjectCount().subscribe((_response: any) => {
             expect(_response).toBeTruthy();
             expect(storeMock.pipe).toHaveBeenCalledTimes(1);
             expect(_response).toBe(totalObjectCount);
@@ -155,7 +157,7 @@ describe('KbSearchFacade', () => {
     it('should throw error -> observable error', fakeAsync(() => {
         const error = { error: 'TestError' };
         storeMock.pipe.and.returnValue(throwError(error));
-        kbViewFacade.getTotalObjectCount().subscribe((_response: any) => {
+        kbSearchFacade.getTotalObjectCount().subscribe((_response: any) => {
             expect(_response).toBeFalsy();
         }, _error => {
             expect(_error).toBeTruthy();
@@ -167,7 +169,7 @@ describe('KbSearchFacade', () => {
     it('should return isInit in the state if success', fakeAsync(() => {
         const isInit = true;
         storeMock.pipe.and.returnValue(of(isInit));
-        kbViewFacade.isInit().subscribe((_response: any) => {
+        kbSearchFacade.isInit().subscribe((_response: any) => {
             expect(_response).toBeTruthy();
             expect(storeMock.pipe).toHaveBeenCalledTimes(1);
             expect(_response).toBe(isInit);
@@ -179,7 +181,7 @@ describe('KbSearchFacade', () => {
     it('should throw error -> observable error', fakeAsync(() => {
         const error = { error: 'TestError' };
         storeMock.pipe.and.returnValue(throwError(error));
-        kbViewFacade.isInit().subscribe((_response: any) => {
+        kbSearchFacade.isInit().subscribe((_response: any) => {
             expect(_response).toBeFalsy();
         }, _error => {
             expect(_error).toBeTruthy();
@@ -191,7 +193,7 @@ describe('KbSearchFacade', () => {
     it('should return isSearching in the state if success', fakeAsync(() => {
         const isLoading = true;
         storeMock.pipe.and.returnValue(of(isLoading));
-        kbViewFacade.isSearching().subscribe((_response: any) => {
+        kbSearchFacade.isSearching().subscribe((_response: any) => {
             expect(_response).toBeTruthy();
             expect(storeMock.pipe).toHaveBeenCalledTimes(1);
             expect(_response).toBe(isLoading);
@@ -203,7 +205,7 @@ describe('KbSearchFacade', () => {
     it('should throw error -> observable error', fakeAsync(() => {
         const error = { error: 'TestError' };
         storeMock.pipe.and.returnValue(throwError(error));
-        kbViewFacade.isSearching().subscribe((_response: any) => {
+        kbSearchFacade.isSearching().subscribe((_response: any) => {
             expect(_response).toBeFalsy();
         }, _error => {
             expect(_error).toBeTruthy();
@@ -213,10 +215,10 @@ describe('KbSearchFacade', () => {
     }));
 
     it('should return true if not loading and total count is 0', fakeAsync(() => {
-        spyOn(kbViewFacade, 'isSearching').and.returnValue(of(false));
-        spyOn(kbViewFacade, 'getTotalObjectCount').and.returnValue(of(0));
+        spyOn(kbSearchFacade, 'isSearching').and.returnValue(of(false));
+        spyOn(kbSearchFacade, 'getTotalObjectCount').and.returnValue(of(0));
 
-        kbViewFacade.isNotFound().subscribe((_response: any) => {
+        kbSearchFacade.isNotFound().subscribe((_response: any) => {
             expect(_response).toBe(true);
         }, _error => {
             expect(_error).toBeFalsy();
@@ -224,10 +226,10 @@ describe('KbSearchFacade', () => {
     }));
 
     it('should return false if loading', fakeAsync(() => {
-        spyOn(kbViewFacade, 'isSearching').and.returnValue(of(true));
-        spyOn(kbViewFacade, 'getTotalObjectCount').and.returnValue(of(0));
+        spyOn(kbSearchFacade, 'isSearching').and.returnValue(of(true));
+        spyOn(kbSearchFacade, 'getTotalObjectCount').and.returnValue(of(0));
 
-        kbViewFacade.isNotFound().subscribe((_response: any) => {
+        kbSearchFacade.isNotFound().subscribe((_response: any) => {
             expect(_response).toBe(false);
         }, _error => {
             expect(_error).toBeFalsy();
@@ -235,10 +237,10 @@ describe('KbSearchFacade', () => {
     }));
 
     it('should return false if not loading and total count is not 0', fakeAsync(() => {
-        spyOn(kbViewFacade, 'isSearching').and.returnValue(of(false));
-        spyOn(kbViewFacade, 'getTotalObjectCount').and.returnValue(of(2));
+        spyOn(kbSearchFacade, 'isSearching').and.returnValue(of(false));
+        spyOn(kbSearchFacade, 'getTotalObjectCount').and.returnValue(of(2));
 
-        kbViewFacade.isNotFound().subscribe((_response: any) => {
+        kbSearchFacade.isNotFound().subscribe((_response: any) => {
             expect(_response).toBe(false);
         }, _error => {
             expect(_error).toBeFalsy();
@@ -248,7 +250,7 @@ describe('KbSearchFacade', () => {
     it('should throw error -> observable error', fakeAsync(() => {
         const error = { error: 'TestError' };
         storeMock.pipe.and.returnValue(throwError(error));
-        kbViewFacade.isNotFound().subscribe((_response: any) => {
+        kbSearchFacade.isNotFound().subscribe((_response: any) => {
             expect(_response).toBeFalsy();
         }, _error => {
             expect(_error).toBeTruthy();
@@ -263,11 +265,11 @@ describe('KbSearchFacade', () => {
             pageIndex: 1
         };
         const searchTerm = "search term";
-        spyOn(kbViewFacade, 'getPagination').and.returnValue(of(pagination));
-        spyOn(kbViewFacade, 'getLastPage').and.returnValue(of(10));
-        spyOn(kbViewFacade, 'getSerachTerm').and.returnValue(of(searchTerm));
+        spyOn(kbSearchFacade, 'getPagination').and.returnValue(of(pagination));
+        spyOn(kbSearchFacade, 'getLastPage').and.returnValue(of(10));
+        spyOn(kbSearchFacade, 'getSerachTerm').and.returnValue(of(searchTerm));
 
-        kbViewFacade.getNextPageSearchOptions().subscribe((_response: any) => {
+        kbSearchFacade.getNextPageSearchOptions().subscribe((_response: any) => {
             expect(_response).toEqual({
                 pagination: { ...pagination, pageIndex: pagination.pageIndex + 1 },
                 searchTerm: searchTerm
@@ -278,13 +280,13 @@ describe('KbSearchFacade', () => {
     }));
 
     it('should return null if pageIndex > lastPage', fakeAsync(() => {
-        spyOn(kbViewFacade, 'getPagination').and.returnValue(of({
+        spyOn(kbSearchFacade, 'getPagination').and.returnValue(of({
             pageIndex: 5
         }));
-        spyOn(kbViewFacade, 'getLastPage').and.returnValue(of(2));
-        spyOn(kbViewFacade, 'getSerachTerm').and.returnValue(of("search term"));
+        spyOn(kbSearchFacade, 'getLastPage').and.returnValue(of(2));
+        spyOn(kbSearchFacade, 'getSerachTerm').and.returnValue(of("search term"));
 
-        kbViewFacade.getNextPageSearchOptions().subscribe((_response: any) => {
+        kbSearchFacade.getNextPageSearchOptions().subscribe((_response: any) => {
             expect(_response).toBeNull();
         }, _error => {
             expect(_error).toBeFalsy();
@@ -294,7 +296,7 @@ describe('KbSearchFacade', () => {
     it('should throw error -> observable error', fakeAsync(() => {
         const error = { error: 'TestError' };
         storeMock.pipe.and.returnValue(throwError(error));
-        kbViewFacade.getNextPageSearchOptions().subscribe((_response: any) => {
+        kbSearchFacade.getNextPageSearchOptions().subscribe((_response: any) => {
             expect(_response).toBeFalsy();
         }, _error => {
             expect(_error).toBeTruthy();
@@ -305,7 +307,7 @@ describe('KbSearchFacade', () => {
     it('should return isError in the state if success', fakeAsync(() => {
         const isError = true;
         storeMock.pipe.and.returnValue(of(isError));
-        kbViewFacade.isError().subscribe((_response: any) => {
+        kbSearchFacade.isError().subscribe((_response: any) => {
             expect(_response).toBeTruthy();
             expect(storeMock.pipe).toHaveBeenCalledTimes(1);
             expect(_response).toBe(isError);
@@ -317,7 +319,7 @@ describe('KbSearchFacade', () => {
     it('should throw error -> observable error', fakeAsync(() => {
         const error = { error: 'TestError' };
         storeMock.pipe.and.returnValue(throwError(error));
-        kbViewFacade.isError().subscribe((_response: any) => {
+        kbSearchFacade.isError().subscribe((_response: any) => {
             expect(_response).toBeFalsy();
         }, _error => {
             expect(_error).toBeTruthy();

@@ -3,13 +3,15 @@ import { Component, Input } from '@angular/core';
 
 import { KbArticleListComponent } from './kb-article-list.component';
 import { IArticleAction } from '../../models/IArticleAction';
+import { IArticle } from '../../models/IArticle';
 import { KbActionService } from '../../services/kbAction.service';
 import { KbActionServiceMock } from '../../services/mock/kbAction.service.mock';
 
 @Component({ selector: 'kb-article-item', template: '' })
 class KbArticleItemComponent {
-  @Input() article: any;
+  @Input() article: IArticle;
   @Input() actions: IArticleAction;
+  @Input() public isShowLinkedIcon: boolean;
 }
 
 describe('KbArticleListComponent', () => {

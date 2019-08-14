@@ -8,4 +8,5 @@ export class KbSearchFacadeMock {
     public isNotFound: jasmine.Spy = jasmine.createSpy();
     public searchArticles: jasmine.Spy = jasmine.createSpy();
     public loadMoreArticles: jasmine.Spy = jasmine.createSpy();
+    public getArticlesBasedLinkage: jasmine.Spy = jasmine.createSpy();
 }

@@ -1,3 +1,4 @@
 export class KbServiceMock {
-    getArticle: jasmine.Spy = jasmine.createSpy();
+    public getArticle: jasmine.Spy = jasmine.createSpy();
+    public getLinkedArticles: jasmine.Spy = jasmine.createSpy();
 };

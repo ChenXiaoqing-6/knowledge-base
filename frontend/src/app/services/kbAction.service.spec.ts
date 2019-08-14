@@ -2,13 +2,16 @@ import { KbActionService } from './kbAction.service';
 import { IArticleAction, ARTICLE_ACTION_TYPE } from '../models/IArticleAction';
 import { IArticle } from '../models/IArticle';
 import { MockArticle } from '../models/mock/Article.mock';
+import { KbLinkedListFacadeMock } from '../state/linkage/mock/linked-article.facade.mock';
 
 describe('KbActionService', () => {
     const alertService: jasmine.Spy = jasmine.createSpy();
+    const kbLinkedListFacadeSpy = new KbLinkedListFacadeMock();
     const translateService = jasmine.createSpyObj('TranslateService', ['instant']);
+    const clipboardService = jasmine.createSpyObj('ClipboardService', ['copyFromContent']);
     let kbActionService: KbActionService;
     beforeEach(() => {
-        kbActionService = new KbActionService(<any> alertService, <any> translateService);
+        kbActionService = new KbActionService(<any>alertService, <any>translateService, <any>kbLinkedListFacadeSpy, <any>clipboardService);
     });
 
     it('should be created', () => {
@@ -16,7 +19,7 @@ describe('KbActionService', () => {
     });
 
     it('shold return the copy actions if the parameter of getAction() is "COPY"', () => {
-        const copyAction: IArticleAction = kbActionService.getAction(ARTICLE_ACTION_TYPE.DELETE) as IArticleAction;
+        const copyAction: IArticleAction = kbActionService.getAction(ARTICLE_ACTION_TYPE.COPY) as IArticleAction;
         expect(copyAction).toBeTruthy();
         expect(copyAction.handler).toBeTruthy();
     });

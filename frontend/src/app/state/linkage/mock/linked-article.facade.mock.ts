@@ -6,4 +6,6 @@ export class KbLinkedListFacadeMock {
     public isInit: jasmine.Spy = jasmine.createSpy();
     public isError: jasmine.Spy = jasmine.createSpy();
     public isLinkingArticles: jasmine.Spy = jasmine.createSpy();
+    public unlinkArticle: jasmine.Spy = jasmine.createSpy();
+    public linkArticle: jasmine.Spy = jasmine.createSpy();
 }

@@ -26,18 +26,32 @@ describe('KbArticleActionsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    expect(component.isOpen).toBeFalsy();
   });
 
   it('should call "action.handler" function in onClick', () => {
     const handler = (article: IArticle) => { 
-      expect(article).toBe(MockArticle);
+      expect(article).toBe(component.article);
     };
     const action: IArticleAction = {
-      title: 'More',
-      icon: 'sap-icon--overflow',
+      title: () => 'KB_ARTICLE_ACTIONS_COPY_TITLE',
+      icon: () => 'sap-icon--copy',
       handler: handler
     };
     component.onClick(action);
+  });
+
+  it('should call "childAction.handler" function in onChildActionClick', () => {
+    const handler = (article: IArticle) => { 
+      expect(article).toBe(component.article);
+      expect(component.isOpen).toBeFalsy();
+    };
+    const action: IArticleAction = {
+      title: () => 'KB_ARTICLE_ACTIONS_COPY_TITLE',
+      icon: () => 'sap-icon--copy',
+      handler: handler
+    };
+    component.onChildActionClick(action);
   });
 
 });

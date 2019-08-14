@@ -103,7 +103,7 @@ export const MockSearchResponse: any = {
 export const MockLinkedArticlesResponse: any = {
   "data": [
     {
-      article:
+      "article":
       {
         "id": "1",
         "provider": "Mindtouch",
@@ -121,7 +121,7 @@ export const MockLinkedArticlesResponse: any = {
         "devotes": 0,  //1908+
         "tag": ["troubleshooting", "coffee maker"],  //1908+
       },
-      articleLinkage: {
+      "articleLinkage": {
         "id": "1",
         "articleId": "1",
         "providerType": "mind touch",
@@ -133,7 +133,7 @@ export const MockLinkedArticlesResponse: any = {
     },
 
     {
-      article:
+      "article":
       {
         "id": "2",
         "provider": "Mindtouch",
@@ -151,7 +151,7 @@ export const MockLinkedArticlesResponse: any = {
         "devotes": 0,  //1908+
         "tag": ["troubleshooting", "coffee maker"],  //1908+
       },
-      articleLinkage: {
+      "articleLinkage": {
         "id": "2",
         "articleId": "2",
         "providerType": "mind touch",
@@ -161,9 +161,8 @@ export const MockLinkedArticlesResponse: any = {
         }
       }
     },
-
     {
-      article:
+      "article":
       {
         "id": "3",
         "provider": "Mindtouch",
@@ -181,7 +180,7 @@ export const MockLinkedArticlesResponse: any = {
         "devotes": 3,  //1908+
         "tag": ["troubleshooting", "coffee maker"],  //1908+
       },
-      articleLinkage: {
+      "articleLinkage": {
         "id": "3",
         "articleId": "3",
         "providerType": "mind touch",
@@ -191,9 +190,8 @@ export const MockLinkedArticlesResponse: any = {
         }
       }
     },
-
     {
-      article:
+      "article":
       {
         "id": "4",
         "provider": "Mindtouch",
@@ -211,7 +209,7 @@ export const MockLinkedArticlesResponse: any = {
         "devotes": 4,  //1908+
         "tag": ["troubleshooting", "coffee maker"],  //1908+
       },
-      articleLinkage: {
+      "articleLinkage": {
         "id": "4",
         "articleId": "4",
         "providerType": "mind touch",
