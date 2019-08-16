@@ -1,5 +1,5 @@
 import { ISearchOptions } from "../../models/IRequestOptions";
-import { Observable, timer, throwError } from "rxjs";
+import { Observable, timer, throwError, of } from "rxjs";
 import { CollectionResponse } from "../../models/IResponse";
 import { IArticle } from "../../models/IArticle";
 import { tap, mapTo } from "rxjs/operators";
@@ -174,6 +174,15 @@ export const MockLinkedArticlesResponse: any = {
 }
 
 export function mockSearch(options: ISearchOptions): Observable<CollectionResponse<IArticle>>  {
+  if (options.searchTerm === "")  {
+    return of({
+      data:[], 
+      pageSize: 20,
+      currentPage: 1,
+      lastPage: 1,  
+      totalObjectCount:0
+    });
+  }
     if (options.searchTerm.indexOf("Error") >= 0) {
         return throwError(new Error('Fake error')); 
       }

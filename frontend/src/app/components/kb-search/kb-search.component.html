@@ -1,5 +1,34 @@
 <div class="fd-has-padding-small container-view">
-    <fd-input-group id="inputSearch" #searchinput [button]="true" [placeholder]="'KB_SEARCH_INPUT_PLACEHOLDER' | translate" [glyph]="'search'" [placement]="'after'" (addOnButtonClicked)="search(searchinput.inputText)" (keyup.Enter)="search(searchinput.inputText)"></fd-input-group>
+    <!-- <fd-input-group 
+        id="inputSearch" 
+        #searchinput [button]="true" 
+        [placeholder]="'KB_SEARCH_INPUT_PLACEHOLDER' | translate" 
+        [glyph]="'search'" 
+        [placement]="'after'" 
+        (addOnButtonClicked)="search(searchinput.inputText)" 
+        (keyup.Enter)="search(searchinput.inputText)"></fd-input-group> -->
+    <br>
+    <fd-combobox 
+        id="inputSearch" 
+        #searchinput 
+        [dropdownValues]="suguestionArticles" 
+        [glyph]="'search'"
+        [maxHeight]="'260px'"
+        [itemTemplate]="template" 
+        (itemClicked)="selectItem($event)"
+        (keydown.Enter)="search(searchinput.inputText)" 
+        (keyup)="onKeyup(searchinput.inputText)"
+        [displayFn]="displayFunction" 
+        [placeholder]="'KB_SEARCH_INPUT_PLACEHOLDER' | translate"></fd-combobox>
+
+    <ng-template #template let-item>
+        <div class="fd-template-container-div" tabindex="0">
+            <li>
+                <span class="template-container-icon" [ngClass]="['fd-has-margin-left-small','fd-has-float-right','sap-icon--m','icon-container', 'sap-icon--education']"></span>
+                <span>{{item.title}}</span>
+            </li>
+        </div>
+    </ng-template>
     <br>
     <div [attr.aria-busy]="busy$ | async">
         <fd-loading-spinner id="loadingSpinnerSuggestedAndLinked" [loading]="(isSuggestedListBusy$ | async) && (isLinkedListBusy$ | async)"></fd-loading-spinner>

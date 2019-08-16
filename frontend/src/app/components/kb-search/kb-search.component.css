@@ -12,3 +12,23 @@
 .search-result p a {
     float: right;
 }
+.fd-template-container-div li {
+    display: flex;
+    align-items: center;
+    padding-bottom: 12px;
+    padding-top:12px;
+    margin-left:-5px;
+    margin-top:-4px;
+    margin-bottom: -4px;
+    border-top:1px solid #ededed;
+    cursor: pointer;
+}
+
+.fd-template-container-div:hover {
+    background-color: var(--fd-color-background-hover);
+}
+
+.template-container-icon{
+    margin-right: 12px;
+    margin-top: 4px; 
+}

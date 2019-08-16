@@ -29,7 +29,7 @@ export class KbSearchFacade {
   }
 
   public searchArticles(options: ISearchOptions) {
-    if (options.searchTerm.trim().length == 0) {
+    if (options.searchTerm == undefined || options.searchTerm.trim().length == 0) {
       this.resetSearch();
     } else {
       this.store$.dispatch(new SearchArticles(options));
@@ -101,7 +101,7 @@ export class KbSearchFacade {
   }
 
   public getSelectedArticle(id: string): Observable<IArticle> {
-    return this.store$.pipe(select(selectArticleById, {id}));
+    return this.store$.pipe(select(selectArticleById, { id }));
   }
 
 }
