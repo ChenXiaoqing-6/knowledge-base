@@ -3,6 +3,7 @@ import { Observable, timer, throwError, of } from "rxjs";
 import { CollectionResponse } from "../../models/IResponse";
 import { IArticle } from "../../models/IArticle";
 import { tap, mapTo } from "rxjs/operators";
+import { IProviderConfigData } from "../../models/IProviderConfigData";
 
 export const MockArticleResponse: any = {
     "id": "20001",
@@ -173,6 +174,21 @@ export const MockLinkedArticlesResponse: any = {
   "totalObjectCount": 4
 }
 
+export const mockConfigDataResponse: any ={
+  "data":[
+    {
+      "providerCode": "MindTouch",
+      "isActive": true,
+      "adapterAuthType": "",
+      "adapterURL": "",
+      "adapterCredential": "",
+      "siteURL": "https://sapdemo-responsive.mindtouch.us\"",
+      "siteAuthType": "",
+      "siteCredential": "{\"user\": \"admin\",\"key\":\"5cd197ff89096ce78a1e27b28bf371e2d3bb065e51e3b607fdf13f7c7630bf11\",\"secret\": \"f6d3306b11dd361c165ca981280bcdaa0c56a6d5bd9b36c8497a99b2ab4c16b9\"}"
+    }
+  ]
+}
+
 export function mockSearch(options: ISearchOptions): Observable<CollectionResponse<IArticle>>  {
   if (options.searchTerm === "")  {
     return of({
@@ -212,7 +228,7 @@ export function mockSearch(options: ISearchOptions): Observable<CollectionRespon
         totalObjectCount: typeData.length
       };
       console.log("request server: ", options);
-      return timer(1000).pipe(tap(()=>{console.log("done.");}),mapTo(ret));
+      return timer(200).pipe(tap(()=>{console.log("done.");}),mapTo(ret));
 }
 
 export function MockLinkedArticles(): Observable<CollectionResponse<IArticle>> {
@@ -221,4 +237,12 @@ export function MockLinkedArticles(): Observable<CollectionResponse<IArticle>> {
   };
   return timer(2000).pipe(tap(()=>{console.log("done.");}),mapTo(ret));
   // return throwError(new Error('Fake error'));
+}
+
+export function mockConfigData(): Observable<CollectionResponse<IProviderConfigData>> {
+
+  let ret ={
+    ...mockConfigDataResponse,
+  };
+  return timer(2000).pipe(tap(()=>{console.log("done.");}),mapTo(ret));
 }

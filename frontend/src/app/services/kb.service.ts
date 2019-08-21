@@ -5,7 +5,7 @@ import { switchMap } from 'rxjs/operators';
 import { IArticle } from '../models/IArticle';
 import { ISearchOptions } from '../models/IRequestOptions';
 import { CollectionResponse, SingleResponse } from '../models/IResponse';
-import { MockLinkedArticles, MockArticleResponse } from '../services/mock/mock-data';
+import { MockLinkedArticles, MockArticleResponse, mockSearch} from '../services/mock/mock-data';
 import { CloudService } from './cloud.service';
 
 @Injectable({
@@ -15,27 +15,33 @@ export class KbService {
 
   constructor(private cloudService: CloudService) { }
 
-  public searchArticles(options: ISearchOptions): Observable<CollectionResponse<IArticle>> {
-    const params = new HttpParams()
-      .set('page', '' + options.pagination.pageIndex)
-      .set('pageSize', '' + options.pagination.pageSize)
-      .set('search', options.searchTerm);
+  // public searchArticles(options: ISearchOptions): Observable<CollectionResponse<IArticle>> {
+  //   const params = new HttpParams()
+  //     .set('page', '' + options.pagination.pageIndex)
+  //     .set('pageSize', '' + options.pagination.pageSize)
+  //     .set('search', options.searchTerm);
 
-    return this.cloudService.getHttp().get(
-      this.cloudService.getUrl("search"), { params }
-    ).pipe(
-      switchMap((response: Object) => {
-        return of(Object.assign({
-          data: [],
-          pageSize: 1,
-          currentPage: 1,
-          lastPage: 1,
-          totalObjectCount: 0
-        }, response));
-      })
-    );
+  //   return this.cloudService.getHttp().get(
+  //     this.cloudService.getUrl("search"), { params }
+  //   ).pipe(
+  //     switchMap((response: Object) => {
+  //       return of(Object.assign({
+  //         data: [],
+  //         pageSize: 1,
+  //         currentPage: 1,
+  //         lastPage: 1,
+  //         totalObjectCount: 0
+  //       }, response));
+  //     })
+  //   );
+  // }
+
+  public searchArticles(options: ISearchOptions): Observable<CollectionResponse<IArticle>> {
+
+      return mockSearch(options);
+
   }
-  
+
   public getArticle(id: string): IArticle {
     return MockArticleResponse;
   }

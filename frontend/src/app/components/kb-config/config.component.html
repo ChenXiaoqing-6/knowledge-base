@@ -1,0 +1,83 @@
+<div class="config-action">
+    <button fd-button  class ="config-action-cancel" [options]="'light'">Cancel</button>
+    <button fd-button  class ="config-action-save" [options]="'emphasized'">Save</button>
+</div>
+
+<div class="config-body">
+    <div class="config-header">
+           <span> Enable Knowledge Component </span>
+        <fd-toggle 
+            class="config-header-toggle" 
+            [size] ="'s'"
+            [checked] = "isEnable"
+            (checkedChange) ="isEnableChange()">
+    </fd-toggle>    
+    </div>
+
+    <div class="config-content" [hidden] ="!isEnable">
+        <div class="config-side-nav">
+
+            <fd-side-nav>
+                <div fd-side-nav-list>
+                <fd-side-nav-item class="config-side-item">
+                    <a fd-side-nav-link href="#">
+                            MindTouch
+                        <fd-toggle class="config-toggle" [size] ="'s'" [checked] = "isMindTouch" (checkedChange) ="isMindTouchChange()"></fd-toggle> 
+                    </a>
+                </fd-side-nav-item>
+                </div>
+            </fd-side-nav>
+
+            <div class="config-side-icon">
+                <span class="" [ngClass]="['fd-has-margin-left-small','fd-has-float-right','sap-icon--m','icon-container', 'sap-icon--delete']"></span>
+                <span class="" [ngClass]="['fd-has-margin-left-small','fd-has-float-right','sap-icon--m','icon-container', 'sap-icon--add']"></span>        
+            </div>
+                   
+            </div>
+            <div id="mindtouch" class="config-item-content">
+                <kb-config-form></kb-config-form>
+                <!-- <div class="config-content-form">
+                    <div class="fd-form__set">
+                        <div class="fd-form__item">
+                            <label class="fd-form__label" for="input-1">Provider Name:</label>
+                            <input class="fd-form__control" type="text" id="input-1" placeholder="Field placeholder text">
+                        </div>
+                    </div>
+
+                                    
+                    <div class="fd-form__set">
+                        <div class="fd-form__item">
+                            <label class="fd-form__label" for="input-1">Site URL</label>
+                            <input class="fd-input--compact fd-form__control" type="text" id="input-1" placeholder="Field placeholder text">
+                        </div>
+                    </div>
+                                    
+                    <div class="fd-form__set">
+                        <div class="fd-form__item">
+                            <label class="fd-form__label" aria-required="true" for="input-2">User:</label>
+                            <input class="fd-form__control" type="text" id="input-2" placeholder="Field placeholder text">
+                        </div>
+                    </div>
+                                    
+                    <div class="fd-form__set">
+                        <div class="fd-form__item">
+                            <label class="fd-form__label" aria-required="true" for="input-3">Key:</label>
+                            <input class="fd-form__control" type="password" id="input-3">
+                        </div>
+                    </div>  
+                            
+                    <div class="fd-form__set">
+                            <div class="fd-form__item">
+                                <label class="fd-form__label" aria-required="true" for="input-4">Secret:</label>
+                                <input class="fd-form__control" type="password" id="input-4">
+                            </div>
+                    </div>
+                    <p>Define data for establishing connection with the knowledge base adapter and knowledge base site.</p> 
+                    <p><span>Note:</span>The authorization of the user given in the connection data should be limited to reading and searching knowledge articles</p>
+                </div> -->
+                
+            </div>
+    </div>
+
+
+</div>

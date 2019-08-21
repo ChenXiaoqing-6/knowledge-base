@@ -15,7 +15,6 @@ import { KbViewFacadeMock } from '../../state/article/mock/article.facade.mock';
 import { KbViewFacade } from '../../state/article/article.facade';
 import { KbServiceMock } from '../../services/mock/kb.service.mock';
 import { KbService } from '../../services/kb.service';
-import { OpenArticle } from '../../state/article/article.actions';
 
 @Component({ selector: 'kb-article-list', template: '' })
 class KbArticleListComponent {
@@ -32,7 +31,7 @@ class KbLinkedListComponent {
   @Input() articles: IArticle[];
 }
 
-describe('KbSearchComponent', () => {
+fdescribe('KbSearchComponent', () => {
   let component: KbSearchComponent;
   let fixture: ComponentFixture<KbSearchComponent>;
   let KbSearchFacadeSpy = new KbSearchFacadeMock();

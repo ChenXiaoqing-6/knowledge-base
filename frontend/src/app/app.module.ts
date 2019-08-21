@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TranslateModule } from '@ngx-translate/core';
 import { FundamentalNgxModule } from 'fundamental-ngx';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { KbSearchComponent } from './components/kb-search/kb-search.component';
 import { KbArticleListComponent } from './components/kb-article-list/kb-article-list.component';
@@ -35,6 +36,11 @@ import { KbSuggestedFacade } from './state/suggestion/suggested-article.facade';
 import { IFrameMessageAdapter } from './services/iframe.message.service';
 import { EnsureAuthContextGuard } from './guards/ensure-auth-context.guard';
 import { AuthContextInterceptor } from './state/authContext/authContext.interceptor';
+import { TranslationService } from './services/translation.service';
+import { KbConfigComponent } from './components/kb-config/config.component';
+import { KbConfigFormComponent } from './components/kb-config-form/kb-config-form.component';
+
+
 
 @NgModule({
   declarations: [
@@ -49,12 +55,15 @@ import { AuthContextInterceptor } from './state/authContext/authContext.intercep
     SafeUrlPipe,
     KbLinkedListComponent,
     KbSuggestedListComponent,
-    KbArticleActionsComponent
+    KbArticleActionsComponent,
+    KbConfigComponent,
+    KbConfigFormComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FundamentalNgxModule,
+    ReactiveFormsModule,
     HttpClientModule,
     TranslateModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
@@ -72,6 +81,7 @@ import { AuthContextInterceptor } from './state/authContext/authContext.intercep
   ],
   providers: [
     KbSearchFacade,
+    TranslationService,
     KbViewFacade,
     KbLinkedListFacade,
     KbSuggestedFacade,
