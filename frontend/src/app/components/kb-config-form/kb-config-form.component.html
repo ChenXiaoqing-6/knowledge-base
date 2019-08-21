@@ -1,13 +1,30 @@
-<form [formGroup]="profileForm">
+<form class="config-form" [formGroup]="profileForm">
   
   <label>
-    First Name:
-    <input type="text" formControlName="firstName">
+    Provider Name:
+    <input type="text" formControlName="providerName">
   </label>
 
   <label>
-    Last Name:
-    <input type="text" formControlName="lastName">
+    Site URL:
+    <input type="text" formControlName="siteURL">
   </label>
 
+  <label>
+    User:
+    <input type="text" formControlName="user">
+  </label>
+
+  <label>
+    Key:
+    <input type="text" formControlName="key">
+  </label>
+  
+  <label>
+    Secret:
+    <input type="text" formControlName="secret">
+  </label>
+
+  <p>Define data for establishing connection with the knowledge base adapter and knowledge base site.</p> 
+  <p><span>Note:</span>The authorization of the user given in the connection data should be limited to reading and searching knowledge articles</p>
 </form>

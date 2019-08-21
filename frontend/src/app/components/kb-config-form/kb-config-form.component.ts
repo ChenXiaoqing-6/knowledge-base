@@ -9,8 +9,11 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class KbConfigFormComponent implements OnInit {
  
   profileForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
+    providerName: new FormControl(''),
+    siteURL: new FormControl(''),
+    user: new FormControl(''),
+    key: new FormControl(''),
+    secret: new FormControl(''),
   });
 
   constructor() { }
