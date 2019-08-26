@@ -1,0 +1,87 @@
+.config-action{
+    margin-top: 8%;
+    margin-left:20% ;
+    width: 800px;
+    height: 100px;
+    padding-right: 30px;
+}
+.config-action button{
+    float: right;
+    font-family: 72;
+    font-size: 14px;
+    font-style: normal;
+}
+.config-action-cancel{
+    color: #0854a1;
+}
+.config-action-save{
+    font-weight: bold;
+}
+
+.config-body{
+    width: 800px;
+    height:625px;
+    margin-left:20% ;
+}
+
+.config-header{
+    height: 75px;
+    border-bottom:1px solid #ededed;
+    font-family: 72;
+    font-size: 24px;
+    color: #32363a;
+    padding-top:25px; 
+    padding-left: 10px;
+    background-color: white;
+}
+
+.config-content{
+    height:550px;
+    background-color: white;
+}
+
+.config-header-toggle{
+    float: left;
+}
+
+.config-side-nav {
+    float: left;
+    width: 240px;
+    height: 550px; 
+    position: relative;
+}
+
+.config-side-item{
+    border-bottom:1px solid #ededed;
+}
+
+.config-side-icon{
+    width: 224px;
+    height: 36px;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.15);
+    background-color: #ffffff;
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    padding-top: 10px;
+    padding-right: 10px;
+    color: #0854a1;
+}
+
+.config-toggle{
+    float: right;
+}
+
+.config-item-content{
+    float: left;
+    width: 550px;
+    height: 550px;
+    margin-left: 10px;
+    background-color: white;
+    border-left:1px solid #ededed;
+    padding: 15px;
+}
+.config-content-form{
+    padding: 27px;
+}

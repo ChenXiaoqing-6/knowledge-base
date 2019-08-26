@@ -6,3 +6,7 @@ export interface CollectionResponse<T> {
     lastPage: number;
     totalObjectCount: number;
 }
+
+export interface BooleanResponse {
+    isEnable: boolean
+}

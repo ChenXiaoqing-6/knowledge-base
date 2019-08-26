@@ -1,6 +1,7 @@
+import { IProviderConfigData } from './../../models/IProviderConfigData';
 import { ISearchOptions } from "../../models/IRequestOptions";
 import { Observable, timer, throwError } from "rxjs";
-import { CollectionResponse } from "../../models/IResponse";
+import { CollectionResponse, BooleanResponse } from "../../models/IResponse";
 import { IArticle } from "../../models/IArticle";
 import { tap, mapTo } from "rxjs/operators";
 
@@ -138,8 +139,8 @@ export const MockLinkedArticlesResponse: any = {
       {
           "id": "3",
           "provider": "Mindtouch",
-          "title": "Issue Reporting to Responsible Machine Designer in the Team",
-          "content": "This guide provides an overview of product features and related technologies", //1908+
+          "title": "Issue Reporting to Responsible Machine Designer in the Team Issue Reporting to Responsible Machine Designer in the Team Issue Reporting to Responsible Machine Designer in the Team Issue Reporting to Responsible Machine Designer in the Team Issue Reporting to Responsible Machine Designer in the Team Issue Reporting to Responsible Machine Designer in the Team Issue Reporting to Responsible Machine Designer in the Team Issue Reporting to Responsible Machine Designer in the Team Issue Reporting to Responsible Machine Designer in the Team",
+          "content": "Issue Reporting to Responsible Machine Designer in the Team Issue Reporting to Responsible Machine Designer in the Team Issue Reporting to Responsible Machine Designer in the Team Issue Reporting to Responsible Machine Designer in the Team Issue Reporting to Responsible Machine Designer in the Team Issue Reporting to Responsible Machine Designer in the Team Issue Reporting to Responsible Machine Designer in the Team Issue Reporting to Responsible Machine Designer in the Team Issue Reporting to Responsible Machine Designer in the Team", //1908+
           "lastUpdated": "2019-06-25T06:18:26Z",
           "score": 0.9,
           "link": "https://sapdemo-responsive.mindtouch.us/Workstations/test_guide",
@@ -173,6 +174,26 @@ export const MockLinkedArticlesResponse: any = {
   "totalObjectCount": 4
 }
 
+export const MockProviderConfigResponse: any = {
+  "data": [
+    {
+      "id": "1",
+      "providerCode": "MindTouch",
+      "isActive": true,
+      "adapterAuthType": "",
+      "adapterURL": "",
+      "adapterCredential": "",
+      "siteURL": "https://sapdemo-responsive.mindtouch.us\\",
+      "siteAuthType": "",
+      "siteCredential": "{\"user\": \"admin\",\"key\":\"5cd197ff89096ce78a1e27b28bf371e2d3bb065e51e3b607fdf13f7c7630bf11\",\"secret\": \"f6d3306b11dd361c165ca981280bcdaa0c56a6d5bd9b36c8497a99b2ab4c16b9\"}"
+    }
+  ]
+}
+
+export const MockGeneralConfigResponse: any = {
+  "isEnable": true
+}
+
 export function mockSearch(options: ISearchOptions): Observable<CollectionResponse<IArticle>>  {
     if (options.searchTerm.indexOf("Error") >= 0) {
         return throwError(new Error('Fake error')); 
@@ -203,13 +224,27 @@ export function mockSearch(options: ISearchOptions): Observable<CollectionRespon
         totalObjectCount: typeData.length
       };
       console.log("request server: ", options);
-      return timer(1000).pipe(tap(()=>{console.log("done.");}),mapTo(ret));
+      return timer(3000).pipe(tap(()=>{console.log("done.");}),mapTo(ret));
 }
 
 export function MockLinkedArticles(): Observable<CollectionResponse<IArticle>> {
   let ret = {
     ...MockLinkedArticlesResponse,
   };
-  return timer(2000).pipe(tap(()=>{console.log("done.");}),mapTo(ret));
+  return timer(1000).pipe(tap(()=>{console.log("done.");}),mapTo(ret));
   // return throwError(new Error('Fake error'));
+}
+
+export function MockGeneralConfig(): Observable<BooleanResponse> {
+  let ret = {
+    ...MockGeneralConfigResponse
+  };
+  return timer(1000).pipe(tap(()=>{console.log("done.");}),mapTo(ret));
+}
+
+export function MockProviderConfig(): Observable<CollectionResponse<IProviderConfigData>> {
+  let ret = {
+    ...MockProviderConfigResponse
+  };
+  return timer(2000).pipe(tap(()=>{console.log("done.");}),mapTo(ret));
 }

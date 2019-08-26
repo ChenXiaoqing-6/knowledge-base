@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { KbSearchComponent } from '../components/kb-search/kb-search.component';
 import { KbDetailComponent } from '../components/kb-detail/kb-detail.component';
+import { KbConfigComponent } from '../components/kb-config/config.component';
+
 const appRoutes: Routes = [
   {
     path: 'kbDetail/:id',
@@ -9,6 +11,10 @@ const appRoutes: Routes = [
   {
     path: '',
     component: KbSearchComponent
+  },
+  {
+    path: 'config',
+    component: KbConfigComponent
   }
 ];
 

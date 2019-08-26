@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { KbSearchComponent } from './components/kb-search/kb-search.component';
 import { KbArticleListComponent } from './components/kb-article-list/kb-article-list.component';
 import { KbArticleItemComponent } from './components/kb-article-item/kb-article-item.component';
+import { KbConfigComponent } from './components/kb-config/config.component';
 
 import { KbDetailComponent } from './components/kb-detail/kb-detail.component';
 import { KbDetailContentComponent } from './components/kb-detail-content/kb-detail-content.component';
@@ -24,10 +25,14 @@ import { KbArticleActionsComponent } from './components/kb-article-actions/kb-ar
 import { effects, reducers, metaReducers } from './state';
 import { appRoutes } from './router/routes';
 import { KbService } from './services/kb.service';
+import { ConfigService } from './services/config.service';
 import { KbSearchFacade } from './state/search/search-article.facade';
 import { KbViewFacade } from './state/article/article.facade';
 import { KbLinkedListFacade } from './state/linkage/linked-article.facade';
 import { KbSuggestedFacade } from './state/suggestion/suggested-article.facade';
+import { KbConfigFacade } from './state/config/config.facade';
+import { KbConfigFormComponent } from './components/kb-config-form/kb-config-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -42,10 +47,13 @@ import { KbSuggestedFacade } from './state/suggestion/suggested-article.facade';
     SafeUrlPipe,
     KbLinkedListComponent,
     KbSuggestedListComponent,
-    KbArticleActionsComponent
+    KbArticleActionsComponent,
+    KbConfigComponent,
+    KbConfigFormComponent
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     FundamentalNgxModule,
     HttpClientModule,
@@ -67,7 +75,9 @@ import { KbSuggestedFacade } from './state/suggestion/suggested-article.facade';
     KbViewFacade,
     KbLinkedListFacade,
     KbSuggestedFacade,
-    KbService
+    KbConfigFacade,
+    KbService,
+    ConfigService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
