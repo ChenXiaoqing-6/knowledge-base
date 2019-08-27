@@ -13,7 +13,7 @@ const appRoutes: Routes = [
     component: KbSearchComponent
   },
   {
-    path: 'config',
+    path: 'setting',
     component: KbConfigComponent
   }
 ];

@@ -12,7 +12,7 @@ export class KbConfigFormComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     if (this.profileForm && this.profileForm.value) {
       this.profileForm.setValue({
-        providerCode: changes['providerConfig'].currentValue.providerCode,
+        providerType: changes['providerConfig'].currentValue.providerType,
         siteURL: changes['providerConfig'].currentValue.siteURL,
         user: JSON.parse(changes['providerConfig'].currentValue.siteCredential).user,
         key: JSON.parse(changes['providerConfig'].currentValue.siteCredential).key,
@@ -26,7 +26,7 @@ export class KbConfigFormComponent implements OnInit {
 
   ngOnInit() {
     this.profileForm = this.fb.group({
-      providerCode: [this.providerConfig.providerCode],
+      providerType: [this.providerConfig.providerType],
       siteURL: [this.providerConfig.siteURL],
       user: [JSON.parse(this.providerConfig.siteCredential).user],
       key: [JSON.parse(this.providerConfig.siteCredential).key],

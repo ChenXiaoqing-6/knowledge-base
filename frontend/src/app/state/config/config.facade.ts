@@ -3,14 +3,13 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { IProviderConfigData } from '../../models/IProviderConfigData';
 import { IKbState } from '../index';
-import { GetGeneralConfig, GetProviderConfig, ChangeSelectedProviderConfig, ChangeSelectedProviderConfigIndex, PostAllProviderConfig, ChangeGeneralActive, ChangeSelectedProviderConfigActive, ReturnToInitialProviderConfig } from './config.actions';
+import { GetGeneralConfig, GetAllProviderConfig, TempSaveSelectedProviderConfig, ChangeSelectedProviderConfigIndex, PutAllProviderConfig, ChangeGeneralActive, ChangeSelectedProviderConfigActive, ReturnToInitialProviderConfig, PutGeneralConfig } from './config.actions';
 import {
     selectIsEnable,
     selectAllProviderConfig,
-    selectCurrentProviderConfig,
+    selectCurrentProviderConfigIndex,
     selectIsGeneralConfigCompleted,
-    selectIsProviderConfigCompleted,
-    temptest
+    selectIsProviderConfigCompleted
 } from './config.selectors';
 
 @Injectable()
@@ -30,7 +29,7 @@ export class KbConfigFacade {
         return this.store$.pipe(select(selectIsProviderConfigCompleted));
     }
 
-    public getAllProviderConfig(): Observable<IProviderConfigData[]> {
+    public allProviderConfig(): Observable<IProviderConfigData[]> {
         return this.store$.pipe(select(selectAllProviderConfig));
     }
 
@@ -38,40 +37,37 @@ export class KbConfigFacade {
         this.store$.dispatch(new GetGeneralConfig());
     }
 
-    public getProviderConfig() {
-        this.store$.dispatch(new GetProviderConfig());
+    public getAllProviderConfig() {
+        this.store$.dispatch(new GetAllProviderConfig());
     }
 
-    public getSelectedProviderConfig(): Observable<number> {
-        return this.store$.pipe(select(selectCurrentProviderConfig));
+    public getSelectedProviderConfigIndex(): Observable<number> {
+        return this.store$.pipe(select(selectCurrentProviderConfigIndex));
     }
 
-    public ChangeSelectedProviderConfig(data: IProviderConfigData) {
-        this.store$.dispatch(new ChangeSelectedProviderConfig(data));
+    public TempSaveSelectedProviderConfig(data: IProviderConfigData) {
+        this.store$.dispatch(new TempSaveSelectedProviderConfig(data));
     }
 
     public ChangeSelectedProviderConfigIndex(data: number) {
         this.store$.dispatch(new ChangeSelectedProviderConfigIndex(data));
     }
 
-    public PostAllProviderConfig( ) {
-        this.store$.dispatch(new PostAllProviderConfig());
+    public PutSaveData() {
+        this.store$.dispatch(new PutGeneralConfig());
+        this.store$.dispatch(new PutAllProviderConfig());
     }
 
-    public ChangeGeneralActive( ) {
+    public ChangeGeneralActive() {
         this.store$.dispatch(new ChangeGeneralActive());
     }
 
-    public ChangeSelectedProviderConfigActive (data: number) {
+    public ChangeSelectedProviderConfigActive(data: number) {
         this.store$.dispatch(new ChangeSelectedProviderConfigActive(data));
     }
 
-    public ReturnToInitialProviderConfig ( ) {
+    public ReturnToInitialProviderConfig() {
         this.store$.dispatch(new ReturnToInitialProviderConfig());
-    }
-
-    public temptest(): Observable<IProviderConfigData[]> {
-        return this.store$.pipe(select(temptest));
     }
 
 }

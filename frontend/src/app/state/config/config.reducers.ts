@@ -2,7 +2,6 @@ import { IProviderConfigData } from './../../models/IProviderConfigData';
 import { createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 import { IkbConfigState } from './config.state';
 import { Actions, ActionTypes } from './config.actions';
-import { ConfigService } from '../../services/config.service';
 
 export const adapter: EntityAdapter<IProviderConfigData> = createEntityAdapter<IProviderConfigData>();
 
@@ -35,46 +34,43 @@ export function reducer(state = initialKbConfigState, action: Actions): IkbConfi
                 ...state
             };
 
-        case ActionTypes.GetProviderConfig:
+        case ActionTypes.GetAllProviderConfig:
             return {
                 ...state
             };
 
-        case ActionTypes.GetProviderConfigSuccess:
+        case ActionTypes.GetAllProviderConfigSuccess:
             const initialAllProviderConfig: IProviderConfigData[] = [];
             for (let i = 0; i < action.payload.data.length; i++) {
                 initialAllProviderConfig[i] = {
                     id: action.payload.data[i].id,
                     isActive: action.payload.data[i].isActive,
-                    providerCode: action.payload.data[i].providerCode,
+                    providerType: action.payload.data[i].providerType,
                     siteAuthType: action.payload.data[i].siteAuthType,
                     siteCredential: action.payload.data[i].siteCredential,
-                    siteURL: action.payload.data[i].siteURL,
-                    adapterCredential: action.payload.data[i].adapterCredential,
-                    adapterURL: action.payload.data[i].adapterURL,
-                    adapterAuthType: action.payload.data[i].adapterAuthType
+                    siteURL: action.payload.data[i].siteURL
                 };
             }
             return adapter.addAll(action.payload.data, {
                 ...state,
-                selectedProviderConfigIndex: 1,
+                selectedProviderConfigIndex: 0,
                 initialAllProviderConfig: initialAllProviderConfig,
                 isAllProviderConfigCompleted: true
             });
 
-        case ActionTypes.GetProviderConfigError:
+        case ActionTypes.GetAllProviderConfigError:
             return {
                 ...state
             };
 
-        case ActionTypes.ChangeSelectedProviderConfig:
+        case ActionTypes.TempSaveSelectedProviderConfig:
             var tempSiteCredential = {
                 user: action.payload.user,
                 key: action.payload.key,
                 secret: action.payload.secret
             }
-            state.entities[state.selectedProviderConfigIndex].siteURL = action.payload.siteURL;
-            state.entities[state.selectedProviderConfigIndex].siteCredential = JSON.stringify(tempSiteCredential);
+            state.entities[state.ids[state.selectedProviderConfigIndex]].siteURL = action.payload.siteURL;
+            state.entities[state.ids[state.selectedProviderConfigIndex]].siteCredential = JSON.stringify(tempSiteCredential);
             return state;
 
         case ActionTypes.ChangeSelectedProviderConfigIndex:
@@ -83,10 +79,26 @@ export function reducer(state = initialKbConfigState, action: Actions): IkbConfi
                 selectedProviderConfigIndex: action.payload
             };
 
-        case ActionTypes.PostAllProviderConfig:
-            var service = new ConfigService();
-            service.postAllProviderConfig(state.entities);
-            return state;
+        case ActionTypes.PutAllProviderConfig:
+            return {
+                ...state
+            };
+
+        case ActionTypes.PutAllProviderConfigSuccess:
+            return {
+                ...state,
+                initialAllProviderConfig: action.payload
+            };
+
+        case ActionTypes.PutGeneralConfig:
+            return {
+                ...state
+            };
+
+        case ActionTypes.PutGeneralConfigSuccess:
+            return {
+                ...state
+            };
 
         case ActionTypes.ChangeGeneralActive:
             return {
@@ -95,8 +107,10 @@ export function reducer(state = initialKbConfigState, action: Actions): IkbConfi
             };
 
         case ActionTypes.ChangeSelectedProviderConfigActive:
-            state.entities[action.payload].isActive = !state.entities[action.payload].isActive;
-            return state;
+            state.entities[state.ids[action.payload]].isActive = !state.entities[state.ids[action.payload]].isActive;
+            return {
+                ...state
+            };
 
         case ActionTypes.ReturnToInitialProviderConfig:
             const initialAllProviderConfig2: IProviderConfigData[] = [];
@@ -104,13 +118,10 @@ export function reducer(state = initialKbConfigState, action: Actions): IkbConfi
                 initialAllProviderConfig2[i] = {
                     id: state.initialAllProviderConfig[i].id,
                     isActive: state.initialAllProviderConfig[i].isActive,
-                    providerCode: state.initialAllProviderConfig[i].providerCode,
+                    providerType: state.initialAllProviderConfig[i].providerType,
                     siteAuthType: state.initialAllProviderConfig[i].siteAuthType,
                     siteCredential: state.initialAllProviderConfig[i].siteCredential,
-                    siteURL: state.initialAllProviderConfig[i].siteURL,
-                    adapterCredential: state.initialAllProviderConfig[i].adapterCredential,
-                    adapterURL: state.initialAllProviderConfig[i].adapterURL,
-                    adapterAuthType: state.initialAllProviderConfig[i].adapterAuthType
+                    siteURL: state.initialAllProviderConfig[i].siteURL
                 };
             }
             return adapter.addAll(initialAllProviderConfig2, {

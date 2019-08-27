@@ -18,7 +18,6 @@ export class KbConfigComponent implements OnInit {
   isAllProviderConfigReady$: Observable<boolean>;
   allProviderConfig$: Observable<IProviderConfigData[]>;
   selectedProviderConfigIndex$: Observable<number>;
-  temptest$: Observable<IProviderConfigData[]>;
 
 
   constructor(
@@ -27,18 +26,17 @@ export class KbConfigComponent implements OnInit {
 
   ngOnInit() {
     this.isEnable$ = this.kbConfigFacade.isEnable();
-    this.allProviderConfig$ = this.kbConfigFacade.getAllProviderConfig();
-    this.selectedProviderConfigIndex$ = this.kbConfigFacade.getSelectedProviderConfig();
+    this.allProviderConfig$ = this.kbConfigFacade.allProviderConfig();
+    this.selectedProviderConfigIndex$ = this.kbConfigFacade.getSelectedProviderConfigIndex();
     this.isGeneralConfigReady$ = this.kbConfigFacade.isGeneralConfigReady();
     this.isAllProviderConfigReady$ = this.kbConfigFacade.isAllProviderConfigReady();
-    this.temptest$ = this.kbConfigFacade.temptest();
     this.kbConfigFacade.getGeneralConfig();
-    this.kbConfigFacade.getProviderConfig();
+    this.kbConfigFacade.getAllProviderConfig();
   }
 
   onSave() {
     this.tempSaveConfig();
-    this.kbConfigFacade.PostAllProviderConfig();
+    this.kbConfigFacade.PutSaveData();
   }
 
   onCancel() {
@@ -47,19 +45,19 @@ export class KbConfigComponent implements OnInit {
 
   onSelect(index: number) {
     this.tempSaveConfig();
-    this.kbConfigFacade.ChangeSelectedProviderConfigIndex(index + 1);
+    this.kbConfigFacade.ChangeSelectedProviderConfigIndex(index);
   }
 
   tempSaveConfig() {
-    this.kbConfigFacade.ChangeSelectedProviderConfig(this.configForm.getCurrentProviderConfig());
+    this.kbConfigFacade.TempSaveSelectedProviderConfig(this.configForm.getCurrentProviderConfig());
   }
 
-  isEnableChange() {
+  isGeneralEnableChange() {
     this.kbConfigFacade.ChangeGeneralActive();
   }
 
-  isSelectedProviderConfigChange(index: number) {
-    this.kbConfigFacade.ChangeSelectedProviderConfigActive(index + 1);
+  isSelectedProviderConfigActiveChange(index: number) {
+    this.kbConfigFacade.ChangeSelectedProviderConfigActive(index);
   }
 
   public ngOnDestroy(): void {

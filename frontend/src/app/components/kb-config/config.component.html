@@ -7,9 +7,9 @@
   <div class="config-header">
     <fd-loading-spinner [loading]="!(isGeneralConfigReady$ | async)"></fd-loading-spinner>
     <div *ngIf="isGeneralConfigReady$ | async">
-      <span> Enable Knowledge Component</span>
+      <span class="fd-has-margin-left-small"> Enable Knowledge Component</span>
       <fd-toggle class="config-header-toggle" [size]="'s'" [checked]="isEnable$ | async"
-        (checkedChange)="isEnableChange()">
+        (checkedChange)="isGeneralEnableChange()">
       </fd-toggle>
     </div>
   </div>
@@ -18,15 +18,17 @@
     <div *ngIf="isAllProviderConfigReady$ | async">
       <div class="config-side-nav">
         <nav class="fd-side-nav">
-        <ul class="fd-side-nav__list">
-          <li *ngFor="let ProviderConfig of (allProviderConfig$ | async); let ProviderConfigIndex = index" class="fd-side-nav__item config-side-item">
-            <a class="fd-has-type-1 fd-has-color-text-1 fd-side-nav__link" (click)="onSelect(ProviderConfigIndex)"  [ngClass]= "{'is-selected': ProviderConfigIndex == (selectedProviderConfigIndex$ | async) - 1}">
-              {{ProviderConfig.providerCode}}
-              <fd-toggle class="config-toggle" [size]="'s'" [checked]="ProviderConfig.isActive"
-                (checkedChange)="isSelectedProviderConfigChange(ProviderConfigIndex)"></fd-toggle>
-            </a> 
-          </li>
-        </ul>
+          <ul class="fd-side-nav__list">
+            <li *ngFor="let ProviderConfig of (allProviderConfig$ | async); let ProviderConfigIndex = index"
+              class="fd-side-nav__item config-side-item">
+              <a class="fd-has-type-1 fd-has-color-text-1 fd-side-nav__link" (click)="onSelect(ProviderConfigIndex)"
+                [ngClass]="{'is-selected': ProviderConfigIndex == (selectedProviderConfigIndex$ | async)}">
+                {{ProviderConfig.providerType}}
+                <fd-toggle class="config-toggle" [size]="'s'" [checked]="ProviderConfig.isActive"
+                  (checkedChange)="isSelectedProviderConfigActiveChange(ProviderConfigIndex)"></fd-toggle>
+              </a>
+            </li>
+          </ul>
         </nav>
         <div class="config-side-icon">
           <span class=""
@@ -37,7 +39,7 @@
 
       </div>
       <div id="mindtouch" class="config-item-content">
-        <kb-config-form [providerConfig]="(allProviderConfig$ | async)[(selectedProviderConfigIndex$ | async)-1]">
+        <kb-config-form [providerConfig]="(allProviderConfig$ | async)[selectedProviderConfigIndex$ | async]">
         </kb-config-form>
       </div>
     </div>

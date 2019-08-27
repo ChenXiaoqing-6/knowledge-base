@@ -14,7 +14,7 @@ export const selectAllProviderConfig = createSelector(
     fromReducers.selectAll
 );
 
-export const selectCurrentProviderConfig = createSelector(
+export const selectCurrentProviderConfigIndex = createSelector(
     kbConfigState,
     (state) => state.selectedProviderConfigIndex
 );
@@ -28,8 +28,3 @@ export const selectIsProviderConfigCompleted = createSelector(
     kbConfigState,
     (state) => state.isAllProviderConfigCompleted
 );
-
-export const temptest = createSelector(
-    kbConfigState,
-    (state) => state.initialAllProviderConfig
-)
