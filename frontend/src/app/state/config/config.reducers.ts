@@ -8,9 +8,10 @@ export const adapter: EntityAdapter<IProviderConfigData> = createEntityAdapter<I
 export const initialKbConfigState: IkbConfigState = adapter.getInitialState({
     isGeneralConfigCompleted: false,
     isEnable: false,
-    selectedProviderConfigIndex: 1,
+    selectedProviderConfigIndex: 0,
     initialAllProviderConfig: [],
-    isAllProviderConfigCompleted: false
+    isAllProviderConfigCompleted: false,
+    activeProviderConfigIndex: 0
 });
 
 export function reducer(state = initialKbConfigState, action: Actions): IkbConfigState {
@@ -55,7 +56,8 @@ export function reducer(state = initialKbConfigState, action: Actions): IkbConfi
                 ...state,
                 selectedProviderConfigIndex: 0,
                 initialAllProviderConfig: initialAllProviderConfig,
-                isAllProviderConfigCompleted: true
+                isAllProviderConfigCompleted: true,
+                activeProviderConfigIndex: 0
             });
 
         case ActionTypes.GetAllProviderConfigError:
@@ -101,16 +103,30 @@ export function reducer(state = initialKbConfigState, action: Actions): IkbConfi
             };
 
         case ActionTypes.ChangeGeneralActive:
+            if (state.isEnable == true) {
+                state.entities[state.ids[state.activeProviderConfigIndex]].isActive = false;
+            } else {
+                state.entities[state.ids[0]].isActive = true;
+            }
             return {
                 ...state,
                 isEnable: !state.isEnable
             };
 
         case ActionTypes.ChangeSelectedProviderConfigActive:
-            state.entities[state.ids[action.payload]].isActive = !state.entities[state.ids[action.payload]].isActive;
-            return {
-                ...state
-            };
+            if (state.entities[state.ids[action.payload]].isActive == true) {
+                state.entities[state.ids[action.payload]].isActive = !state.entities[state.ids[action.payload]].isActive;
+                return {
+                    ...state,
+                    isEnable: false
+                };
+            } else {
+                state.entities[state.ids[action.payload]].isActive = !state.entities[state.ids[action.payload]].isActive;
+                state.entities[state.ids[state.activeProviderConfigIndex]].isActive = false;
+                return {
+                    ...state
+                };
+            }
 
         case ActionTypes.ReturnToInitialProviderConfig:
             const initialAllProviderConfig2: IProviderConfigData[] = [];

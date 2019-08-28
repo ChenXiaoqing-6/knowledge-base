@@ -9,7 +9,8 @@ import {
     selectAllProviderConfig,
     selectCurrentProviderConfigIndex,
     selectIsGeneralConfigCompleted,
-    selectIsProviderConfigCompleted
+    selectIsProviderConfigCompleted,
+    selectActiveProviderConfigIndex
 } from './config.selectors';
 
 @Injectable()
@@ -70,4 +71,7 @@ export class KbConfigFacade {
         this.store$.dispatch(new ReturnToInitialProviderConfig());
     }
 
+    public activeProviderConfigIndex(): Observable<number> {
+        return this.store$.pipe(select(selectActiveProviderConfigIndex));
+    }
 }

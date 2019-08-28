@@ -28,3 +28,8 @@ export const selectIsProviderConfigCompleted = createSelector(
     kbConfigState,
     (state) => state.isAllProviderConfigCompleted
 );
+
+export const selectActiveProviderConfigIndex = createSelector(
+    kbConfigState,
+    (state) => state.activeProviderConfigIndex
+);

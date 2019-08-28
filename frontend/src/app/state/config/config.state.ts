@@ -8,4 +8,5 @@ export interface IkbConfigState extends EntityState<IProviderConfigData> {
     selectedProviderConfigIndex: number;
     initialAllProviderConfig: IProviderConfigData[];
     isAllProviderConfigCompleted: boolean;
+    activeProviderConfigIndex: number;
 }
