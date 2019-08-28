@@ -7,15 +7,6 @@
 }
 .config-action button{
     float: right;
-    font-family: 72;
-    font-size: 14px;
-    font-style: normal;
-}
-.config-action-cancel{
-    color: #0854a1;
-}
-.config-action-save{
-    font-weight: bold;
 }
 
 .config-body{

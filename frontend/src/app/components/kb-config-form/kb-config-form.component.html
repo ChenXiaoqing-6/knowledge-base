@@ -1,28 +1,28 @@
 <form class="config-form" [formGroup]="profileForm">
 
-  <label>
+  <label fd-form-label>
     Provider Name:
-    <input type="text" formControlName="providerType" disabled="true">
+    <input fd-form-control type="text" formControlName="providerType" disabled="true">
   </label>
 
-  <label>
+  <label fd-form-label>
     Site URL:
-    <input type="text" formControlName="siteURL" placeholder="https://">
+    <input fd-form-control type="text" formControlName="siteURL" placeholder="https://">
   </label>
 
-  <label>
+  <label fd-form-label>
     User:
-    <input type="text" formControlName="user">
+    <input fd-form-control type="text" formControlName="user">
   </label>
 
-  <label>
+  <label fd-form-label>
     Key:
-    <input type="text" formControlName="key">
+    <input fd-form-control type="text" formControlName="key">
   </label>
 
-  <label>
+  <label fd-form-label>
     Secret:
-    <input type="text" formControlName="secret">
+    <input fd-form-control type="text" formControlName="secret">
   </label>
 
   <p>Define data for establishing connection with the knowledge base adapter and knowledge base site.</p>
